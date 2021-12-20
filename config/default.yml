@@ -1,0 +1,9 @@
+# Write it!
+
+Rails/EnumPrefix:
+  Description: 'TODO: Write a description of the cop.'
+  Enabled: true
+  VersionAdded: '0.1.0'
+  StyleGuide: https://github.com/rails/rails/issues/13389#issue-24527737
+  Include:
+    - app/models/**/*
