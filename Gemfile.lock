@@ -61,7 +61,7 @@ GEM
     unicode-display_width (1.8.0)
 
 PLATFORMS
-  x86_64-darwin-19
+  ruby
 
 DEPENDENCIES
   rake (~> 13.0)
