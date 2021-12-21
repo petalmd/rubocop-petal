@@ -1,23 +1,188 @@
 # frozen_string_literal: true
 
 RSpec.describe RuboCop::Cop::Rails::EnumPrefix do
-  subject(:cop) { described_class.new(config) }
+  include RuboCop::RSpec::ExpectOffense
 
-  let(:config) { RuboCop::Config.new }
+  let(:cop_class) { described_class }
+  let(:cop) { cop_class.new }
 
-  # TODO: Write test code
-  #
-  # For example
-  it 'registers an offense when using `#bad_method`' do
-    expect_offense(<<~RUBY)
-      bad_method
-      ^^^^^^^^^^ Use `#good_method` instead of `#bad_method`.
-    RUBY
+  context 'without an enum' do
+    it 'expects no offense' do
+      expect_no_offenses(<<~RUBY)
+        puts 'some stuff'
+
+        # Declares a model without enum
+        class MyModel
+          has_many :some_other_thing
+        end
+      RUBY
+    end
   end
 
-  it 'does not register an offense when using `#good_method`' do
-    expect_no_offenses(<<~RUBY)
-      good_method
-    RUBY
+  context 'with an enum without a prefix or suffix' do
+    it 'expects an offense' do
+      expect_offense(<<~RUBY)
+        class MyModel
+          enum my_enum: {state1: 1, state2: 2}
+          ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^ Prefer using a `_prefix` or `_suffix` with `enum`.
+        end
+      RUBY
+    end
+
+    context 'for an enum on multiple lines' do
+      it 'expects an offense' do
+        expect_offense(<<~RUBY)
+          class MyModel
+            enum my_enum: {
+            ^^^^^^^^^^^^^^^ Prefer using a `_prefix` or `_suffix` with `enum`.
+              state1: 1,
+              state2: 2
+            }
+          end
+        RUBY
+      end
+    end
+  end
+
+  context 'when using a prefix' do
+    context 'when it is a boolean' do
+      it 'expects no offense' do
+        expect_no_offenses(<<~RUBY)
+          class MyModel
+            enum my_enum: {state1: 1, state2: 2}, _prefix: true
+          end
+        RUBY
+      end
+
+      context 'when it is multiline' do
+        it 'expects no offense' do
+          expect_no_offenses(<<~RUBY)
+            class MyModel
+              enum my_enum: {
+                state1: 1,
+                state2: 2
+              }, _prefix: true
+            end
+          RUBY
+        end
+      end
+    end
+
+    context 'when it is a string' do
+      it 'expects no offense' do
+        expect_no_offenses(<<~RUBY)
+          class MyModel
+            enum my_enum: {state1: 1, state2: 2}, _prefix: 'some_prefix'
+          end
+        RUBY
+      end
+
+      context 'when it is multiline' do
+        it 'expects no offense' do
+          expect_no_offenses(<<~RUBY)
+            class MyModel
+              enum my_enum: {
+                state1: 1,
+                state2: 2
+              }, _prefix: 'some_prefix'
+            end
+          RUBY
+        end
+      end
+    end
+
+    context 'when it is a symbol' do
+      it 'expects no offense' do
+        expect_no_offenses(<<~RUBY)
+          class MyModel
+            enum my_enum: {state1: 1, state2: 2}, _prefix: :some_prefix
+          end
+        RUBY
+      end
+
+      context 'when it is multiline' do
+        it 'expects no offense' do
+          expect_no_offenses(<<~RUBY)
+            class MyModel
+              enum my_enum: {
+                state1: 1,
+                state2: 2
+              }, _prefix: :some_prefix
+            end
+          RUBY
+        end
+      end
+    end
+  end
+
+  context 'when using a suffix' do
+    context 'when it is a boolean' do
+      it 'expects no offense' do
+        expect_no_offenses(<<~RUBY)
+          class MyModel
+            enum my_enum: {state1: 1, state2: 2}, _suffix: true
+          end
+        RUBY
+      end
+
+      context 'when it is multiline' do
+        it 'expects no offense' do
+          expect_no_offenses(<<~RUBY)
+            class MyModel
+              enum my_enum: {
+                state1: 1,
+                state2: 2
+              }, _suffix: true
+            end
+          RUBY
+        end
+      end
+    end
+
+    context 'when it is a string' do
+      it 'expects no offense' do
+        expect_no_offenses(<<~RUBY)
+          class MyModel
+            enum my_enum: {state1: 1, state2: 2}, _suffix: 'some_suffix'
+          end
+        RUBY
+      end
+
+      context 'when it is multiline' do
+        it 'expects no offense' do
+          expect_no_offenses(<<~RUBY)
+            class MyModel
+              enum my_enum: {
+                state1: 1,
+                state2: 2
+              }, _suffix: 'some_suffix'
+            end
+          RUBY
+        end
+      end
+    end
+
+    context 'when it is a symbol' do
+      it 'expects no offense' do
+        expect_no_offenses(<<~RUBY)
+          class MyModel
+            enum my_enum: {state1: 1, state2: 2}, _suffix: :some_suffix
+          end
+        RUBY
+      end
+
+      context 'when it is multiline' do
+        it 'expects no offense' do
+          expect_no_offenses(<<~RUBY)
+            class MyModel
+              enum my_enum: {
+                state1: 1,
+                state2: 2
+              }, _suffix: :some_suffix
+            end
+          RUBY
+        end
+      end
+    end
   end
 end
