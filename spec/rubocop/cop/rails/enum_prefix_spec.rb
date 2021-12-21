@@ -25,20 +25,16 @@ RSpec.describe RuboCop::Cop::Rails::EnumPrefix do
           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^ Prefer using a `_prefix` or `_suffix` with `enum`.
         end
       RUBY
-    end
 
-    context 'for an enum on multiple lines' do
-      it 'expects an offense' do
-        expect_offense(<<~RUBY)
-          class MyModel
-            enum my_enum: {
-            ^^^^^^^^^^^^^^^ Prefer using a `_prefix` or `_suffix` with `enum`.
-              state1: 1,
-              state2: 2
-            }
-          end
-        RUBY
-      end
+      expect_offense(<<~RUBY)
+        class MyModel
+          enum my_enum: {
+          ^^^^^^^^^^^^^^^ Prefer using a `_prefix` or `_suffix` with `enum`.
+            state1: 1,
+            state2: 2
+          }
+        end
+      RUBY
     end
   end
 
@@ -50,19 +46,15 @@ RSpec.describe RuboCop::Cop::Rails::EnumPrefix do
             enum my_enum: {state1: 1, state2: 2}, _prefix: true
           end
         RUBY
-      end
 
-      context 'when it is multiline' do
-        it 'expects no offense' do
-          expect_no_offenses(<<~RUBY)
-            class MyModel
-              enum my_enum: {
-                state1: 1,
-                state2: 2
-              }, _prefix: true
-            end
-          RUBY
-        end
+        expect_no_offenses(<<~RUBY)
+          class MyModel
+            enum my_enum: {
+              state1: 1,
+              state2: 2
+            }, _prefix: true
+          end
+        RUBY
       end
     end
 
@@ -73,19 +65,15 @@ RSpec.describe RuboCop::Cop::Rails::EnumPrefix do
             enum my_enum: {state1: 1, state2: 2}, _prefix: 'some_prefix'
           end
         RUBY
-      end
 
-      context 'when it is multiline' do
-        it 'expects no offense' do
-          expect_no_offenses(<<~RUBY)
-            class MyModel
-              enum my_enum: {
-                state1: 1,
-                state2: 2
-              }, _prefix: 'some_prefix'
-            end
-          RUBY
-        end
+        expect_no_offenses(<<~RUBY)
+          class MyModel
+            enum my_enum: {
+              state1: 1,
+              state2: 2
+            }, _prefix: 'some_prefix'
+          end
+        RUBY
       end
     end
 
@@ -96,19 +84,15 @@ RSpec.describe RuboCop::Cop::Rails::EnumPrefix do
             enum my_enum: {state1: 1, state2: 2}, _prefix: :some_prefix
           end
         RUBY
-      end
 
-      context 'when it is multiline' do
-        it 'expects no offense' do
-          expect_no_offenses(<<~RUBY)
-            class MyModel
-              enum my_enum: {
-                state1: 1,
-                state2: 2
-              }, _prefix: :some_prefix
-            end
-          RUBY
-        end
+        expect_no_offenses(<<~RUBY)
+          class MyModel
+            enum my_enum: {
+              state1: 1,
+              state2: 2
+            }, _prefix: :some_prefix
+          end
+        RUBY
       end
     end
   end
@@ -121,19 +105,15 @@ RSpec.describe RuboCop::Cop::Rails::EnumPrefix do
             enum my_enum: {state1: 1, state2: 2}, _suffix: true
           end
         RUBY
-      end
 
-      context 'when it is multiline' do
-        it 'expects no offense' do
-          expect_no_offenses(<<~RUBY)
-            class MyModel
-              enum my_enum: {
-                state1: 1,
-                state2: 2
-              }, _suffix: true
-            end
-          RUBY
-        end
+        expect_no_offenses(<<~RUBY)
+          class MyModel
+            enum my_enum: {
+              state1: 1,
+              state2: 2
+            }, _suffix: true
+          end
+        RUBY
       end
     end
 
@@ -144,19 +124,15 @@ RSpec.describe RuboCop::Cop::Rails::EnumPrefix do
             enum my_enum: {state1: 1, state2: 2}, _suffix: 'some_suffix'
           end
         RUBY
-      end
 
-      context 'when it is multiline' do
-        it 'expects no offense' do
-          expect_no_offenses(<<~RUBY)
-            class MyModel
-              enum my_enum: {
-                state1: 1,
-                state2: 2
-              }, _suffix: 'some_suffix'
-            end
-          RUBY
-        end
+        expect_no_offenses(<<~RUBY)
+          class MyModel
+            enum my_enum: {
+              state1: 1,
+              state2: 2
+            }, _suffix: 'some_suffix'
+          end
+        RUBY
       end
     end
 
@@ -167,19 +143,15 @@ RSpec.describe RuboCop::Cop::Rails::EnumPrefix do
             enum my_enum: {state1: 1, state2: 2}, _suffix: :some_suffix
           end
         RUBY
-      end
 
-      context 'when it is multiline' do
-        it 'expects no offense' do
-          expect_no_offenses(<<~RUBY)
-            class MyModel
-              enum my_enum: {
-                state1: 1,
-                state2: 2
-              }, _suffix: :some_suffix
-            end
-          RUBY
-        end
+        expect_no_offenses(<<~RUBY)
+          class MyModel
+            enum my_enum: {
+              state1: 1,
+              state2: 2
+            }, _suffix: :some_suffix
+          end
+        RUBY
       end
     end
   end

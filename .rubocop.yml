@@ -1,6 +1,10 @@
+require:
+  - rubocop-rspec
+
 AllCops:
   NewCops: enable
   TargetRubyVersion: 2.6
+  SuggestExtensions: false
 
 Naming/FileName:
  Exclude:
@@ -9,3 +13,6 @@ Naming/FileName:
 Metrics/BlockLength:
   Exclude:
     - spec/**/*_spec.rb
+
+RSpec/ExampleLength:
+  Max: 10
