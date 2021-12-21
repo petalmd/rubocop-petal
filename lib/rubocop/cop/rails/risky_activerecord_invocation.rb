@@ -32,7 +32,7 @@ module RuboCop
               'http://guides.rubyonrails.org/security.html#sql-injection-countermeasures and ' \
               'https://rails-sqli.org/rails3. If you have confirmed with Security that this is a ' \
               'safe usage of this style, disable this alert with ' \
-              '`# rubocop:disable Airbnb/RiskyActiverecordInvocation`.'
+              '`# rubocop:disable Rails/RiskyActiverecordInvocation`.'
 
         PATTERN_SPEC_FILE = /^.*_spec\.rb$/.freeze
 
