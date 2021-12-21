@@ -1,3 +1,9 @@
+Grape/UnnecessaryNamespace:
+  Description: 'Detect unnecessary usage of Grape namespace.'
+  Enabled: true
+  Include:
+    - app/api/**/*
+
 Rails/EnumPrefix:
   Description: 'Set prefix options when using enums.'
   Enabled: true
