@@ -1,8 +1,6 @@
 # frozen_string_literal: true
 
 RSpec.describe RuboCop::Cop::Rails::EnumPrefix do
-  include RuboCop::RSpec::ExpectOffense
-
   let(:cop_class) { described_class }
   let(:cop) { cop_class.new }
 

@@ -6,24 +6,24 @@ module RuboCop
       # Disallow ActiveRecord calls that pass interpolated or added strings as an argument.
       # https://github.com/airbnb/ruby/blob/12435e8136d2adf710de999bc0f6bef01215df2c/rubocop-airbnb/lib/rubocop/cop/airbnb/risky_activerecord_invocation.rb
       class RiskyActiverecordInvocation < Cop
-        VULNERABLE_AR_METHODS = [
-          :delete_all,
-          :destroy_all,
-          :exists?,
-          :execute,
-          :find_by_sql,
-          :group,
-          :having,
-          :insert,
-          :order,
-          :pluck,
-          :reorder,
-          :select,
-          :select_rows,
-          :select_values,
-          :select_all,
-          :update_all,
-          :where
+        VULNERABLE_AR_METHODS = %i[
+          delete_all
+          destroy_all
+          exists?
+          execute
+          find_by_sql
+          group
+          having
+          insert
+          order
+          pluck
+          reorder
+          select
+          select_rows
+          select_values
+          select_all
+          update_all
+          where
         ].freeze
 
         MSG = 'Passing a string computed by interpolation or addition to an ActiveRecord ' \
@@ -41,9 +41,7 @@ module RuboCop
           return if processed_source.buffer.name.match? PATTERN_SPEC_FILE
           return if receiver.nil?
           return unless vulnerable_ar_method?(method_name)
-          if !includes_interpolation?(args) && !includes_sum?(args)
-            return
-          end
+          return if !includes_interpolation?(args) && !includes_sum?(args)
 
           add_offense(node)
         end

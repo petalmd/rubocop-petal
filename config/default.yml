@@ -1,9 +1,6 @@
-# Write it!
-
 Rails/EnumPrefix:
   Description: 'Set prefix options when using enums.'
   Enabled: true
-  VersionAdded: '0.1.0'
   StyleGuide: https://github.com/rails/rails/issues/13389#issue-24527737
   Include:
     - app/models/**/*
@@ -11,17 +8,14 @@ Rails/EnumPrefix:
 Rails/RiskyActiverecordInvocation:
   Description: 'Interpolation, use hash or parameterized syntax.'
   Enabled: true
-  VersionAdded: '0.1.0'
 
 Rails/TableName:
   Description: 'Prevent usage of table_name= to in favor of convention.'
   Enabled: true
   StyleGuide: "https://rails.rubystyle.guide/#keep-ar-defaults"
-  VersionAdded: '0.1.0'
   Include:
     - app/models/**/*
 
 Chewy/ResetOnType:
   Description: 'Prevent using reset! methods on Chewy type class'
   Enabled: true
-  VersionAdded: '0.1.0'

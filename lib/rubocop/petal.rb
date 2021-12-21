@@ -1,9 +1,9 @@
 # frozen_string_literal: true
 
-require_relative "petal/version"
+require_relative 'petal/version'
 
 module RuboCop
-  module Petal
+  module Petal # rubocop:disable Style/Documentation
     class Error < StandardError; end
     # Your code goes here...
     PROJECT_ROOT   = Pathname.new(__dir__).parent.parent.expand_path.freeze
@@ -13,4 +13,3 @@ module RuboCop
     private_constant(:CONFIG_DEFAULT, :PROJECT_ROOT)
   end
 end
-

@@ -3,8 +3,14 @@
 module RuboCop
   module Cop
     module Chewy
+      # This cop prevent usage of table_name= to in favor of convention.
+      #
+      #   # bad
+      #   UsersIndex::User.reset!
+      #
+      #   # good
+      #   UsersIndex.reset!
       class ResetOnType < Base
-
         MSG = 'Using reset or reset! on the type instead of the index will put Elasticsearch in an unhealthy state'
 
         def_node_matcher :reset_on_type?, <<~PATTERN
