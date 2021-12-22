@@ -1,3 +1,9 @@
+RSpec/AuthenticatedAs:
+  Description: 'Suggest to use authenticated_as instead of legacy api_key.'
+  Enabled: true
+  Include:
+    - spec/api/**/*_spec.rb
+
 Rails/EnumPrefix:
   Description: 'Set prefix options when using enums.'
   Enabled: true
