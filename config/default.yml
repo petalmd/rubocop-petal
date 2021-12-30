@@ -1,3 +1,10 @@
+Grape/PreferNamespace:
+  Description: 'Prevent usage of namespace aliases.'
+  Enabled: true
+  StyleGuide: https://github.com/ruby-grape/grape#namespace-validation-and-coercion
+  Include:
+    - app/api/**/*
+
 Rails/EnumPrefix:
   Description: 'Set prefix options when using enums.'
   Enabled: true
