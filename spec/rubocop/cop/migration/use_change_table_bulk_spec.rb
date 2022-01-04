@@ -1,6 +1,6 @@
 # frozen_string_literal: true
 
-RSpec.describe RuboCop::Cop::Migration::BulkChangeTable, :config do
+RSpec.describe RuboCop::Cop::Migration::UseChangeTableBulk, :config do
   context 'without change_table' do
     it 'does not register an offense' do
       expect_no_offenses <<~RUBY

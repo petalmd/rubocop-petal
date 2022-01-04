@@ -11,7 +11,7 @@ module RuboCop
       # # good
       #
       # change_table :my_table, bulk: true
-      class BulkChangeTable < Base
+      class UseChangeTableBulk < Base
         MSG = 'Use `change_table` with `bulk: true`.'
         RESTRICT_ON_SEND = %i[change_table].freeze
 

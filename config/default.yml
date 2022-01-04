@@ -1,8 +1,8 @@
-Migration/BulkChangeTable:
+Migration/UseChangeTableBulk:
   Description: 'Enforces the use of option `bulk: true` with `change_table`'
   Enabled: true
   Include:
-    - db/migration/**/*.rb
+    - db/migrate/**
 
 Rails/EnumPrefix:
   Description: 'Set prefix options when using enums.'

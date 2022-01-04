@@ -2,7 +2,7 @@
 
 # main
 
-* Added Cop `Migration/BulkChangeTable` 
+* Added Cop `Migration/UseChangeTableBulk` 
 
 # v0.1.0
 
