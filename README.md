@@ -1,6 +1,7 @@
 # RuboCop::Petal
 
 [![Build](https://github.com/petalmd/rubocop-petal/actions/workflows/build.yml/badge.svg)](https://github.com/petalmd/rubocop-petal/actions/workflows/build.yml)
+[![Gem Version](https://badge.fury.io/rb/rubocop-petal.svg)](https://badge.fury.io/rb/rubocop-petal)
 
 Petal custom cops. List of cops can be find [here](https://github.com/petalmd/rubocop-petal/tree/main/lib/rubocop/cop).
 
