@@ -27,7 +27,7 @@ In your `.rubocop.yml` file, add `rubocop-petal`
 
 ```yaml
 require:
-  - rubocop-rails
+  - rubocop-petal
 ```
 
 ## Development
