@@ -2,7 +2,9 @@
 
 # main
 
-* Added cop `Added Grape/PreferNamespace`
+* Added cop `Added Grape/PreferNamespace` ([#6](https://github.com/petalmd/rubocop-petal/pull/6))
+* Added Cop `Migration/UseChangeTableBulk` ([#7](https://github.com/petalmd/rubocop-petal/pull/7))
+* Added cop `Grape/HelpersIncludeModule` ([#1](https://github.com/petalmd/rubocop-petal/pull/1))
 
 # v0.1.0
 
