@@ -4,6 +4,12 @@ RSpec/AuthenticatedAs:
   Include:
     - spec/api/**/*_spec.rb
 
+Grape/HelpersIncludeModule:
+  Description: 'Prevent using helpers with block to include module'
+  Enabled: true
+  Include:
+    - app/api/**/*
+
 Rails/EnumPrefix:
   Description: 'Set prefix options when using enums.'
   Enabled: true

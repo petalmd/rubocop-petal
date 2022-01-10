@@ -1,6 +1,7 @@
 # RuboCop::Petal
 
 [![Build](https://github.com/petalmd/rubocop-petal/actions/workflows/build.yml/badge.svg)](https://github.com/petalmd/rubocop-petal/actions/workflows/build.yml)
+[![Gem Version](https://badge.fury.io/rb/rubocop-petal.svg)](https://badge.fury.io/rb/rubocop-petal)
 
 Petal custom cops. List of cops can be find [here](https://github.com/petalmd/rubocop-petal/tree/main/lib/rubocop/cop).
 
@@ -26,20 +27,26 @@ In your `.rubocop.yml` file, add `rubocop-petal`
 
 ```yaml
 require:
-  - rubocop-rails
+  - rubocop-petal
 ```
 
 ## Development
 
-After checking out the repo, run `bin/setup` to install dependencies. Then, run `rake spec` to run the tests. You can also run `bin/console` for an interactive prompt that will allow you to experiment.
+After checking out the repo, run `bin/setup` to install dependencies. Then, run `rake spec` to run the tests. 
+You can also run `bin/console` for an interactive prompt that will allow you to experiment.
 
 To install this gem onto your local machine, run `bundle exec rake install`.
+
+To run all checks like the CI simply run `bundle exec rake`.
 
 ## Create new cop
 
 ```shell
 bundle exec rake 'new_cop[Rails/MyNewCop]'
 ```
+
+Have a look to [RuboCop documentation](https://docs.rubocop.org/rubocop/1.23/development.html) to get started with
+_node pattern_.
 
 ## Release
 
