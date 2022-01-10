@@ -1,9 +1,17 @@
+<<<<<<< HEAD
 RSpec/CreateListMax:
   Description: 'Prevent creating to most records with `FactoryBot.create_list`.'
   Enabled: true
   Max: 5
   Include:
     - spec/**/*
+=======
+Grape/HelpersIncludeModule:
+  Description: 'Prevent using helpers with block to include module'
+  Enabled: true
+  Include:
+    - app/api/**/*
+>>>>>>> origin/main
 
 Rails/EnumPrefix:
   Description: 'Set prefix options when using enums.'
