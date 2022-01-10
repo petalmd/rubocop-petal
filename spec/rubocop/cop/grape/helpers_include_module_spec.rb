@@ -19,6 +19,26 @@ RSpec.describe RuboCop::Cop::Grape::HelpersIncludeModule, :config do
         ^^^^^^^^^^^^^^^^^^^^^ Use `helpers MyOtherModule` instead of `helpers` with a block.
       end
     RUBY
+
+    expect_offense(<<~RUBY)
+      helpers do
+        include MyModule
+        ^^^^^^^^^^^^^^^^ Use `helpers MyModule` instead of `helpers` with a block.
+      #{'  '}
+        def def my_helper_method; end
+      end
+    RUBY
+
+    expect_offense(<<~RUBY)
+      helpers do
+        include MyModule
+        ^^^^^^^^^^^^^^^^ Use `helpers MyModule` instead of `helpers` with a block.
+      #{'  '}
+        def def my_helper_method; end
+        include MyOtherModule
+        ^^^^^^^^^^^^^^^^^^^^^ Use `helpers MyOtherModule` instead of `helpers` with a block.
+      end
+    RUBY
   end
 
   it 'does not register an offense when using `helpers` without a block to include module' do
