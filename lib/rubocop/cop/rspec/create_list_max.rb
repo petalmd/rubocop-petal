@@ -21,6 +21,7 @@ module RuboCop
       class CreateListMax < Base
         MSG = 'Creating more than `%<max_config>s` records is discouraged.'
         DEFAULT_MAX = 5
+        RESTRICT_ON_SEND = [:create_list].freeze
 
         def_node_search :create_list, <<~PATTERN
           (send _ :create_list (sym _) (:int $_) ...)

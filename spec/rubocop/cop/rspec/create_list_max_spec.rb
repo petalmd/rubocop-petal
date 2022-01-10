@@ -29,6 +29,11 @@ RSpec.describe RuboCop::Cop::RSpec::CreateListMax, :config do
       ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^ Creating more than `2` records is discouraged.
       end
     RUBY
+
+    expect_offense(<<~RUBY)
+      let(:my_record) { FactoryBot.create(:my_parent, children: FactoryBot.create_list(:my_model, 3)) }
+                                                                ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^ Creating more than `2` records is discouraged.
+    RUBY
   end
 
   it 'does not register an offense when using less than Max' do
