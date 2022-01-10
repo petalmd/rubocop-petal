@@ -4,7 +4,7 @@ RSpec.describe RuboCop::Cop::Grape::UnnecessaryNamespace, :config do
   it 'registers an offense when using unnecessary namespace' do
     expect_offense(<<~RUBY)
       namespace :a_space do
-      ^^^^^^^^^^^^^^^^^^ Unnecessary usage of Grape namespace.Specify endpoint name with a argument: `get :my_namespace`.
+      ^^^^^^^^^^^^^^^^^^ Unnecessary usage of Grape namespace. Specify endpoint name with a argument: `get :my_namespace`.
         params do
           requires :id, type: Integer
         end
@@ -18,7 +18,7 @@ RSpec.describe RuboCop::Cop::Grape::UnnecessaryNamespace, :config do
 
     expect_offense(<<~RUBY)
       namespace :a_space do
-      ^^^^^^^^^^^^^^^^^^ Unnecessary usage of Grape namespace.Specify endpoint name with a argument: `get :my_namespace`.
+      ^^^^^^^^^^^^^^^^^^ Unnecessary usage of Grape namespace. Specify endpoint name with a argument: `get :my_namespace`.
         params do
           requires :id, type: Integer
         end
@@ -32,7 +32,7 @@ RSpec.describe RuboCop::Cop::Grape::UnnecessaryNamespace, :config do
 
     expect_offense(<<~RUBY)
       namespace :a_space do
-      ^^^^^^^^^^^^^^^^^^ Unnecessary usage of Grape namespace.Specify endpoint name with a argument: `get :my_namespace`.
+      ^^^^^^^^^^^^^^^^^^ Unnecessary usage of Grape namespace. Specify endpoint name with a argument: `get :my_namespace`.
         params {}
         get {}
       end
@@ -40,28 +40,35 @@ RSpec.describe RuboCop::Cop::Grape::UnnecessaryNamespace, :config do
 
     expect_offense(<<~RUBY)
       namespace :a_space do
-      ^^^^^^^^^^^^^^^^^^ Unnecessary usage of Grape namespace.Specify endpoint name with a argument: `get :my_namespace`.
+      ^^^^^^^^^^^^^^^^^^ Unnecessary usage of Grape namespace. Specify endpoint name with a argument: `get :my_namespace`.
         get {}
       end
     RUBY
 
     expect_offense(<<~RUBY)
       namespace 'a_space' do
-      ^^^^^^^^^^^^^^^^^^^ Unnecessary usage of Grape namespace.Specify endpoint name with a argument: `get :my_namespace`.
+      ^^^^^^^^^^^^^^^^^^^ Unnecessary usage of Grape namespace. Specify endpoint name with a argument: `get :my_namespace`.
+        get {}
+      end
+    RUBY
+
+    expect_offense(<<~RUBY)
+      resource :a_space do
+      ^^^^^^^^^^^^^^^^^ Unnecessary usage of Grape namespace. Specify endpoint name with a argument: `get :my_namespace`.
+        get {}
+      end
+    RUBY
+
+    expect_offense(<<~RUBY)
+      resources :a_space do
+      ^^^^^^^^^^^^^^^^^^ Unnecessary usage of Grape namespace. Specify endpoint name with a argument: `get :my_namespace`.
         get {}
       end
     RUBY
 
     expect_offense(<<~RUBY)
       namespace :a_space do
-      ^^^^^^^^^^^^^^^^^^ Unnecessary usage of Grape namespace.Specify endpoint name with a argument: `get :my_namespace`.
-        get {}
-      end
-    RUBY
-
-    expect_offense(<<~RUBY)
-      namespace :a_space do
-      ^^^^^^^^^^^^^^^^^^ Unnecessary usage of Grape namespace.Specify endpoint name with a argument: `get :my_namespace`.
+      ^^^^^^^^^^^^^^^^^^ Unnecessary usage of Grape namespace. Specify endpoint name with a argument: `get :my_namespace`.
         get do
           { hello: :world }.to_json
         end
@@ -70,12 +77,54 @@ RSpec.describe RuboCop::Cop::Grape::UnnecessaryNamespace, :config do
 
     expect_offense(<<~RUBY)
       namespace :a_space do
-      ^^^^^^^^^^^^^^^^^^ Unnecessary usage of Grape namespace.Specify endpoint name with a argument: `get :my_namespace`.
+      ^^^^^^^^^^^^^^^^^^ Unnecessary usage of Grape namespace. Specify endpoint name with a argument: `get :my_namespace`.
         params do
           requires :id, type: Integer
         end
         get do
           { hello: :world }.to_json
+        end
+      end
+    RUBY
+
+    expect_offense(<<~RUBY)
+      namespace :a_space do
+        namespace :b_space do
+        ^^^^^^^^^^^^^^^^^^ Unnecessary usage of Grape namespace. Specify endpoint name with a argument: `get :my_namespace`.
+          params do
+            requires :id, type: Integer
+          end
+          get do
+            { hello: :world }.to_json
+          end
+        end
+      end
+    RUBY
+
+    expect_offense(<<~RUBY)
+      namespace :a_space do
+        resources :b_space do
+        ^^^^^^^^^^^^^^^^^^ Unnecessary usage of Grape namespace. Specify endpoint name with a argument: `get :my_namespace`.
+          params do
+            requires :id, type: Integer
+          end
+          get do
+            { hello: :world }.to_json
+          end
+        end
+      end
+    RUBY
+
+    expect_offense(<<~RUBY)
+      resources :a_space do
+        namespace :b_space do
+        ^^^^^^^^^^^^^^^^^^ Unnecessary usage of Grape namespace. Specify endpoint name with a argument: `get :my_namespace`.
+          params do
+            requires :id, type: Integer
+          end
+          get do
+            { hello: :world }.to_json
+          end
         end
       end
     RUBY

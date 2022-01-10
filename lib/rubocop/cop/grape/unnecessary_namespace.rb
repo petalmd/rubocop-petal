@@ -14,7 +14,7 @@ module RuboCop
       #   get :my_namespace {}
       #
       class UnnecessaryNamespace < Base
-        MSG = 'Unnecessary usage of Grape namespace.'\
+        MSG = 'Unnecessary usage of Grape namespace. '\
               'Specify endpoint name with a argument: `get :my_namespace`.'
         HTTP_ACTIONS = Set.new(%i[get put post patch delete])
         GRAPE_NAMESPACE_ALIAS = Set.new(%i[namespace resource resources])
