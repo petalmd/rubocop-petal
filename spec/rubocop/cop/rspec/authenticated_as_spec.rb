@@ -3,7 +3,7 @@
 RSpec.describe RuboCop::Cop::RSpec::AuthenticatedAs, :config do
   it 'registers an offense when using `HTTP_API_KEY`' do
     expect_offense(<<~RUBY)
-      get '/api/v2/my_endpoint', headers: { HTTP_API_KEY: user.api_key }
+      get '/api/v1/my_endpoint', headers: { HTTP_API_KEY: user.api_key }
                                             ^^^^^^^^^^^^ Use `authenticated_as` instead of legacy api_key.
     RUBY
 
