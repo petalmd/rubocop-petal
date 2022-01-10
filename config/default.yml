@@ -4,6 +4,12 @@ RSpec/AuthenticatedAs:
   Include:
     - spec/api/**/*_spec.rb
 
+Migration/UseChangeTableBulk:
+  Description: 'Enforces the use of option `bulk: true` with `change_table`'
+  Enabled: true
+  Include:
+    - db/migrate/**
+
 Grape/HelpersIncludeModule:
   Description: 'Prevent using helpers with block to include module'
   Enabled: true
