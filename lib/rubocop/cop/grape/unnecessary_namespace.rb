@@ -45,6 +45,8 @@ module RuboCop
           add_offense(node) if http_action_node.size == 1
         end
 
+        private
+
         def select_http_action_block_node(nodes)
           nodes.select { |node| http_action?(node) }
         end
