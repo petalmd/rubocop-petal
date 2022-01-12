@@ -2,6 +2,8 @@
 
 # main
 
+# v0.2.0
+
 * Added cop `RSpec/AuthenticatedAs` ([#3](https://github.com/petalmd/rubocop-petal/pull/3))
 * Added cop `Grape/UnnecessaryNamespace` ([#2](https://github.com/petalmd/rubocop-petal/pull/2))
 * Added cop `RSpec/CreateListMax` ([#4](https://github.com/petalmd/rubocop-petal/pull/4))
