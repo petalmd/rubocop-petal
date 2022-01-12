@@ -4,6 +4,13 @@ RSpec/AuthenticatedAs:
   Include:
     - spec/api/**/*_spec.rb
 
+RSpec/CreateListMax:
+  Description: 'Prevent creating to most records with `FactoryBot.create_list`.'
+  Enabled: true
+  Max: 5
+  Include:
+    - spec/**/*
+
 Migration/UseChangeTableBulk:
   Description: 'Enforces the use of option `bulk: true` with `change_table`'
   Enabled: true
@@ -12,6 +19,12 @@ Migration/UseChangeTableBulk:
 
 Grape/HelpersIncludeModule:
   Description: 'Prevent using helpers with block to include module'
+  Enabled: true
+  Include:
+    - app/api/**/*
+
+Grape/UnnecessaryNamespace:
+  Description: 'Detect unnecessary usage of Grape namespace.'
   Enabled: true
   Include:
     - app/api/**/*
