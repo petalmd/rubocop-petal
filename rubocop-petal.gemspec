@@ -32,5 +32,5 @@ Gem::Specification.new do |spec|
   # guide at: https://bundler.io/guides/creating_gem.html
 
   spec.add_runtime_dependency 'rubocop', '>= 1.7.0', '< 2.0'
-  spec.add_dependency 'rubocop-rails', '~> 2.10.0'
+  spec.add_dependency 'rubocop-rails', '~> 2.10'
 end
