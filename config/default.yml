@@ -1,3 +1,10 @@
+Grape/PreferNamespace:
+  Description: 'Prevent usage of namespace aliases.'
+  Enabled: true
+  StyleGuide: https://github.com/ruby-grape/grape#namespace-validation-and-coercion
+  Include:
+    - app/api/**/*
+
 RSpec/AuthenticatedAs:
   Description: 'Suggest to use authenticated_as instead of legacy api_key.'
   Enabled: true

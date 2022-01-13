@@ -2,9 +2,11 @@
 
 # main
 
+* Added cop `Added Grape/PreferNamespace` ([#6](https://github.com/petalmd/rubocop-petal/pull/6))
+
 # v0.2.1
 
-Update lock dependencies `rubocop-rails` ([#9](https://github.com/petalmd/rubocop-petal/pull/9))
+* Update lock dependencies `rubocop-rails` ([#9](https://github.com/petalmd/rubocop-petal/pull/9))
 
 # v0.2.0
 
