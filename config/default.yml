@@ -5,6 +5,12 @@ Grape/PreferNamespace:
   Include:
     - app/api/**/*
 
+Migration/ForeignKeyOption:
+  Description: 'Specify the foreign key option to create the constraint.'
+  Enabled: true
+  Include:
+    - db/migrate/**
+
 RSpec/AuthenticatedAs:
   Description: 'Suggest to use authenticated_as instead of legacy api_key.'
   Enabled: true
