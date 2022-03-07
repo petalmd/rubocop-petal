@@ -2,6 +2,7 @@
 
 # main
 
+* Added cop `Added Migration/ForeignKeyOption` ([#11](https://github.com/petalmd/rubocop-petal/pull/11))
 * Added cop `Added Grape/PreferNamespace` ([#6](https://github.com/petalmd/rubocop-petal/pull/6))
 
 # v0.2.1
