@@ -34,6 +34,8 @@ module RuboCop
 
         def on_send(node)
           return unless using_alias_on_api? node
+          # Check if use block
+          return unless node.block_node&.children&.last
 
           add_offense(node) do |corrector|
             corrector.replace(node, node.source.gsub(/^#{namespace_alias(node)}/, 'namespace'))
