@@ -2,6 +2,8 @@
 
 # main
 
+# v0.3.1
+
 Correct cop name `Migration/SchemaStatementsMethods` in config ([#17](https://github.com/petalmd/rubocop-petal/pull/17))
 
 # v0.3.0
