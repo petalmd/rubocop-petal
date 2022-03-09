@@ -2,6 +2,8 @@
 
 # main
 
+Correct cop name `Migration/SchemaStatementsMethods` in config ([#17](https://github.com/petalmd/rubocop-petal/pull/17))
+
 # v0.3.0
 
 * Added cop `Added Migration/ForeignKeyOption` ([#11](https://github.com/petalmd/rubocop-petal/pull/11))

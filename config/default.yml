@@ -11,7 +11,7 @@ Migration/ForeignKeyOption:
   Include:
     - db/migrate/**
 
-Migration/SchemaStatementsConnection:
+Migration/SchemaStatementsMethods:
   Description: 'Suggest to use SchemaStatements methods already defined in a migration class.'
   Enabled: true
   Include:
