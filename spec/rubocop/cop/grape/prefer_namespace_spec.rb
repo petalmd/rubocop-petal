@@ -50,6 +50,19 @@ RSpec.describe RuboCop::Cop::Grape::PreferNamespace, :config do
             get {}
           end
         RUBY
+
+        expect_offense(<<~RUBY)
+          resources do
+          ^^^^^^^^^ Prefer using `namespace` over its aliases.
+            get {}
+          end
+        RUBY
+
+        expect_correction(<<~RUBY)
+          namespace do
+            get {}
+          end
+        RUBY
       end
     end
 
@@ -75,13 +88,13 @@ RSpec.describe RuboCop::Cop::Grape::PreferNamespace, :config do
         expect_offense(<<~RUBY)
           segment :my_segment, 'some other param' do
           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^ Prefer using `namespace` over its aliases.
-            get {}
+            get { group }
           end
         RUBY
 
         expect_correction(<<~RUBY)
           namespace :my_segment, 'some other param' do
-            get {}
+            get { group }
           end
         RUBY
       end
@@ -115,7 +128,15 @@ RSpec.describe RuboCop::Cop::Grape::PreferNamespace, :config do
 
   it 'does not register an offense when a method with a similar name' do
     expect_no_offenses(<<~RUBY)
-      namespace :my_group do
+      namespace :group do
+        get do
+          SomeClass.group(:stuff, :together)
+        end
+      end
+    RUBY
+
+    expect_no_offenses(<<~RUBY)
+      namespace do
         get do
           SomeClass.group(:stuff, :together)
         end

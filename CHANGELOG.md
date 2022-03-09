@@ -6,6 +6,7 @@
 * Added cop `Added Grape/PreferNamespace` ([#6](https://github.com/petalmd/rubocop-petal/pull/6))
 * Added cop `Added Migration/SchemaStatementsMethods` ([#14](https://github.com/petalmd/rubocop-petal/pull/14))
 * Remove cop `Added Migration/UseChangeTableBulk` ([#15](https://github.com/petalmd/rubocop-petal/pull/15))
+* Update cop `Grape/PreferNamespace` ([#16](https://github.com/petalmd/rubocop-petal/pull/16))
 
 # v0.2.1
 
