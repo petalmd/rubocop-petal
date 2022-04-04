@@ -18,6 +18,8 @@ module RuboCop
       #   stub_products(MY_PRODUCT: true)
       #
       class StubProducts < Base
+        extend AutoCorrector
+
         MSG = 'Use `stub_products` instead of veil/unveil_product.'
 
         def_node_search :veil_product?, <<~PATTERN
@@ -31,7 +33,12 @@ module RuboCop
         def on_send(node)
           return unless veil_product?(node) || unveil_product?(node)
 
-          add_offense(node)
+          add_offense(node) do |corrector|
+            product_is_available = !veil_product?(node)
+            subst = "stub_products(\\k<product> => #{product_is_available}"
+
+            corrector.replace(node, node.source.gsub(/(?'method'^[^(]*).(?'product'[^)]+)/m, subst))
+          end
         end
       end
     end
