@@ -2,50 +2,58 @@
 
 RSpec.describe RuboCop::Cop::RSpec::StubProducts, :config do
   context 'when using veil_product' do
-    it 'registers an offense', :aggregate_failures do
-      expect_offense(<<~RUBY)
-        veil_product('MY_PRODUCT')
-        ^^^^^^^^^^^^^^^^^^^^^^^^^^ Use `stub_products` instead of veil/unveil_product.
-      RUBY
+    context 'when veil_product is called with parentheses' do
+      it 'registers an offense', :aggregate_failures do
+        expect_offense(<<~RUBY)
+          veil_product('MY_PRODUCT')
+          ^^^^^^^^^^^^^^^^^^^^^^^^^^ Use `stub_products` instead of veil/unveil_product.
+        RUBY
 
-      expect_correction(<<~RUBY)
-        stub_products('MY_PRODUCT' => false)
-      RUBY
+        expect_correction(<<~RUBY)
+          stub_products('MY_PRODUCT' => false)
+        RUBY
+      end
     end
 
-    it 'registers an offense', :aggregate_failures do
-      expect_offense(<<~RUBY)
-        veil_product 'MY_PRODUCT'
-        ^^^^^^^^^^^^^^^^^^^^^^^^^ Use `stub_products` instead of veil/unveil_product.
-      RUBY
+    context 'when veil_product is called without parentheses' do
+      it 'registers an offense', :aggregate_failures do
+        expect_offense(<<~RUBY)
+          veil_product 'MY_PRODUCT'
+          ^^^^^^^^^^^^^^^^^^^^^^^^^ Use `stub_products` instead of veil/unveil_product.
+        RUBY
 
-      expect_correction(<<~RUBY)
-        stub_products('MY_PRODUCT' => false)
-      RUBY
+        expect_correction(<<~RUBY)
+          stub_products('MY_PRODUCT' => false)
+        RUBY
+      end
     end
   end
 
   context 'when using unveil_product' do
-    it 'registers an offense' do
-      expect_offense(<<~RUBY)
-        unveil_product('MY_PRODUCT')
-        ^^^^^^^^^^^^^^^^^^^^^^^^^^^^ Use `stub_products` instead of veil/unveil_product.
-      RUBY
+    context 'when unveil_product is called with parentheses' do
+      it 'registers an offense' do
+        expect_offense(<<~RUBY)
+          unveil_product('MY_PRODUCT')
+          ^^^^^^^^^^^^^^^^^^^^^^^^^^^^ Use `stub_products` instead of veil/unveil_product.
+        RUBY
 
-      expect_correction(<<~RUBY)
-        stub_products('MY_PRODUCT' => true)
-      RUBY
+        expect_correction(<<~RUBY)
+          stub_products('MY_PRODUCT' => true)
+        RUBY
+      end
     end
 
-    it 'registers an offense' do
-      expect_offense(<<~RUBY)
-        unveil_product 'MY_PRODUCT'
-        ^^^^^^^^^^^^^^^^^^^^^^^^^^^ Use `stub_products` instead of veil/unveil_product.
-      RUBY
+    context 'when unveil_product is called without parentheses' do
+      it 'registers an offense' do
+        expect_offense(<<~RUBY)
+          unveil_product 'MY_PRODUCT'
+          ^^^^^^^^^^^^^^^^^^^^^^^^^^^ Use `stub_products` instead of veil/unveil_product.
+        RUBY
 
-      expect_correction(<<~RUBY)
-        stub_products('MY_PRODUCT' => true)
-      RUBY
+        expect_correction(<<~RUBY)
+          stub_products('MY_PRODUCT' => true)
+        RUBY
+      end
     end
   end
 
