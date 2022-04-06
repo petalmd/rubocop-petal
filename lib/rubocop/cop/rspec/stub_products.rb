@@ -35,9 +35,10 @@ module RuboCop
 
           add_offense(node) do |corrector|
             product_is_available = !veil_product?(node)
-            subst = "stub_products(\\k<product> => #{product_is_available}"
+            product_code = /'[^']*'/.match(node.source)
+            subst = "stub_products(#{product_code} => #{product_is_available})"
 
-            corrector.replace(node, node.source.gsub(/(?'method'^[^(]*).(?'product'[^)]+)/m, subst))
+            corrector.replace(node, subst)
           end
         end
       end
