@@ -27,6 +27,20 @@ RSpec.describe RuboCop::Cop::RSpec::StubProducts, :config do
         RUBY
       end
     end
+
+    context 'when veil_product is called with a variable' do
+      it 'registers an offense', :aggregate_failures do
+        product_code = 'MY_PRODUCT'
+        expect_offense(<<~RUBY, product_code: product_code)
+          veil_product product_code
+          ^^^^^^^^^^^^^^^^^^^^^^^^^ Use `stub_products` instead of veil/unveil_product.
+        RUBY
+
+        expect_correction(<<~RUBY)
+          stub_products(product_code => false)
+        RUBY
+      end
+    end
   end
 
   context 'when using unveil_product' do
@@ -52,6 +66,20 @@ RSpec.describe RuboCop::Cop::RSpec::StubProducts, :config do
 
         expect_correction(<<~RUBY)
           stub_products('MY_PRODUCT' => true)
+        RUBY
+      end
+    end
+
+    context 'when unveil_product is called with a variable' do
+      it 'registers an offense', :aggregate_failures do
+        product_code = 'MY_PRODUCT'
+        expect_offense(<<~RUBY, product_code: product_code)
+          unveil_product product_code
+          ^^^^^^^^^^^^^^^^^^^^^^^^^^^ Use `stub_products` instead of veil/unveil_product.
+        RUBY
+
+        expect_correction(<<~RUBY)
+          stub_products(product_code => true)
         RUBY
       end
     end

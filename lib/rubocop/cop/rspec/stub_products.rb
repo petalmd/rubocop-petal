@@ -34,11 +34,15 @@ module RuboCop
           return unless veil_product?(node) || unveil_product?(node)
 
           add_offense(node) do |corrector|
-            product_is_available = !veil_product?(node)
-            product_code = /'[^']*'/.match(node.source)
-            subst = "stub_products(#{product_code} => #{product_is_available})"
+            if (match = /^\S*\s+(\S+)|\(([^)]+)\)/.match(node.source))
+              match1, match2 = match.captures
+              product_code = match1 || match2
 
-            corrector.replace(node, subst)
+              product_is_available = !veil_product?(node)
+              subst = "stub_products(#{product_code} => #{product_is_available})"
+
+              corrector.replace(node, subst)
+            end
           end
         end
       end
