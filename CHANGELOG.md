@@ -2,9 +2,11 @@
 
 # main
 
+* Added cop `RSpec/StubProducts` ([#18](https://github.com/petalmd/rubocop-petal/pull/18))
+
 # v0.3.1
 
-Correct cop name `Migration/SchemaStatementsMethods` in config ([#17](https://github.com/petalmd/rubocop-petal/pull/17))
+* Correct cop name `Migration/SchemaStatementsMethods` in config ([#17](https://github.com/petalmd/rubocop-petal/pull/17))
 
 # v0.3.0
 
