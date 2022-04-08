@@ -2,6 +2,8 @@
 
 # main
 
+* Fix typo default config SafeAutoCorrect RSpec/StubProducts ([#19](https://github.com/petalmd/rubocop-petal/pull/19))
+
 #v0.4.0
 
 * Added cop `RSpec/StubProducts` ([#18](https://github.com/petalmd/rubocop-petal/pull/18))
