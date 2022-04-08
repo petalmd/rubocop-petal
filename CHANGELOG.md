@@ -2,6 +2,8 @@
 
 # main
 
+#v0.4.0
+
 * Added cop `RSpec/StubProducts` ([#18](https://github.com/petalmd/rubocop-petal/pull/18))
 
 # v0.3.1
