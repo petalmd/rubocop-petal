@@ -39,7 +39,7 @@ module RuboCop
 
           uniqueness_child_options = uniqueness_options.children.last
 
-          # When it is juste `uniqueness: true`
+          # When it's just `uniqueness: true`
           if uniqueness_child_options.boolean_type?
             boolean_uniqueness(uniqueness_options)
             return
@@ -61,7 +61,7 @@ module RuboCop
         end
 
         def boolean_uniqueness(node)
-          # When it is juste `uniqueness: true`
+          # When it's just `uniqueness: true`
           add_offense(node) do |corrector|
             corrector.replace(node, 'uniqueness: { case_sensitive: false }')
           end
