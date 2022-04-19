@@ -1,9 +1,6 @@
 # frozen_string_literal: true
 
-RSpec.describe RuboCop::Cop::Rails::ValidateUniquenessCase do
-  let(:cop_class) { described_class }
-  let(:cop) { cop_class.new }
-
+RSpec.describe RuboCop::Cop::Rails::ValidateUniquenessCase, :config do
   it 'registers an offense when not setting case_sensitive' do
     expect_offense(<<~RUBY)
       validates :first_name, uniqueness: true
@@ -53,5 +50,26 @@ RSpec.describe RuboCop::Cop::Rails::ValidateUniquenessCase do
     expect_no_offenses(<<~RUBY)
       validates :first_name, :last_name
     RUBY
+  end
+
+  context 'when using Rails 6.1' do
+    let(:rails_version) { 6.1 }
+
+    it 'doesnt register an offense' do
+      expect_no_offenses(<<~RUBY)
+        validates :first_name, uniqueness: true
+      RUBY
+    end
+  end
+
+  context 'when using Rails 6.0' do
+    let(:rails_version) { 6.0 }
+
+    it 'register an offense' do
+      expect_offense(<<~RUBY)
+        validates :first_name, uniqueness: true
+                               ^^^^^^^^^^^^^^^^ Pass `case_sensitive: true|false` to uniqueness options.
+      RUBY
+    end
   end
 end

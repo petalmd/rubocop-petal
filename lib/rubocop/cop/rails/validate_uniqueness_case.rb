@@ -22,6 +22,9 @@ module RuboCop
       class ValidateUniquenessCase < Base
         extend AutoCorrector
 
+        # Don't force to add the `case_sensitive` option when
+        # the default value is already `false` in Rails 6.
+        MAXIMUM_RAILS_VERSION = 6.1
         MSG = 'Pass `case_sensitive: true|false` to uniqueness options.'
         RESTRICT_ON_SEND = %i[validates].freeze
 
@@ -34,6 +37,8 @@ module RuboCop
         PATTERN
 
         def on_send(node)
+          return unless support_target_rails_version?
+
           uniqueness_options = match_uniqueness_options(node)
           return unless uniqueness_options
 
@@ -46,14 +51,14 @@ module RuboCop
           end
 
           case_sensitive_options = uniqueness_child_options.pairs.detect { |c| have_case_sensitive_options?(c) }
-
-          return if case_sensitive_options
-
-          hash_uniqueness(uniqueness_options)
+          hash_uniqueness_offense(uniqueness_options, case_sensitive_options)
         end
+
+        private
 
         def match_uniqueness_options(node)
           node.children.last.children.detect do |c|
+            # Skip if not a hash
             next if c.is_a?(Symbol)
 
             uniqueness?(c)
@@ -67,10 +72,16 @@ module RuboCop
           end
         end
 
-        def hash_uniqueness(node)
+        def hash_uniqueness_offense(node, sensitive_options)
+          return if sensitive_options
+
           add_offense(node) do |corrector|
             corrector.insert_after(node.loc.expression.adjust(end_pos: -2), ', case_sensitive: false')
           end
+        end
+
+        def support_target_rails_version?
+          target_rails_version < MAXIMUM_RAILS_VERSION
         end
       end
     end
