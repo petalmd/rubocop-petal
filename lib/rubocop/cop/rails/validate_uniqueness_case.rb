@@ -17,7 +17,7 @@ module RuboCop
       #
       # # good
       # validates :name, uniqueness: { case_sensitive: true }
-      # validates :name, uniqueness: { case_sensitive: false }
+      # validates :name, uniqueness: { scope: :user_id, case_sensitive: false }
       #
       class ValidateUniquenessCase < Base
         extend AutoCorrector
