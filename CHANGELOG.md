@@ -2,6 +2,8 @@
 
 # main
 
+#v0.5.0
+
 * Added cop `Rails/ValidateUniquenessCase` ([#20](https://github.com/petalmd/rubocop-petal/pull/20))
 
 #v0.4.1
