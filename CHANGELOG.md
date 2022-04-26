@@ -2,15 +2,15 @@
 
 # main
 
-#v0.5.0
+# v0.5.0
 
 * Added cop `Rails/ValidateUniquenessCase` ([#20](https://github.com/petalmd/rubocop-petal/pull/20))
 
-#v0.4.1
+# v0.4.1
 
 * Fix typo default config SafeAutoCorrect RSpec/StubProducts ([#19](https://github.com/petalmd/rubocop-petal/pull/19))
 
-#v0.4.0
+# v0.4.0
 
 * Added cop `RSpec/StubProducts` ([#18](https://github.com/petalmd/rubocop-petal/pull/18))
 
