@@ -70,11 +70,3 @@ Rails/TableName:
 Chewy/ResetOnType:
   Description: 'Prevent using reset! methods on Chewy type class'
   Enabled: true
-
-Rails/ValidateUniquenessCase:
-  Description: 'Enforce setting uniqueness case sensitive option.'
-  Enabled: true
-  SafeAutoCorrect: false
-  StyleGuide: 'https://guides.rubyonrails.org/6_1_release_notes.html#active-record-notable-changes'
-  Include:
-    - app/models/**/*
