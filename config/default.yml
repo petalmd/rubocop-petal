@@ -30,6 +30,13 @@ RSpec/CreateListMax:
   Include:
     - spec/**/*
 
+RSpec/SidekiqInline:
+  Description: 'Prevent using `Sidekiq::Testing.inline!` in spec in favor of stubbing and calling it inline with `new.perform`.'
+  Enabled: pending
+  StyleGuide: https://github.com/mperham/sidekiq/issues/3495
+  Include:
+    - spec/**/*
+
 RSpec/StubProducts:
   Description: 'Suggest to use stub_products instead of veil/unveil_product.'
   Enabled: true
