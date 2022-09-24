@@ -2,6 +2,8 @@
 
 # main
 
+# v0.6.0
+
 * Added cop `RSpec::SidekiqInline` ([#24](https://github.com/petalmd/rubocop-petal/pull/24))
 * Remove cop `Rails/ValidateUniquenessCase` ([#21](https://github.com/petalmd/rubocop-petal/pull/21))
 
