@@ -188,5 +188,12 @@ RSpec.describe RuboCop::Cop::Grape::UnnecessaryNamespace, :config do
         end
       end
     RUBY
+
+    expect_no_offenses(<<~RUBY)
+      namespace :a_space do
+        get {}
+        patch(:update) {}
+      end
+    RUBY
   end
 end
