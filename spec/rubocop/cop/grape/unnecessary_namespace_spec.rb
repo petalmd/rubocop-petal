@@ -4,7 +4,7 @@ RSpec.describe RuboCop::Cop::Grape::UnnecessaryNamespace, :config do
   it 'registers an offense when using unnecessary namespace' do
     expect_offense(<<~RUBY)
       namespace :a_space do
-      ^^^^^^^^^^^^^^^^^^ Unnecessary usage of Grape namespace. Specify endpoint name with a argument: `get :my_namespace`.
+      ^^^^^^^^^^^^^^^^^^ Unnecessary usage of Grape namespace. Specify endpoint name with an argument: `get :some_path`.
         params do
           requires :id, type: Integer
         end
@@ -18,7 +18,7 @@ RSpec.describe RuboCop::Cop::Grape::UnnecessaryNamespace, :config do
 
     expect_offense(<<~RUBY)
       namespace :a_space do
-      ^^^^^^^^^^^^^^^^^^ Unnecessary usage of Grape namespace. Specify endpoint name with a argument: `get :my_namespace`.
+      ^^^^^^^^^^^^^^^^^^ Unnecessary usage of Grape namespace. Specify endpoint name with an argument: `get :some_path`.
         params do
           requires :id, type: Integer
         end
@@ -32,7 +32,7 @@ RSpec.describe RuboCop::Cop::Grape::UnnecessaryNamespace, :config do
 
     expect_offense(<<~RUBY)
       namespace :a_space do
-      ^^^^^^^^^^^^^^^^^^ Unnecessary usage of Grape namespace. Specify endpoint name with a argument: `get :my_namespace`.
+      ^^^^^^^^^^^^^^^^^^ Unnecessary usage of Grape namespace. Specify endpoint name with an argument: `get :some_path`.
         params {}
         get {}
       end
@@ -40,35 +40,42 @@ RSpec.describe RuboCop::Cop::Grape::UnnecessaryNamespace, :config do
 
     expect_offense(<<~RUBY)
       namespace :a_space do
-      ^^^^^^^^^^^^^^^^^^ Unnecessary usage of Grape namespace. Specify endpoint name with a argument: `get :my_namespace`.
+      ^^^^^^^^^^^^^^^^^^ Unnecessary usage of Grape namespace. Specify endpoint name with an argument: `get :some_path`.
         get {}
       end
     RUBY
 
     expect_offense(<<~RUBY)
       namespace 'a_space' do
-      ^^^^^^^^^^^^^^^^^^^ Unnecessary usage of Grape namespace. Specify endpoint name with a argument: `get :my_namespace`.
+      ^^^^^^^^^^^^^^^^^^^ Unnecessary usage of Grape namespace. Specify endpoint name with an argument: `get :some_path`.
         get {}
       end
     RUBY
 
     expect_offense(<<~RUBY)
       resource :a_space do
-      ^^^^^^^^^^^^^^^^^ Unnecessary usage of Grape namespace. Specify endpoint name with a argument: `get :my_namespace`.
+      ^^^^^^^^^^^^^^^^^ Unnecessary usage of Grape namespace. Specify endpoint name with an argument: `get :some_path`.
         get {}
       end
     RUBY
 
     expect_offense(<<~RUBY)
       resources :a_space do
-      ^^^^^^^^^^^^^^^^^^ Unnecessary usage of Grape namespace. Specify endpoint name with a argument: `get :my_namespace`.
+      ^^^^^^^^^^^^^^^^^^ Unnecessary usage of Grape namespace. Specify endpoint name with an argument: `get :some_path`.
         get {}
       end
     RUBY
 
     expect_offense(<<~RUBY)
       namespace :a_space do
-      ^^^^^^^^^^^^^^^^^^ Unnecessary usage of Grape namespace. Specify endpoint name with a argument: `get :my_namespace`.
+      ^^^^^^^^^^^^^^^^^^ Unnecessary usage of Grape namespace. Specify endpoint name with an argument: `get :some_path`.
+        get(root: false) {}
+      end
+    RUBY
+
+    expect_offense(<<~RUBY)
+      namespace :a_space do
+      ^^^^^^^^^^^^^^^^^^ Unnecessary usage of Grape namespace. Specify endpoint name with an argument: `get :some_path`.
         get do
           { hello: :world }.to_json
         end
@@ -77,7 +84,7 @@ RSpec.describe RuboCop::Cop::Grape::UnnecessaryNamespace, :config do
 
     expect_offense(<<~RUBY)
       namespace :a_space do
-      ^^^^^^^^^^^^^^^^^^ Unnecessary usage of Grape namespace. Specify endpoint name with a argument: `get :my_namespace`.
+      ^^^^^^^^^^^^^^^^^^ Unnecessary usage of Grape namespace. Specify endpoint name with an argument: `get :some_path`.
         params do
           requires :id, type: Integer
         end
@@ -90,7 +97,7 @@ RSpec.describe RuboCop::Cop::Grape::UnnecessaryNamespace, :config do
     expect_offense(<<~RUBY)
       namespace :a_space do
         namespace :b_space do
-        ^^^^^^^^^^^^^^^^^^ Unnecessary usage of Grape namespace. Specify endpoint name with a argument: `get :my_namespace`.
+        ^^^^^^^^^^^^^^^^^^ Unnecessary usage of Grape namespace. Specify endpoint name with an argument: `get :some_path`.
           params do
             requires :id, type: Integer
           end
@@ -104,7 +111,7 @@ RSpec.describe RuboCop::Cop::Grape::UnnecessaryNamespace, :config do
     expect_offense(<<~RUBY)
       namespace :a_space do
         resources :b_space do
-        ^^^^^^^^^^^^^^^^^^ Unnecessary usage of Grape namespace. Specify endpoint name with a argument: `get :my_namespace`.
+        ^^^^^^^^^^^^^^^^^^ Unnecessary usage of Grape namespace. Specify endpoint name with an argument: `get :some_path`.
           params do
             requires :id, type: Integer
           end
@@ -118,7 +125,7 @@ RSpec.describe RuboCop::Cop::Grape::UnnecessaryNamespace, :config do
     expect_offense(<<~RUBY)
       resources :a_space do
         namespace :b_space do
-        ^^^^^^^^^^^^^^^^^^ Unnecessary usage of Grape namespace. Specify endpoint name with a argument: `get :my_namespace`.
+        ^^^^^^^^^^^^^^^^^^ Unnecessary usage of Grape namespace. Specify endpoint name with an argument: `get :some_path`.
           params do
             requires :id, type: Integer
           end
@@ -186,6 +193,38 @@ RSpec.describe RuboCop::Cop::Grape::UnnecessaryNamespace, :config do
           put {}
           get {}
         end
+      end
+    RUBY
+
+    expect_no_offenses(<<~RUBY)
+      namespace :a_space do
+        patch(:update) {}
+      end
+    RUBY
+
+    expect_no_offenses(<<~RUBY)
+      namespace :a_space do
+        patch('update') {}
+      end
+    RUBY
+
+    expect_no_offenses(<<~RUBY)
+      namespace :a_space do
+        get {}
+        patch(:update) {}
+      end
+    RUBY
+
+    expect_no_offenses(<<~RUBY)
+      namespace :a_space do
+        get(root: false) {}
+        patch(:update) {}
+      end
+    RUBY
+
+    expect_no_offenses(<<~RUBY)
+      namespace :a_space do
+        patch(:update, root: false) {}
       end
     RUBY
   end

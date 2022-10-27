@@ -2,6 +2,8 @@
 
 # main
 
+* Support more cases for `Grape/UnnecessaryNamespace`. ([#26](https://github.com/petalmd/rubocop-petal/pull/26))
+
 # v0.6.0
 
 * Added cop `RSpec::SidekiqInline` ([#24](https://github.com/petalmd/rubocop-petal/pull/24))
