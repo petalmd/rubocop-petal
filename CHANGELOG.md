@@ -2,6 +2,8 @@
 
 # main
 
+* Added cop `RSpec::JsonParseResponseBody` ([#24](https://github.com/petalmd/rubocop-petal/pull/27))
+
 # v0.7.0
 
 * Support more cases for `Grape/UnnecessaryNamespace`. ([#26](https://github.com/petalmd/rubocop-petal/pull/26))
