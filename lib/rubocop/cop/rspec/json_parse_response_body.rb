@@ -14,6 +14,8 @@ module RuboCop
       #   response.parsed_body
       #
       class JsonParseResponseBody < Base
+        extend AutoCorrector
+
         MSG = 'Use `response.parsed_body` instead.'
 
         def_node_matcher :json_parse_response_body?, <<~PATTERN
@@ -23,7 +25,9 @@ module RuboCop
         def on_send(node)
           return unless json_parse_response_body?(node)
 
-          add_offense(node)
+          add_offense(node) do |corrector|
+            corrector.replace(node, 'response.parsed_body')
+          end
         end
       end
     end
