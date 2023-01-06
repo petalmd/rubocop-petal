@@ -2,7 +2,7 @@
 
 # main
 
-* Added cop `RSpec::JsonParseResponseBody` ([#24](https://github.com/petalmd/rubocop-petal/pull/27))
+* Added cop `RSpec::JsonParseResponseBody and RSpec::JsonResponse` ([#27](https://github.com/petalmd/rubocop-petal/pull/27))
 
 # v0.7.0
 
