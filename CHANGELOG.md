@@ -2,7 +2,7 @@
 
 # main
 
-* Added cop `RSpec::JsonParseResponseBody and RSpec::JsonResponse` ([#27](https://github.com/petalmd/rubocop-petal/pull/27))
+* Added cop `RSpec/JsonParseResponseBody and RSpec/JsonResponse` ([#27](https://github.com/petalmd/rubocop-petal/pull/27))
 
 # v0.7.0
 
@@ -10,7 +10,7 @@
 
 # v0.6.0
 
-* Added cop `RSpec::SidekiqInline` ([#24](https://github.com/petalmd/rubocop-petal/pull/24))
+* Added cop `RSpec/SidekiqInline` ([#24](https://github.com/petalmd/rubocop-petal/pull/24))
 * Remove cop `Rails/ValidateUniquenessCase` ([#21](https://github.com/petalmd/rubocop-petal/pull/21))
 
 # v0.5.0
