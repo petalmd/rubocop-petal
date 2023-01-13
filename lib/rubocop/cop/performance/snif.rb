@@ -16,7 +16,7 @@ module RuboCop
         MSG = 'Use `detect` instead.'
 
         def_node_matcher :snif?, <<~PATTERN
-            (send _ :snif _ _)
+          (send _ :snif _ _)
         PATTERN
 
         def on_send(node)
