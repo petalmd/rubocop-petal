@@ -4,6 +4,7 @@
 
 * Updated gemspec file. ([#30](https://github.com/petalmd/rubocop-petal/pull/30))
 * Added cop `RSpec/JsonParseResponseBody and RSpec/JsonResponse` ([#27](https://github.com/petalmd/rubocop-petal/pull/27))
+* Added cop `Performance/Snif` ([#27](https://github.com/petalmd/rubocop-petal/pull/31))
 
 # v0.7.0
 
