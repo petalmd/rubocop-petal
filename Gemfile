@@ -12,4 +12,4 @@ gem 'rspec', '~> 3.0'
 gem 'rubocop', '~> 1.0'
 gem 'rubocop-rspec', require: false
 
-gem 'activesupport', '~> 5.2.0'
+gem 'activesupport', '~> 6.0.6'
