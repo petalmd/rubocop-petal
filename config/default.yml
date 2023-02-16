@@ -1,3 +1,7 @@
+Ownership/Team:
+  Description: 'TODO: Write a description of the cop.'
+  Enabled: true
+
 Grape/PreferNamespace:
   Description: 'Prevent usage of namespace aliases.'
   Enabled: true
