@@ -18,10 +18,10 @@ module RuboCop
       #
       class PreferNamespace < Base
         extend AutoCorrector
+        include GrapeHelper
 
         MSG = 'Prefer using `namespace` over its aliases.'
 
-        NAMESPACE_ALIASES = %i[resource resources group segment].freeze
         RESTRICT_ON_SEND = NAMESPACE_ALIASES
 
         def_node_matcher :using_alias_on_api?, <<~PATTERN

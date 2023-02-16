@@ -20,7 +20,7 @@ module RuboCop
         METHOD_JUSTIFY_NAMESPACE = Set.new(%i[route_param version]) + NAMESPACE_ALIASES
 
         def_node_matcher :namespace?, <<~PATTERN
-          (send nil? NAMESPACE_ALIASES ({sym | str} _))
+          (send nil? NAMESPACE_METHODS ({sym | str} _))
         PATTERN
 
         def_node_matcher :justify_namespace?, <<~PATTERN
