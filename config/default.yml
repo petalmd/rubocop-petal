@@ -91,3 +91,7 @@ RSpec/JsonResponse:
   SafeAutoCorrect: true
   Include:
     - spec/**/*
+
+Performance/Snif:
+  Description: 'Prevent snif in favor of detect'
+  Enabled: true
