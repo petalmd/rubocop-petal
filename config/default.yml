@@ -1,6 +1,7 @@
 Ownership/Team:
   Description: 'TODO: Write a description of the cop.'
   Enabled: true
+  OwnershipFilePath: config/ownership.yml
 
 Grape/PreferNamespace:
   Description: 'Prevent usage of namespace aliases.'
