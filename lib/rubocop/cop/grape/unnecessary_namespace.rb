@@ -17,11 +17,10 @@ module RuboCop
         include GrapeHelper
         MSG = 'Unnecessary usage of Grape namespace. '\
               'Specify endpoint name with an argument: `get :some_path`.'
-        GRAPE_NAMESPACE_ALIAS = Set.new(%i[namespace resource resources])
-        METHOD_JUSTIFY_NAMESPACE = Set.new(%i[route_param namespaces resource resources version])
+        METHOD_JUSTIFY_NAMESPACE = Set.new(%i[route_param version]) + NAMESPACE_ALIASES
 
         def_node_matcher :namespace?, <<~PATTERN
-          (send nil? GRAPE_NAMESPACE_ALIAS ({sym | str} _))
+          (send nil? NAMESPACE_ALIASES ({sym | str} _))
         PATTERN
 
         def_node_matcher :justify_namespace?, <<~PATTERN

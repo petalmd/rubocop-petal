@@ -5,8 +5,7 @@ module RuboCop
     module Grape
       module GrapeHelper
         HTTP_ACTIONS = Set.new(%i[get head put post patch delete])
-        NAMESPACE_ALIASES = %i[resource resources group segment].freeze
-        AlL_NAMESPACE_METHODS = NAMESPACE_ALIASES + %i[namespace]
+        NAMESPACE_ALIASES = Set.new(%i[namespace resource resources group segment]).freeze
       end
     end
   end
