@@ -21,7 +21,7 @@ RSpec.describe RuboCop::Cop::Rails::ModelAccessFromApiController, :config do
     )
   end
 
-  let(:api_file) { '/root/api/my_api/app/file.rb' }
+  let(:api_file) { '/root/app/api/file.rb' }
 
   before do
     allow(Dir).to(
@@ -133,58 +133,13 @@ RSpec.describe RuboCop::Cop::Rails::ModelAccessFromApiController, :config do
     describe 'when access of model from api' do
       let(:source) do
         <<~RUBY
-          SomeModel.find(123)
-          ^^^^^^^^^^^^^^^ Direct access of model from within Rails Api.
+          SomeModel.new
+          ^^^^^^^^^ Direct access of model from within Rails Api or Controller.
         RUBY
       end
 
       it 'adds an offense' do
         expect_offense(source, api_file)
-      end
-    end
-
-    describe 'association to model' do
-      let(:source) do
-        <<~RUBY
-          class MyApi::Foo < ApplicationModel
-            has_one :some_model, class_name: "SomeModel", inverse_of: :foo
-                                                    ^^^^^^^^^^^^^^^^^ Direct access of model from within Rails Api.
-          end
-        RUBY
-      end
-
-      it 'adds an offense' do
-        expect_offense(source, api_file)
-      end
-    end
-
-    context 'nested model' do
-      describe 'when access of model from engine' do
-        let(:source) do
-          <<~RUBY
-            Nested::SomeModel.find(123)
-            ^^^^^^^^^^^^^^^^^^^ Direct access of model from within Rails Api.
-          RUBY
-        end
-
-        it 'adds an offense' do
-          expect_offense(source, api_file)
-        end
-      end
-
-      describe 'association to model' do
-        let(:source) do
-          <<~RUBY
-            class MyApi::FooModel < ApplicationModel
-              has_one :nested_model, class_name: "Nested::SomeModel", inverse_of: :foo
-                                                        ^^^^^^^^^^^^^^^^^^^^^ Direct access of model from within Rails Api.
-            end
-          RUBY
-        end
-
-        it 'adds an offense' do
-          expect_offense(source, api_file)
-        end
       end
     end
   end
