@@ -1,3 +1,17 @@
+Rails/ModelAccessFromApiController:
+  Description: 'Do not directly access models from within Rails Api / Controller.'
+  Enabled: false
+  VersionAdded: '0.9.0'
+  AutoCorrect: false
+  ControllersPath: app/controllers/
+  ApisPath: app/api/
+  ModelsPath: app/models/
+  DisabledApis: []
+  DisabledControllers: []
+  AllowedModels: []
+  Include:
+    - '**/*.rb'
+
 Grape/PreferNamespace:
   Description: 'Prevent usage of namespace aliases.'
   Enabled: true
