@@ -31,7 +31,7 @@ RSpec.describe RuboCop::Cop::Rails::ModelAccessFromApiController, :config do
     )
   end
 
-  context 'no violation' do
+  context 'with no violation' do
     describe 'when disabled api' do
       let(:disabled_api_file) do
         '/root/apis/fake_disabled_api/app/file.rb'
@@ -129,7 +129,7 @@ RSpec.describe RuboCop::Cop::Rails::ModelAccessFromApiController, :config do
     end
   end
 
-  context 'violation' do
+  context 'with violation' do
     describe 'when access of model from api' do
       let(:source) do
         <<~RUBY

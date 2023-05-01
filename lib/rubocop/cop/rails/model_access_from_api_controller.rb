@@ -115,7 +115,7 @@ module RuboCop
 
         def in_enforced_api_file?
           file_path = processed_source.path
-          return false unless file_path.include?(apis_path)
+          return false unless file_path.include?(apis_or_controllers_path('api'))
           return false if in_disabled_api?(file_path)
 
           true
@@ -123,7 +123,7 @@ module RuboCop
 
         def in_enforced_controller_file?
           file_path = processed_source.path
-          return false unless file_path.include?(controllers_path)
+          return false unless file_path.include?(apis_or_controllers_path('controller'))
           return false if in_disabled_controller?(file_path)
 
           true
@@ -131,13 +131,13 @@ module RuboCop
 
         def in_disabled_api?(file_path)
           disabled_apis.any? do |e|
-            file_path.include?(File.join(apis_path, e))
+            file_path.include?(File.join(apis_or_controllers_path('api'), e))
           end
         end
 
         def in_disabled_controller?(file_path)
           disabled_controllers.any? do |e|
-            file_path.include?(File.join(controllers_path, e))
+            file_path.include?(File.join(apis_or_controllers_path('controller'), e))
           end
         end
 
@@ -162,12 +162,8 @@ module RuboCop
           path
         end
 
-        def apis_path
-          cop_config['ApisPath']
-        end
-
-        def controllers_path
-          cop_config['ControllersPath']
+        def apis_or_controllers_path(which_one)
+          which_one == 'api' ? cop_config['ApisPath'] : cop_config['ControllersPath']
         end
 
         def disabled_apis
