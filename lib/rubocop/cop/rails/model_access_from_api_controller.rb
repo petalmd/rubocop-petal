@@ -6,13 +6,13 @@ require 'digest/sha1'
 module RuboCop
   module Cop
     module Rails
-      # This cop checks for engines reaching directly into app/ models.
+      # This cop checks for API or Controllers classes reaching directly into app/ models.
       #
       # Inspired by:
       # https://flexport.engineering/isolating-rails-engines-with-rubocop-210feaba3164
       # https://github.com/flexport/rubocop-flexport/pull/5/files
       #
-      # With an ActiveRecord object, engine code can perform arbitrary
+      # With an Model/ActiveRecord object, Api or Controller code can perform arbitrary
       # reads and arbitrary writes to models located in the main `app/`
       # directory. This cop helps isolate Rails Api code to ensure
       # that modular boundaries are respected.
