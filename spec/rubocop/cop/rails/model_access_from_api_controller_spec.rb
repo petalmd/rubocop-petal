@@ -9,10 +9,11 @@ RSpec.describe RuboCop::Cop::Rails::ModelAccessFromApiController, :config do
         'DisabledApis' => %w[
           fake_disabled_api
           FakeDisabledApiCamel
-        ], 'DisabledControllers' => %w[
-             fake_disabled_controller
-             FakeDisabledControllerCamel
-           ],
+        ],
+        'DisabledControllers' => %w[
+          fake_disabled_controller
+          FakeDisabledControllerCamel
+        ],
         'ApisPath' => 'app/api/',
         'ControllersPath' => 'app/controllers/',
         'ModelsPath' => 'app/models/',
