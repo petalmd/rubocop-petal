@@ -109,3 +109,145 @@ RSpec/JsonResponse:
 Performance/Snif:
   Description: 'Prevent snif in favor of detect'
   Enabled: true
+
+# ***********************************************************
+# Begins here - Global project cops setup
+# ***********************************************************
+AllCops:
+  DisplayCopNames: true
+  NewCops: enable
+  DisplayStyleGuide: true
+  ExtraDetails: true
+  StyleGuideBaseURL: https://rubystyle.guide
+
+Layout/CaseIndentation:
+  IndentOneStep: true
+Layout/LineLength:
+  Max: 175
+Layout/MultilineAssignmentLayout:
+  SupportedTypes:
+    - case
+    - if
+Layout/MultilineMethodCallIndentation:
+  EnforcedStyle: indented
+  IndentationWidth: 2
+Layout/MultilineArrayLineBreaks:
+  Enabled: true
+Layout/MultilineHashKeyLineBreaks:
+  Enabled: true
+Layout/MultilineMethodArgumentLineBreaks:
+  Enabled: true
+Lint/AmbiguousBlockAssociation:
+  Exclude:
+    - spec/**/*
+Metrics/AbcSize:
+  Max: 40
+Metrics/BlockLength:
+  Enabled: false
+Metrics/BlockNesting:
+  Enabled: false
+Metrics/ClassLength:
+  Enabled: false
+Metrics/CyclomaticComplexity:
+  Max: 13
+Metrics/MethodLength:
+  Enabled: false
+Metrics/ModuleLength:
+  Enabled: false
+Metrics/ParameterLists:
+  Enabled: false
+Metrics/PerceivedComplexity:
+  Max: 15
+Rails/SaveBang:
+  Enabled: true
+Rails/NotNullColumn:
+  Enabled: false
+Rails/Output:
+  Include:
+    - spec/**/*.rb
+    - app/**/*.rb
+    - db/**/*.rb
+    - config/**/*.rb
+    - lib/**/*.rb
+    - script/**/*.rb
+Rails/UnknownEnv:
+  Environments:
+    - production
+    - development
+    - test
+    - staging
+Rails/WhereExists:
+  Enabled: false
+Style/AsciiComments:
+  Enabled: false
+Style/CollectionMethods:
+  PreferredMethods:
+    detect: detect
+    collect: map
+Style/DateTime:
+  Enabled: true
+Style/Documentation:
+  Enabled: false
+Style/FormatStringToken:
+  Enabled: false
+Style/FrozenStringLiteralComment:
+  EnforcedStyle: always_true
+Style/GlobalVars:
+  AllowedVariables:
+    - "$redis"
+Style/NumericLiterals:
+  MinDigits: 8
+Style/ReturnNil:
+  Enabled: true
+Style/SymbolArray:
+  Enabled: false
+Style/WhileUntilModifier:
+  Enabled: false
+Gemspec/RequireMFA:
+  Enabled: false
+Gemspec/RequiredRubyVersion:
+  Enabled: false
+RSpec:
+  StyleGuideBaseURL: https://rspec.rubystyle.guide
+RSpec/AnyInstance:
+  Enabled: false
+RSpec/ContextWording:
+  Prefixes:
+    - when
+    - with
+    - without
+    - if
+    - unless
+    - for
+RSpec/ExampleLength:
+  Enabled: false
+RSpec/ExampleWithoutDescription:
+  EnforcedStyle: single_line_only
+RSpec/HookArgument:
+  Enabled: false
+RSpec/LetSetup:
+  Enabled: false
+RSpec/MessageSpies:
+  EnforcedStyle: receive
+RSpec/MultipleExpectations:
+  Enabled: false
+RSpec/MultipleMemoizedHelpers:
+  Enabled: false
+RSpec/NamedSubject:
+  Enabled: false
+RSpec/NestedGroups:
+  Max: 12
+RSpec/PredicateMatcher:
+  Enabled: false
+RSpec/StubbedMock:
+  Enabled: false
+RSpec/DescribeClass:
+  Exclude:
+    - spec/integration/**/*.rb
+RSpec/FactoryBot/SyntaxMethods:
+  Enabled: false
+# Necessary due rspec test inform Authorization bearer to mock a jwt token
+RSpec/VariableName:
+  EnforcedStyle: snake_case
+  AllowedPatterns:
+    - ^Authorization
