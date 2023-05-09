@@ -249,5 +249,5 @@ RSpec/FactoryBot/SyntaxMethods:
 # Necessary due rspec test inform Authorization bearer to mock a jwt token
 RSpec/VariableName:
   EnforcedStyle: snake_case
-  AllowedPatterns:
+  IgnoredPatterns:
     - ^Authorization
