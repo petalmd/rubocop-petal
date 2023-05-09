@@ -2,6 +2,10 @@
 
 # main
 
+# vx.x.x (2023-05-09)
+
+* Unified cops to be reused by secure-messaging and new projects. ([#41](https://github.com/petalmd/rubocop-petal/pull/41))
+
 # v0.8.0 (2022-02-21)
 
 * Added cop `Performance/Snif` ([#31](https://github.com/petalmd/rubocop-petal/pull/31))
