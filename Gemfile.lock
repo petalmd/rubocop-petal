@@ -1,9 +1,11 @@
 PATH
   remote: .
   specs:
-    rubocop-petal (1.0.0)
+    rubocop-petal (0.8.0)
       rubocop (>= 1.7.0, < 2.0)
+      rubocop-performance (~> 1.17.1)
       rubocop-rails (~> 2.10)
+      rubocop-rspec (~> 2.20.0)
 
 GEM
   remote: https://rubygems.org/
@@ -54,13 +56,16 @@ GEM
     rubocop-ast (1.15.0)
       parser (>= 3.0.1.1)
     rubocop-capybara (2.18.0)
-      rubocop (~> 1.41)
+      rubocop (>= 1.7.0, < 2.0)
+    rubocop-performance (1.17.1)
+      rubocop (>= 1.7.0, < 2.0)
+      rubocop-ast (>= 0.4.0)
     rubocop-rails (2.15.2)
       activesupport (>= 4.2.0)
       rack (>= 1.1)
       rubocop (>= 1.7.0, < 2.0)
-    rubocop-rspec (2.6.0)
-      rubocop (~> 1.19)
+    rubocop-rspec (2.20.0)
+      rubocop (>= 1.7.0, < 2.0)
       rubocop-capybara (~> 2.17)
     ruby-progressbar (1.11.0)
     thread_safe (0.3.6)
