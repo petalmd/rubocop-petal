@@ -78,13 +78,6 @@ Chewy/ResetOnType:
   Description: 'Prevent using reset! methods on Chewy type class'
   Enabled: true
 
-RSpec/JsonParseResponseBody:
-  Description: 'Prevent JSON.parse(response.body) in favor of response.parsed_body'
-  Enabled: true
-  SafeAutoCorrect: true
-  Include:
-    - spec/**/*
-
 RSpec/JsonResponse:
   Description: 'Prevent json_response in favor of response.parsed_body'
   Enabled: true
