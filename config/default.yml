@@ -145,17 +145,17 @@ Metrics/AbcSize:
 Metrics/BlockLength:
   Enabled: false
 Metrics/BlockNesting:
-  Enabled: false
+  Enabled: true
 Metrics/ClassLength:
-  Enabled: false
+  Enabled: true
 Metrics/CyclomaticComplexity:
   Max: 13
 Metrics/MethodLength:
-  Enabled: false
+  Enabled: true
 Metrics/ModuleLength:
-  Enabled: false
+  Enabled: true
 Metrics/ParameterLists:
-  Enabled: false
+  Enabled: true
 Metrics/PerceivedComplexity:
   Max: 15
 Rails/SaveBang:
