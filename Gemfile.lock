@@ -69,7 +69,7 @@ GEM
     unicode-display_width (2.1.0)
 
 PLATFORMS
-  -darwin-21
+  ruby
 
 DEPENDENCIES
   activesupport (~> 5.2.0)
