@@ -7,19 +7,21 @@ module RuboCop
       # The method will execute inline every perform_async called.
       # Must likely a spec want to test a specific worker and called it.
       # If you don't need to execute it, consider using `have_enqueued_sidekiq_job`
-      # matcher.
+      # matcher. Or if you need to perform the jobs in queue for this worker, use
+      # `drain` method on the worker class.
       #
       # @example
       #   # bad
-      #   Sidekiq::Testing.inline! do; end
-      #
-      #   # good
-      #   expect(MyWorker).to receive(:perform_async).with(some_id) do |id|
-      #     MyWorker.new.perform(id)
+      #   Sidekiq::Testing.inline! do
+      #      OperationThatTriggerWorker.call(some_id)
       #   end
       #
+      #   # good
+      #   OperationThatTriggerWorker.call(some_id)
+      #   MyWorker.drain
+      #
       class SidekiqInline < Base
-        MSG = 'Stub `perform_async` and call inline worker with `new.perform`.'
+        MSG = 'Use `MyWorker.drain` method instead of `Sidekiq::Testing.inline!`.'
         RESTRICT_ON_SEND = [:inline!].freeze
 
         def_node_matcher :sidekiq_inline?, <<~PATTERN
