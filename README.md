@@ -5,7 +5,7 @@
 
 Petal custom cops. List of cops can be find [here](https://github.com/petalmd/rubocop-petal/tree/main/lib/rubocop/cop).
 
-Petal global gem configuration for:
+Petal global cops configuration for:
 
 * rubocop
 * rubocop-rspec
