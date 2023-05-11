@@ -5,6 +5,14 @@
 
 Petal custom cops. List of cops can be find [here](https://github.com/petalmd/rubocop-petal/tree/main/lib/rubocop/cop).
 
+Petal global gem configuration for:
+
+* rubocop
+* rubocop-rspec
+* rubocop-performance
+* rubocop-rails
+* rubocop-petal
+
 ## Installation
 
 Add this line to your application's Gemfile:
@@ -23,11 +31,11 @@ Or install it yourself as:
 
 ## Usage
 
-In your `.rubocop.yml` file, add `rubocop-petal`
+In your `.rubocop.yml` file, add 
 
 ```yaml
-require:
-  - rubocop-petal
+inherit_gem:
+  rubocop-petal: 'config/base.yml'
 ```
 
 ## Development
