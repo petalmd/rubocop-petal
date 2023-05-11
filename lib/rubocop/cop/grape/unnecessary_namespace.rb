@@ -14,7 +14,7 @@ module RuboCop
       #   get :some_path {}
       #
       class UnnecessaryNamespace < Base
-        MSG = 'Unnecessary usage of Grape namespace. ' \
+        MSG = 'Unnecessary usage of Grape namespace. '\
               'Specify endpoint name with an argument: `get :some_path`.'
         HTTP_ACTIONS = Set.new(%i[get head put post patch delete])
         GRAPE_NAMESPACE_ALIAS = Set.new(%i[namespace resource resources])
@@ -50,7 +50,7 @@ module RuboCop
           return if http_action_node.size != 1
 
           paths = paths_added_with_http_action(http_action_node.first)
-          add_offense(node) if paths.empty?
+          add_offense(node) if paths.size.zero?
         end
 
         private
