@@ -2,11 +2,11 @@
 
 # main
 
-# vx.x.x (2023-05-09)
-
 * Unified cops to be reused by secure-messaging and new projects. ([#41](https://github.com/petalmd/rubocop-petal/pull/41))
+* Remove RSpec/JsonParseResponseBody duplicated cop (Fix [#39](https://github.com/petalmd/rubocop-petal/issues/39)). ([#44](https://github.com/petalmd/rubocop-petal/pull/44))
+* Update RSpec/SidekiqInline example and message (Fix [#35](https://github.com/petalmd/rubocop-petal/issues/35)). ([#43](https://github.com/petalmd/rubocop-petal/pull/43))
 
-# v0.8.0 (2022-02-21)
+# v0.8.0 (2023-02-21)
 
 * Added cop `Performance/Snif` ([#31](https://github.com/petalmd/rubocop-petal/pull/31))
 * Updated gemspec file. ([#30](https://github.com/petalmd/rubocop-petal/pull/30))
