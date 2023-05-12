@@ -5,6 +5,7 @@ require:
   - rubocop-petal
 
 AllCops:
+  SuggestExtensions: false
   DisplayCopNames: true
   NewCops: enable
   DisplayStyleGuide: true
