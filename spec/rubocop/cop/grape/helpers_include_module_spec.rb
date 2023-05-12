@@ -1,8 +1,6 @@
 # frozen_string_literal: true
 
 RSpec.describe RuboCop::Cop::Grape::HelpersIncludeModule, :config do
-  let(:config) { RuboCop::Config.new }
-
   it 'registers an offense when using `helpers` with a block to include a module' do
     expect_offense(<<~RUBY)
       helpers do

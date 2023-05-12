@@ -1,0 +1,108 @@
+require:
+  - rubocop-rails
+  - rubocop-performance
+  - rubocop-rspec
+  - rubocop-petal
+
+AllCops:
+  SuggestExtensions: false
+  DisplayCopNames: true
+  NewCops: enable
+  DisplayStyleGuide: true
+  ExtraDetails: true
+  StyleGuideBaseURL: https://rubystyle.guide
+Layout/CaseIndentation:
+  IndentOneStep: true
+Layout/MultilineAssignmentLayout:
+  SupportedTypes:
+    - case
+    - if
+Layout/MultilineMethodCallIndentation:
+  EnforcedStyle: indented
+  IndentationWidth: 2
+Layout/MultilineArrayLineBreaks:
+  Enabled: true
+Layout/MultilineHashKeyLineBreaks:
+  Enabled: true
+Layout/MultilineMethodArgumentLineBreaks:
+  Enabled: true
+Lint/AmbiguousBlockAssociation:
+  Exclude:
+    - spec/**/*
+Metrics/AbcSize:
+  Max: 20
+Metrics/BlockLength:
+  Enabled: false
+Metrics/BlockNesting:
+  Enabled: false
+Metrics/ClassLength:
+  Enabled: false
+Metrics/CyclomaticComplexity:
+  Max: 10
+Metrics/MethodLength:
+  Enabled: false
+Metrics/ModuleLength:
+  Enabled: false
+Metrics/PerceivedComplexity:
+  Max: 12
+RSpec:
+  StyleGuideBaseURL: https://rspec.rubystyle.guide
+RSpec/ContextWording:
+  Prefixes:
+    - when
+    - with
+    - without
+    - if
+    - unless
+    - for
+RSpec/ExampleLength:
+  Enabled: false
+RSpec/ExampleWithoutDescription:
+  EnforcedStyle: single_line_only
+RSpec/HookArgument:
+  Enabled: false
+RSpec/LetSetup:
+  Enabled: false
+RSpec/MessageSpies:
+  EnforcedStyle: receive
+RSpec/MultipleExpectations:
+  Enabled: false
+RSpec/MultipleMemoizedHelpers:
+  Enabled: false
+RSpec/NamedSubject:
+  Enabled: false
+RSpec/NestedGroups:
+  Max: 5
+RSpec/PredicateMatcher:
+  Enabled: false
+RSpec/StubbedMock:
+  Enabled: false
+RSpec/DescribeClass:
+  Exclude:
+    - spec/integration/**/*.rb
+Rails/SaveBang:
+  Enabled: true
+Rails/NotNullColumn:
+  Enabled: false
+Rails/UnknownEnv:
+  Environments:
+    - production
+    - development
+    - test
+    - staging
+Rails/WhereExists:
+  Enabled: false
+Style/CollectionMethods:
+  PreferredMethods:
+    detect: detect
+    collect: map
+Style/DateTime:
+  Enabled: true
+Style/Documentation:
+  Enabled: false
+Style/FrozenStringLiteralComment:
+  EnforcedStyle: always_true
+Style/NumericLiterals:
+  MinDigits: 8
+Style/ReturnNil:
+  Enabled: true

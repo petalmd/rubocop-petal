@@ -1,9 +1,6 @@
 # frozen_string_literal: true
 
-RSpec.describe RuboCop::Cop::Rails::EnumPrefix do
-  let(:cop_class) { described_class }
-  let(:cop) { cop_class.new }
-
+RSpec.describe RuboCop::Cop::Rails::EnumPrefix, :config do
   context 'without an enum' do
     it 'expects no offense' do
       expect_no_offenses(<<~RUBY)
