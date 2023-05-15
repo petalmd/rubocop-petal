@@ -2,6 +2,8 @@
 
 # main
 
+# v1.0.0 (2023-05-15)
+
 * Unified cops to be reused by others projects. ([#41](https://github.com/petalmd/rubocop-petal/pull/41))
 
 # v0.9.0 (2023-05-12)
