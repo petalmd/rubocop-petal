@@ -92,6 +92,8 @@ Rails/UnknownEnv:
     - staging
 Rails/WhereExists:
   Enabled: false
+Rails/TableNameAssignment:
+  Enabled: true
 Style/CollectionMethods:
   PreferredMethods:
     detect: detect
