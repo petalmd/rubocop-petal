@@ -2,6 +2,7 @@
 
 # main
 
+* Adjust `Metrics` base config. ([#49](https://github.com/petalmd/rubocop-petal/pull/49))
 * Added cop `Migration/ChangeTableReferences` ([#47](https://github.com/petalmd/rubocop-petal/pull/47))
 * Added cop `Migration/AlwaysBulkChangeTable` ([#46](https://github.com/petalmd/rubocop-petal/pull/46))
 
