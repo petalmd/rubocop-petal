@@ -5,6 +5,12 @@ Grape/PreferNamespace:
   Include:
     - app/api/**/*
 
+Migration/ChangeTableReferences:
+  Description: 'Prevent using `t.references` or `t.belongs_to` in a change_table.'
+  Enabled: true
+  Include:
+    - db/migrate/**
+
 Migration/ForeignKeyOption:
   Description: 'Specify the foreign key option to create the constraint.'
   Enabled: true

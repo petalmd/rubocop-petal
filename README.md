@@ -54,7 +54,7 @@ bundle exec rake 'new_cop[Rails/MyNewCop]'
 ```
 
 Have a look to [RuboCop documentation](https://docs.rubocop.org/rubocop/1.23/development.html) to get started with
-_node pattern_.
+_node pattern_. [Rubocop AST](https://github.com/rubocop/rubocop-ast/blob/master/docs/modules/ROOT/pages/node_pattern.adoc)
 
 ## Release
 
