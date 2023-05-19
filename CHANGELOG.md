@@ -2,6 +2,8 @@
 
 # main
 
+* Added cop `Migration/AlwaysBulkChangeTable` ([#46](https://github.com/petalmd/rubocop-petal/pull/46))
+
 # v1.0.0 (2023-05-15)
 
 * Unified cops to be reused by others projects. ([#41](https://github.com/petalmd/rubocop-petal/pull/41))

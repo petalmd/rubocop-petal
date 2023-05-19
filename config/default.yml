@@ -5,6 +5,12 @@ Grape/PreferNamespace:
   Include:
     - app/api/**/*
 
+Migration/AlwaysBulkChangeTable:
+  Description: 'Suggest to always use `bulk: true` when using `change_table`.'
+  Enabled: true
+  Include:
+    - db/migrate/**
+
 Migration/ForeignKeyOption:
   Description: 'Specify the foreign key option to create the constraint.'
   Enabled: true
