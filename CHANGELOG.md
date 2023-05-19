@@ -2,7 +2,8 @@
 
 # main
 
-* Added cop `Migration/ChangeTableReferences` ([#x](https://github.com/petalmd/rubocop-petal/pull/x))
+* Added cop `Migration/ChangeTableReferences` ([#47](https://github.com/petalmd/rubocop-petal/pull/47))
+* Added cop `Migration/AlwaysBulkChangeTable` ([#46](https://github.com/petalmd/rubocop-petal/pull/46))
 
 # v1.0.0 (2023-05-15)
 
