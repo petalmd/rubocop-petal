@@ -38,13 +38,13 @@ Metrics/BlockNesting:
 Metrics/ClassLength:
   Enabled: false
 Metrics/CyclomaticComplexity:
-  Max: 10
+  Max: 9
 Metrics/MethodLength:
   Enabled: false
 Metrics/ModuleLength:
   Enabled: false
 Metrics/PerceivedComplexity:
-  Max: 12
+  Max: 10
 RSpec:
   StyleGuideBaseURL: https://rspec.rubystyle.guide
 RSpec/ContextWording:
