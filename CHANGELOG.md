@@ -2,6 +2,8 @@
 
 # main
 
+# v1.1.0 (2023-05-24)
+
 * Remove cop `Rails/TableName` in favor of [Rails/TableNameAssignment](https://docs.rubocop.org/rubocop-rails/cops_rails.html#railstablenameassignment)
   and enable it in base config (Fix [#45](https://github.com/petalmd/rubocop-petal/issues/45)). ([#48](https://github.com/petalmd/rubocop-petal/pull/48))
 * Adjust `Metrics` base config. ([#49](https://github.com/petalmd/rubocop-petal/pull/49))
