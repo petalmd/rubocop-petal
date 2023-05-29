@@ -2,6 +2,8 @@
 
 # main
 
+* Relax rubocop dependencies. ([#50](https://github.com/petalmd/rubocop-petal/pull/50))
+
 # v1.1.0 (2023-05-24)
 
 * Remove cop `Rails/TableName` in favor of [Rails/TableNameAssignment](https://docs.rubocop.org/rubocop-rails/cops_rails.html#railstablenameassignment)
