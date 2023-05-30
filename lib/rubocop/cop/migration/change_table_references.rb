@@ -29,8 +29,8 @@ module RuboCop
         PATTERN
 
         # @!method change_table?(node)
-        def_node_search :change_table?, <<~PATTERN
-          (send nil? :change_table ...)
+        def_node_matcher :change_table?, <<~PATTERN
+          (block (send nil? :change_table ...) ...)
         PATTERN
 
         def on_block(node)

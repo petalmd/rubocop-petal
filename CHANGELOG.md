@@ -2,6 +2,8 @@
 
 # main
 
+* Fix `Migration/ChangeTableReferences` with multiple nested blocks. ([#51](https://github.com/petalmd/rubocop-petal/pull/51))
+
 # v1.1.1 (2023-05-29)
 
 * Relax rubocop dependencies. ([#50](https://github.com/petalmd/rubocop-petal/pull/50))
