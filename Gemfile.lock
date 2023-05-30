@@ -1,7 +1,7 @@
 PATH
   remote: .
   specs:
-    rubocop-petal (1.1.1)
+    rubocop-petal (1.1.2)
       rubocop (~> 1.50)
       rubocop-performance (~> 1.17)
       rubocop-rails (~> 2.19)
