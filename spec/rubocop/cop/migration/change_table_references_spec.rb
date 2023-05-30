@@ -15,6 +15,16 @@ RSpec.describe RuboCop::Cop::Migration::ChangeTableReferences, :config do
          ^^^^^^^^^^^^ Use a combination of `t.bigint`, `t.index` and `t.foreign_key` in a change_table.
       end
     RUBY
+
+    # With multiple layer of blocks
+    expect_offense(<<~RUBY)
+      foo do
+        change_table :subscriptions, bulk: true do |t|
+           t.belongs_to :user, null: false, foreign_key: true
+           ^^^^^^^^^^^^ Use a combination of `t.bigint`, `t.index` and `t.foreign_key` in a change_table.
+        end
+      end
+    RUBY
   end
 
   it 'does not register an offense when using references in a create_table' do
