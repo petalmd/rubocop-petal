@@ -11,7 +11,7 @@ module RuboCop
       #  add_reference :products, :user, foreign_key: true
       #
       #   # good
-      #   change_table :subscriptions, bulk: true do |t|
+      #   change_table :products, bulk: true do |t|
       #     t.bigint :user_id, null: false
       #     t.index :user_id
       #     t.foreign_key :users, column: :user_id
