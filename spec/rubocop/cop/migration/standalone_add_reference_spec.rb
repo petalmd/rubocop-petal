@@ -21,6 +21,11 @@ RSpec.describe RuboCop::Cop::Migration::StandaloneAddReference, :config do
       remove_reference :products, :user
       ^^^^^^^^^^^^^^^^ Modifying references must be done in a change_table block.
     RUBY
+
+    expect_offense(<<~RUBY)
+      remove_belongs_to :products, :user
+      ^^^^^^^^^^^^^^^^^ Modifying references must be done in a change_table block.
+    RUBY
   end
 
   it 'does not register an offense when not calling modifying references methods' do

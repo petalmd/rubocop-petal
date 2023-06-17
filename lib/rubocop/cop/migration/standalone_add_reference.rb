@@ -19,7 +19,7 @@ module RuboCop
       class StandaloneAddReference < Base
         MSG = 'Modifying references must be done in a change_table block.'
 
-        RESTRICT_ON_SEND = %i[add_reference belongs_to remove_reference].freeze
+        RESTRICT_ON_SEND = %i[add_reference belongs_to remove_reference remove_belongs_to].freeze
 
         def on_send(node)
           reference_method = node.source_range.with(end_pos: node.child_nodes.first.source_range.begin_pos - 1)
