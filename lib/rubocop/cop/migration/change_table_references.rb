@@ -21,11 +21,12 @@ module RuboCop
       #     t.foreign_key :users, column: :user_id
       #   end
       class ChangeTableReferences < Base
-        MSG = 'Use a combination of `t.bigint`, `t.index` and `t.foreign_key` in a change_table.'
+        MSG = 'Use a combination of `t.bigint`, `t.index` and `t.foreign_key` in a change_table to add a reference.' \
+              'Or `t.remove_foreign_key`, `t.remove` to remove a reference.'
 
         # @!method add_references_in_block?(node)
         def_node_search :add_references_in_block?, <<~PATTERN
-          (send lvar /references|belongs_to/ ...)
+          (send lvar /references|belongs_to|remove_references|remove_belongs_to/ ...)
         PATTERN
 
         # @!method change_table?(node)
