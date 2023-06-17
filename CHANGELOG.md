@@ -2,6 +2,8 @@
 
 # main
 
+* Added cop `Migration/StandaloneAddReference` ([#X](https://github.com/petalmd/rubocop-petal/pull/X))
+
 # v1.1.2 (2023-05-30)
 
 * Fix `Migration/ChangeTableReferences` with multiple nested blocks. ([#51](https://github.com/petalmd/rubocop-petal/pull/51))
