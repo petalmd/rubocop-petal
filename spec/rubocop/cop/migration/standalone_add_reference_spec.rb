@@ -4,12 +4,12 @@ RSpec.describe RuboCop::Cop::Migration::StandaloneAddReference, :config do
   it 'registers an offense when modifing a references outside a change_table' do
     expect_offense(<<~RUBY)
       add_reference :products, :user
-      ^^^^^^^^^^^^^^ Modifying references must be done in a change_table block.
+      ^^^^^^^^^^^^^ Modifying references must be done in a change_table block.
     RUBY
 
     expect_offense(<<~RUBY)
       add_reference :products, :user, index: true
-      ^^^^^^^^^^^^^^ Modifying references must be done in a change_table block.
+      ^^^^^^^^^^^^^ Modifying references must be done in a change_table block.
     RUBY
 
     expect_offense(<<~RUBY)
@@ -19,7 +19,7 @@ RSpec.describe RuboCop::Cop::Migration::StandaloneAddReference, :config do
 
     expect_offense(<<~RUBY)
       remove_reference :products, :user
-      ^^^^^^^^^^^^^^^^^ Modifying references must be done in a change_table block.
+      ^^^^^^^^^^^^^^^^ Modifying references must be done in a change_table block.
     RUBY
   end
 
