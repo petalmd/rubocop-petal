@@ -2,7 +2,7 @@
 
 # main
 
-* Added cop `Migration/StandaloneAddReference` ([#X](https://github.com/petalmd/rubocop-petal/pull/X))
+* Added cop `Migration/StandaloneAddReference` ([#54](https://github.com/petalmd/rubocop-petal/pull/54))
 
 # v1.1.2 (2023-05-30)
 
