@@ -3,6 +3,7 @@
 # main
 
 * Added cop `Migration/StandaloneAddReference` ([#54](https://github.com/petalmd/rubocop-petal/pull/54))
+* Update `Migration/ChangeTableReferences` on send alias and message to handle removing references. ([#55](https://github.com/petalmd/rubocop-petal/pull/55))
 
 # v1.1.2 (2023-05-30)
 

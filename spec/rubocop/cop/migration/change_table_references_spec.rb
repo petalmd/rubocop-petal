@@ -5,14 +5,28 @@ RSpec.describe RuboCop::Cop::Migration::ChangeTableReferences, :config do
     expect_offense(<<~RUBY)
       change_table :subscriptions, bulk: true do |t|
          t.references :user, null: false, foreign_key: true
-         ^^^^^^^^^^^^ Use a combination of `t.bigint`, `t.index` and `t.foreign_key` in a change_table.
+         ^^^^^^^^^^^^ Use a combination of `t.bigint`, `t.index` and `t.foreign_key` in a change_table to add a reference.Or `t.remove_foreign_key`, `t.remove` to remove a reference.
       end
     RUBY
 
     expect_offense(<<~RUBY)
       change_table :subscriptions, bulk: true do |t|
          t.belongs_to :user, null: false, foreign_key: true
-         ^^^^^^^^^^^^ Use a combination of `t.bigint`, `t.index` and `t.foreign_key` in a change_table.
+         ^^^^^^^^^^^^ Use a combination of `t.bigint`, `t.index` and `t.foreign_key` in a change_table to add a reference.Or `t.remove_foreign_key`, `t.remove` to remove a reference.
+      end
+    RUBY
+
+    expect_offense(<<~RUBY)
+      change_table :subscriptions, bulk: true do |t|
+         t.remove_references :user, null: false, foreign_key: true
+         ^^^^^^^^^^^^^^^^^^^ Use a combination of `t.bigint`, `t.index` and `t.foreign_key` in a change_table to add a reference.Or `t.remove_foreign_key`, `t.remove` to remove a reference.
+      end
+    RUBY
+
+    expect_offense(<<~RUBY)
+      change_table :subscriptions, bulk: true do |t|
+         t.remove_belongs_to :user, null: false, foreign_key: true
+         ^^^^^^^^^^^^^^^^^^^ Use a combination of `t.bigint`, `t.index` and `t.foreign_key` in a change_table to add a reference.Or `t.remove_foreign_key`, `t.remove` to remove a reference.
       end
     RUBY
 
@@ -21,7 +35,7 @@ RSpec.describe RuboCop::Cop::Migration::ChangeTableReferences, :config do
       foo do
         change_table :subscriptions, bulk: true do |t|
            t.belongs_to :user, null: false, foreign_key: true
-           ^^^^^^^^^^^^ Use a combination of `t.bigint`, `t.index` and `t.foreign_key` in a change_table.
+           ^^^^^^^^^^^^ Use a combination of `t.bigint`, `t.index` and `t.foreign_key` in a change_table to add a reference.Or `t.remove_foreign_key`, `t.remove` to remove a reference.
         end
       end
     RUBY
