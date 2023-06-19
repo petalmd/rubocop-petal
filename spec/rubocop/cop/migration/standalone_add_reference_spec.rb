@@ -13,8 +13,8 @@ RSpec.describe RuboCop::Cop::Migration::StandaloneAddReference, :config do
     RUBY
 
     expect_offense(<<~RUBY)
-      belongs_to :products, :user
-      ^^^^^^^^^^ Modifying references must be done in a change_table block.
+      add_belongs_to :products, :user
+      ^^^^^^^^^^^^^^ Modifying references must be done in a change_table block.
     RUBY
 
     expect_offense(<<~RUBY)
