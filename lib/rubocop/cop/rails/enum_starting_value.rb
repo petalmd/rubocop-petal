@@ -27,13 +27,13 @@ module RuboCop
         def on_send(node)
           return unless enum? node
 
-          add_offense(node) if start_with_zero?(enum_attributes node)
+          add_offense(node) if start_with_zero?(enum_attributes(node))
         end
 
         def start_with_zero?(node)
           node.children.any? do |child|
             value = child.value
-            value.type == :int &&  value.value == 0
+            value.type == :int && value.value.zero?
           end
         end
       end
