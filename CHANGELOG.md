@@ -2,7 +2,6 @@
 
 # main
 
-# v1.1.3 (2023-06-19)
 * Added cop `Rails/EnumStartingValue` ([#57](https://github.com/petalmd/rubocop-petal/pull/57))
 
 * Added cop `Migration/StandaloneAddReference` ([#54](https://github.com/petalmd/rubocop-petal/pull/54))
