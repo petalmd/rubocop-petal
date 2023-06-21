@@ -31,6 +31,8 @@ module RuboCop
         end
 
         def start_with_zero?(node)
+          return unless node.type == :hash
+
           node.children.any? do |child|
             value = child.value
             value.type == :int && value.value.zero?

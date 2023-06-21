@@ -76,4 +76,39 @@ RSpec.describe RuboCop::Cop::Rails::EnumStartingValue, :config do
       RUBY
     end
   end
+
+  context 'when enum values are strings' do
+    it 'expects no offense' do
+      expect_no_offenses(<<~RUBY)
+        class MyModel
+          enum my_enum: { default: 'default', console: 'console', scheduling: 'scheduling', booking: 'booking' }, _prefix: true
+        end
+      RUBY
+    end
+  end
+
+  context 'when enum contains comments' do
+    it 'expects no offense' do
+      expect_no_offenses(<<~RUBY)
+        class MyModel
+          enum action: {
+                          state_one: 1, # related to state one
+                          state_two: 2 # related to state two
+                        }
+        end
+      RUBY
+    end
+  end
+
+  context 'when enum values are defined in a constant' do
+    it 'expects no offense' do
+      ENUM_VALUES = {state_one: 0, state_two: 1}
+
+      expect_no_offenses(<<~RUBY)
+        class MyModel
+          enum action: ENUM_VALUES
+        end
+      RUBY
+    end
+  end
 end
