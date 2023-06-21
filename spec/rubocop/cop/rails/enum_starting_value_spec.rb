@@ -19,7 +19,7 @@ RSpec.describe RuboCop::Cop::Rails::EnumStartingValue, :config do
       it 'expects an offense' do
         expect_offense(<<~RUBY)
           class MyModel
-            enum my_enum: {state1: 0, state2: 2}
+            enum my_enum: { state1: 0, state2: 2 }
             ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^ Prefer starting from `1` instead of `0` with `enum`.
           end
         RUBY
@@ -36,7 +36,7 @@ RSpec.describe RuboCop::Cop::Rails::EnumStartingValue, :config do
 
         expect_offense(<<~RUBY)
           class MyModel
-            enum my_enum: {state1: 1, state2: 0}
+            enum my_enum: { state1: 1, state2: 0 }
             ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^ Prefer starting from `1` instead of `0` with `enum`.
           end
         RUBY
@@ -47,7 +47,7 @@ RSpec.describe RuboCop::Cop::Rails::EnumStartingValue, :config do
       it 'expects an offense' do
         expect_offense(<<~RUBY)
           class MyModel
-            enum my_enum: {state1: 0, state2: 2}, _suffix: false
+            enum my_enum: { state1: 0, state2: 2 }, _suffix: false
             ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^ Prefer starting from `1` instead of `0` with `enum`.
           end
         RUBY
@@ -69,7 +69,7 @@ RSpec.describe RuboCop::Cop::Rails::EnumStartingValue, :config do
     it 'expects no offense' do
       expect_no_offenses(<<~RUBY)
         class MyModel
-          enum my_enum: {state1: 1, state2: 2}, _prefix: true
+          enum my_enum: { state1: 1, state2: 2 }, _prefix: true
         end
       RUBY
 
@@ -108,9 +108,11 @@ RSpec.describe RuboCop::Cop::Rails::EnumStartingValue, :config do
   end
 
   context 'when enum values are defined in a constant' do
-    it 'expects no offense' do
-      ENUM_VALUES = {state_one: 0, state_two: 1}
+    before do
+      stub_const('ENUM_VALUES', { state_one: 0, state_two: 1 }.freeze )
+    end
 
+    it 'expects no offense' do
       expect_no_offenses(<<~RUBY)
         class MyModel
           enum action: ENUM_VALUES
