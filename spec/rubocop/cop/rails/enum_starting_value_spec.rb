@@ -33,6 +33,13 @@ RSpec.describe RuboCop::Cop::Rails::EnumStartingValue, :config do
             }
           end
         RUBY
+
+        expect_offense(<<~RUBY)
+          class MyModel
+            enum my_enum: {state1: 1, state2: 0}
+            ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^ Prefer starting from `1` instead of `0` with `enum`.
+          end
+        RUBY
       end
     end
 
