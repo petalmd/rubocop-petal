@@ -109,7 +109,7 @@ RSpec.describe RuboCop::Cop::Rails::EnumStartingValue, :config do
 
   context 'when enum values are defined in a constant' do
     before do
-      stub_const('ENUM_VALUES', { state_one: 0, state_two: 1 }.freeze )
+      stub_const('ENUM_VALUES', { state_one: 0, state_two: 1 }.freeze)
     end
 
     it 'expects no offense' do
