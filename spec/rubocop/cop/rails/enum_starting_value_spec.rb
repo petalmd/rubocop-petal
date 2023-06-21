@@ -20,7 +20,7 @@ RSpec.describe RuboCop::Cop::Rails::EnumStartingValue, :config do
         expect_offense(<<~RUBY)
           class MyModel
             enum my_enum: { state1: 0, state2: 2 }
-            ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^ Prefer starting from `1` instead of `0` with `enum`.
+            ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^ Prefer starting from `1` instead of `0` with `enum`.
           end
         RUBY
 
@@ -37,7 +37,7 @@ RSpec.describe RuboCop::Cop::Rails::EnumStartingValue, :config do
         expect_offense(<<~RUBY)
           class MyModel
             enum my_enum: { state1: 1, state2: 0 }
-            ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^ Prefer starting from `1` instead of `0` with `enum`.
+            ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^ Prefer starting from `1` instead of `0` with `enum`.
           end
         RUBY
       end
@@ -48,7 +48,7 @@ RSpec.describe RuboCop::Cop::Rails::EnumStartingValue, :config do
         expect_offense(<<~RUBY)
           class MyModel
             enum my_enum: { state1: 0, state2: 2 }, _suffix: false
-            ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^ Prefer starting from `1` instead of `0` with `enum`.
+            ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^ Prefer starting from `1` instead of `0` with `enum`.
           end
         RUBY
 
