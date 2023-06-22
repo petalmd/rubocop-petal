@@ -81,6 +81,13 @@ Rails/EnumPrefix:
   Include:
     - app/models/**/*
 
+Rails/EnumStartingValue:
+  Description: 'Prevent starting from zero with an enum.'
+  Enabled: true
+  StyleGuide: https://github.com/petalmd/rubocop-petal/issues/56
+  Include:
+    - app/models/**/*
+
 Rails/RiskyActiverecordInvocation:
   Description: 'Interpolation, use hash or parameterized syntax.'
   Enabled: true
