@@ -110,5 +110,5 @@ Performance/Snif:
 Worker/NoNilReturn:
   Description: 'Prevent early nil return in workers'
   Enabled: true
-    Include:
-      - app/workers/**/*
+  Include:
+    - app/workers/**/*
