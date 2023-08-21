@@ -107,7 +107,7 @@ Performance/Snif:
   Description: 'Prevent snif in favor of detect'
   Enabled: true
 
-Worker/NoNilReturn:
+Workers/NoNilReturn:
   Description: 'Prevent early nil return in workers'
   Enabled: true
   Include:
