@@ -1,5 +1,5 @@
 # frozen_string_literal: true
-require 'byebug'
+
 module RuboCop
   module Cop
     module Workers
