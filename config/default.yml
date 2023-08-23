@@ -104,7 +104,7 @@ RSpec/JsonResponse:
     - spec/**/*
 
 Performance/Snif:
-  # Description: 'Prevent snif in favor of detect'
+  Description: 'Prevent snif in favor of detect'
   Enabled: true
 
 Sidekiq/NoNilReturn:
