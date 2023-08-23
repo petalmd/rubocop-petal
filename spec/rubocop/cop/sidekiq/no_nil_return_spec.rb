@@ -1,6 +1,6 @@
 # frozen_string_literal: true
 
-RSpec.describe RuboCop::Cop::Workers::NoNilReturn, :config do
+RSpec.describe RuboCop::Cop::Sidekiq::NoNilReturn, :config do
   subject(:cop) { described_class.new }
 
   describe 'when analizing worker code' do
@@ -11,7 +11,7 @@ RSpec.describe RuboCop::Cop::Workers::NoNilReturn, :config do
             def perform
               unless some_condition
                 return
-                ^^^^^^ Workers/NoNilReturn: Avoid using early nil return in workers.
+                ^^^^^^ Sidekiq/NoNilReturn: Avoid using early nil return in workers.
               end
               do_something
             end
@@ -27,7 +27,7 @@ RSpec.describe RuboCop::Cop::Workers::NoNilReturn, :config do
             def perform
               if some_condition
                 return
-                ^^^^^^ Workers/NoNilReturn: Avoid using early nil return in workers.
+                ^^^^^^ Sidekiq/NoNilReturn: Avoid using early nil return in workers.
               end
               do_something
             end
@@ -42,7 +42,7 @@ RSpec.describe RuboCop::Cop::Workers::NoNilReturn, :config do
           class WorkerClass
             def perform
               return unless some_condition
-              ^^^^^^ Workers/NoNilReturn: Avoid using early nil return in workers.
+              ^^^^^^ Sidekiq/NoNilReturn: Avoid using early nil return in workers.
               do_something
             end
           end
@@ -56,7 +56,7 @@ RSpec.describe RuboCop::Cop::Workers::NoNilReturn, :config do
           class WorkerClass
             def perform
               return if some_condition
-              ^^^^^^ Workers/NoNilReturn: Avoid using early nil return in workers.
+              ^^^^^^ Sidekiq/NoNilReturn: Avoid using early nil return in workers.
               do_something
             end
           end
@@ -70,7 +70,7 @@ RSpec.describe RuboCop::Cop::Workers::NoNilReturn, :config do
           class WorkerClass
             def perform
               some_condition ? return : do_something
-                               ^^^^^^ Workers/NoNilReturn: Avoid using early nil return in workers.
+                               ^^^^^^ Sidekiq/NoNilReturn: Avoid using early nil return in workers.
               do_something_else
             end
           end

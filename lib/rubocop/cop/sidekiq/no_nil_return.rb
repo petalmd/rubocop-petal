@@ -2,7 +2,7 @@
 
 module RuboCop
   module Cop
-    module Workers
+    module Sidekiq
       # Ensure workers avoid returning early
       #
       # # bad
