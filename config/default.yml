@@ -106,3 +106,7 @@ RSpec/JsonResponse:
 Performance/Snif:
   Description: 'Prevent snif in favor of detect'
   Enabled: true
+
+Sidekiq/NoNilReturn:
+  Description: 'Prevent early nil return in workers'
+  Enabled: false

@@ -2,6 +2,8 @@
 
 # main
 
+* Added cop `Sidekiq/NoEarlyNilReturn` ([#58](https://github.com/petalmd/rubocop-petal/pull/58))
+
 * Added cop `Rails/EnumStartingValue` ([#57](https://github.com/petalmd/rubocop-petal/pull/57))
 
 * Added cop `Migration/StandaloneAddReference` ([#54](https://github.com/petalmd/rubocop-petal/pull/54))
