@@ -25,7 +25,7 @@ module RuboCop
               'Or `t.remove_foreign_key`, `t.remove` to remove a reference.'
 
         # @!method add_references_in_block?(node)
-        def_node_search :add_references_in_block?, <<~PATTERN
+        def_node_matcher :add_references_in_block?, <<~PATTERN
           (send lvar /references|belongs_to|remove_references|remove_belongs_to/ ...)
         PATTERN
 
@@ -37,7 +37,7 @@ module RuboCop
         def on_block(node)
           return unless change_table?(node)
 
-          references_node = node.children.detect { |n| add_references_in_block?(n) }
+          references_node = node.child_nodes[2].each_node.detect { |n| add_references_in_block?(n) }
           return unless references_node
 
           arguments = references_node.child_nodes[1]
