@@ -2,7 +2,7 @@
 
 # main
 
-* Added cop `Chewy/FieldType`. ([#X](https://github.com/petalmd/rubocop-petal/pull/X))
+* Added cop `Chewy/FieldType`. ([#64](https://github.com/petalmd/rubocop-petal/pull/64))
 * Fix `Migration/ChangeTableReferences` offense location (Fix [#61](https://github.com/petalmd/rubocop-petal/issues/61)) ([#62](https://github.com/petalmd/rubocop-petal/pull/62))
 * Added cop `Sidekiq/NoEarlyNilReturn` ([#58](https://github.com/petalmd/rubocop-petal/pull/58))
 * Added cop `Rails/EnumStartingValue` ([#57](https://github.com/petalmd/rubocop-petal/pull/57))
