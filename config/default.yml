@@ -1,3 +1,9 @@
+Chewy/FieldType:
+  Description: 'Assure that a type is defined for a Chewy field.'
+  Enabled: true
+  Include:
+    - app/chewy/**/*
+
 Grape/PreferNamespace:
   Description: 'Prevent usage of namespace aliases.'
   Enabled: true
