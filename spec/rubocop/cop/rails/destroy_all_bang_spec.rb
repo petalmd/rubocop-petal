@@ -38,9 +38,5 @@ RSpec.describe RuboCop::Cop::Rails::DestroyAllBang, :config do
     expect_no_offenses(<<~RUBY)
       User.each(&:destroy!)
     RUBY
-
-    expect_no_offenses(<<~RUBY)
-      User.each(&:destroy!)
-    RUBY
   end
 end
