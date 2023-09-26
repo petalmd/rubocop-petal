@@ -80,6 +80,11 @@ Grape/UnnecessaryNamespace:
   Include:
     - app/api/**/*
 
+Rails/DestroyAllBang:
+  Description: 'Prevent using `destroy_all` in favor of `each(&:destroy!)` to go along Rails/SaveBang cop.'
+  StyleGuide: https://rails.rubystyle.guide#save-bang
+  Enabled: true
+
 Rails/EnumPrefix:
   Description: 'Set prefix options when using enums.'
   Enabled: true

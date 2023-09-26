@@ -2,6 +2,7 @@
 
 # main
 
+* Added cop `Rails/DestroyAllBang`(Fix [#42](https://github.com/petalmd/rubocop-petal/issues/42)). ([#65](https://github.com/petalmd/rubocop-petal/pull/65))
 * Added cop `Chewy/FieldType`. ([#64](https://github.com/petalmd/rubocop-petal/pull/64))
 * Fix `Migration/ChangeTableReferences` offense location (Fix [#61](https://github.com/petalmd/rubocop-petal/issues/61)) ([#62](https://github.com/petalmd/rubocop-petal/pull/62))
 * Added cop `Sidekiq/NoEarlyNilReturn` ([#58](https://github.com/petalmd/rubocop-petal/pull/58))
