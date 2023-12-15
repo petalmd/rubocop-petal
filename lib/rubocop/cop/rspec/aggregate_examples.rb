@@ -1,6 +1,5 @@
 # frozen_string_literal: true
 
-require_relative 'aggregate_examples/its'
 require_relative 'aggregate_examples/matchers_with_side_effects'
 require_relative 'aggregate_examples/metadata_helpers'
 require_relative 'aggregate_examples/line_range_helpers'
@@ -117,7 +116,6 @@ module RuboCop
 
         # Methods from the following modules override and extend methods of this
         # class, extracting specific behavior.
-        prepend Its
         prepend MatchersWithSideEffects
 
         MSG = 'Aggregate with the example at line %d.'

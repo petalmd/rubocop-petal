@@ -1,8 +1,5 @@
 # frozen_string_literal: true
 
-# require "cop_helper"
-# require "test_prof/cops/rspec/aggregate_examples"
-
 RSpec.describe RuboCop::Cop::RSpec::AggregateExamples, :config do
   subject(:cop) { described_class.new(config) }
 
