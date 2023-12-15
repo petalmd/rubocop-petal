@@ -33,7 +33,7 @@ module RuboCop
       #
       #   # good
       #   describe do
-      #     it.+do
+      #     it do
       #       expect(number).to be_positive
       #       expect(number).to be_odd
       #       is_expected.to be_prime
