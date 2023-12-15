@@ -50,12 +50,12 @@ module RuboCop
             argument = arguments.first
             replacement =
               case argument.type
-              when :array
-                key = argument.values.first
-                "expect(subject[#{key.source}])"
-              else
-                property = argument.value
-                "expect(subject.#{property})"
+                when :array
+                  key = argument.values.first
+                  "expect(subject[#{key.source}])"
+                else
+                  property = argument.value
+                  "expect(subject.#{property})"
               end
             body.source.gsub(/is_expected|are_expected/, replacement)
           end
@@ -64,7 +64,7 @@ module RuboCop
             return super unless its?(example.send_node)
 
             # First parameter to `its` is not metadata.
-            example.send_node.arguments[1..-1]
+            example.send_node.arguments[1..]
           end
 
           def its?(node)

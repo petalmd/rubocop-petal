@@ -120,15 +120,15 @@ module RuboCop
         prepend Its
         prepend MatchersWithSideEffects
 
-        MSG = "Aggregate with the example at line %d."
+        MSG = 'Aggregate with the example at line %d.'
 
         def on_block(node)
           example_group_with_several_examples(node) do |all_examples|
             example_clusters(all_examples).each do |_, examples|
-              examples[1..-1].each do |example|
+              examples[1..].each do |example|
                 add_offense(example,
-                  location: :expression,
-                  message: message_for(example, examples[0]))
+                            location: :expression,
+                            message: message_for(example, examples[0]))
               end
             end
           end
@@ -143,7 +143,7 @@ module RuboCop
               range = range_for_replace(examples)
               replacement = aggregated_example(examples, metadata)
               corrector.replace(range, replacement)
-              examples[1..-1].map { |example| drop_example(corrector, example) }
+              examples[1..].map { |example| drop_example(corrector, example) }
             end
           end
         end
@@ -173,12 +173,12 @@ module RuboCop
 
         def drop_example(corrector, example)
           aggregated_range = range_by_whole_lines(example.source_range,
-            include_final_newline: true)
+                                                  include_final_newline: true)
           corrector.remove(aggregated_range)
         end
 
         def aggregated_example(examples, metadata)
-          base_indent = " " * examples.first.source_range.column
+          base_indent = ' ' * examples.first.source_range.column
           metadata = metadata_for_aggregated_example(metadata)
           [
             "#{base_indent}specify#{metadata} do",

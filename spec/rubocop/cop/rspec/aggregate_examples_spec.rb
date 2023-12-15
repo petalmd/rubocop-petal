@@ -4,17 +4,17 @@
 # require "test_prof/cops/rspec/aggregate_examples"
 
 RSpec.describe RuboCop::Cop::RSpec::AggregateExamples, :config do
-  let(:all_cops_config) do
-    {"DisplayCopNames" => false}
-  end
-
   subject(:cop) { described_class.new(config) }
 
-  let(:cop_config) do
-    {"AddAggregateFailuresMetadata" => false}
+  let(:all_cops_config) do
+    { 'DisplayCopNames' => false }
   end
 
-  shared_examples "flags in example group" do |group|
+  let(:cop_config) do
+    { 'AddAggregateFailuresMetadata' => false }
+  end
+
+  shared_examples 'flags in example group' do |group|
     it "flags examples in '#{group}'" do
       expect_offense(<<~RUBY)
         #{group} 'some docstring' do
@@ -39,16 +39,16 @@ RSpec.describe RuboCop::Cop::RSpec::AggregateExamples, :config do
   end
 
   # Detects aggregatable examples inside all aliases of example groups.
-  it_behaves_like "flags in example group", :context
-  it_behaves_like "flags in example group", :describe
-  it_behaves_like "flags in example group", :feature
-  it_behaves_like "flags in example group", :example_group
+  it_behaves_like 'flags in example group', :context
+  it_behaves_like 'flags in example group', :describe
+  it_behaves_like 'flags in example group', :feature
+  it_behaves_like 'flags in example group', :example_group
 
   # Non-expectation statements can have side effects, when e.g. being
   # part of the setup of the example.
   # Examples containing expectations wrapped in a method call, e.g.
   # `expect_no_corrections` are not considered aggregatable.
-  it "ignores examples with non-expectation statements" do
+  it 'ignores examples with non-expectation statements' do
     expect_no_offenses(<<~RUBY)
       describe do
         specify do
@@ -62,7 +62,7 @@ RSpec.describe RuboCop::Cop::RSpec::AggregateExamples, :config do
 
   # Both one-line examples and examples spanning multiple lines can be
   # aggregated, in case they consist only of expectation statements.
-  it "flags a leading single expectation example" do
+  it 'flags a leading single expectation example' do
     expect_offense(<<~RUBY)
       describe do
         it { expect(candidate).to be_positive }
@@ -85,7 +85,7 @@ RSpec.describe RuboCop::Cop::RSpec::AggregateExamples, :config do
     RUBY
   end
 
-  it "flags a following single expectation example" do
+  it 'flags a following single expectation example' do
     expect_offense(<<~RUBY)
       describe do
         specify do
@@ -108,7 +108,7 @@ RSpec.describe RuboCop::Cop::RSpec::AggregateExamples, :config do
     RUBY
   end
 
-  it "flags an expectation with compound matchers" do
+  it 'flags an expectation with compound matchers' do
     expect_offense(<<~RUBY)
       describe do
         specify do
@@ -134,7 +134,7 @@ RSpec.describe RuboCop::Cop::RSpec::AggregateExamples, :config do
   end
 
   # Not just consecutive examples can be aggregated.
-  it "flags scattered aggregatable examples" do
+  it 'flags scattered aggregatable examples' do
     expect_offense(<<~RUBY)
       describe do
         it { expect(life).to be_first }
@@ -175,7 +175,7 @@ RSpec.describe RuboCop::Cop::RSpec::AggregateExamples, :config do
   # When examples have docstrings, it is incorrect to aggregate them, since
   # either docstring is lost, either it needs to be joined with the others,
   # which is an error-prone transformation.
-  it "flags example with docstring, but does not autocorrect" do
+  it 'flags example with docstring, but does not autocorrect' do
     expect_offense(<<~RUBY)
       describe do
         it('is awesome') { expect(drink).to be_awesome }
@@ -187,7 +187,7 @@ RSpec.describe RuboCop::Cop::RSpec::AggregateExamples, :config do
     expect_no_corrections
   end
 
-  it "flags several examples with docstrings, but does not autocorrect" do
+  it 'flags several examples with docstrings, but does not autocorrect' do
     expect_offense(<<~RUBY)
       describe do
         it('is awesome') { expect(drink).to be_awesome }
@@ -202,7 +202,7 @@ RSpec.describe RuboCop::Cop::RSpec::AggregateExamples, :config do
   # Breaks examples into groups with similar metadata.
   # `aggregate_failures: true` is considered a helper metadata, and is
   # removed during aggregation.
-  it "flags examples with hash metadata" do
+  it 'flags examples with hash metadata' do
     expect_offense(<<~RUBY)
       describe do
         it { expect(ambient_temperature).to be_mild }
@@ -234,7 +234,7 @@ RSpec.describe RuboCop::Cop::RSpec::AggregateExamples, :config do
   end
 
   # Same as above
-  it "flags examples with symbol metadata" do
+  it 'flags examples with symbol metadata' do
     expect_offense(<<~RUBY)
       describe do
         it { expect(fruit).to be_so_so }
@@ -260,7 +260,7 @@ RSpec.describe RuboCop::Cop::RSpec::AggregateExamples, :config do
     RUBY
   end
 
-  it "flags examples with both metadata and docstrings, but does not autocorrect" do
+  it 'flags examples with both metadata and docstrings, but does not autocorrect' do
     expect_offense(<<~RUBY)
       describe do
         it { expect(dragonfruit).to be_so_so }
@@ -274,7 +274,7 @@ RSpec.describe RuboCop::Cop::RSpec::AggregateExamples, :config do
   end
 
   # Examples with similar metadata of mixed types are aggregated.
-  it "flags examples with mixed types of metadata" do
+  it 'flags examples with mixed types of metadata' do
     expect_offense(<<~RUBY)
       describe do
         it { expect(data).to be_ok }
@@ -295,7 +295,7 @@ RSpec.describe RuboCop::Cop::RSpec::AggregateExamples, :config do
     RUBY
   end
 
-  it "ignores examples defined in the loop" do
+  it 'ignores examples defined in the loop' do
     expect_no_offenses(<<~RUBY)
       describe do
         [1, 2, 3].each do
@@ -305,7 +305,7 @@ RSpec.describe RuboCop::Cop::RSpec::AggregateExamples, :config do
     RUBY
   end
 
-  it "flags examples with HEREDOC, but does not autocorrect" do
+  it 'flags examples with HEREDOC, but does not autocorrect' do
     expect_offense(<<~RUBY)
       describe do
         specify do
@@ -322,7 +322,7 @@ RSpec.describe RuboCop::Cop::RSpec::AggregateExamples, :config do
     expect_no_corrections
   end
 
-  it "flags examples with HEREDOC interleaved with parenthesis and curly brace, but does not autocorrect" do
+  it 'flags examples with HEREDOC interleaved with parenthesis and curly brace, but does not autocorrect' do
     expect_offense(<<~RUBY)
       describe do
         it { expect(text).to span_couple_lines(<<~TEXT) }
@@ -337,7 +337,7 @@ RSpec.describe RuboCop::Cop::RSpec::AggregateExamples, :config do
     expect_no_corrections
   end
 
-  it "ignores block expectation syntax" do
+  it 'ignores block expectation syntax' do
     expect_no_offenses(<<~RUBY)
       describe do
         specify do
@@ -351,7 +351,7 @@ RSpec.describe RuboCop::Cop::RSpec::AggregateExamples, :config do
     RUBY
   end
 
-  it "flags examples with expectations with a property of something as subject" do
+  it 'flags examples with expectations with a property of something as subject' do
     expect_offense(<<~RUBY)
       describe do
         it { expect(division.result).to eq(5) }
@@ -372,7 +372,7 @@ RSpec.describe RuboCop::Cop::RSpec::AggregateExamples, :config do
 
   # Helper methods have a good chance of having side effects, and are
   # not aggregated.
-  it "ignores helper method as subject" do
+  it 'ignores helper method as subject' do
     expect_no_offenses(<<~RUBY)
       describe do
         specify do
@@ -387,7 +387,7 @@ RSpec.describe RuboCop::Cop::RSpec::AggregateExamples, :config do
   end
 
   # Examples from different contexts (examples groups) are not aggregated.
-  it "ignores nested example groups" do
+  it 'ignores nested example groups' do
     expect_no_offenses(<<~RUBY)
       describe do
         it { expect(syntax_check).to be_ok }
@@ -403,7 +403,7 @@ RSpec.describe RuboCop::Cop::RSpec::AggregateExamples, :config do
     RUBY
   end
 
-  it "flags aggregatable examples and nested example groups" do
+  it 'flags aggregatable examples and nested example groups' do
     expect_offense(<<~RUBY)
       describe do
         it { expect(pressure).to be_ok }
@@ -430,7 +430,7 @@ RSpec.describe RuboCop::Cop::RSpec::AggregateExamples, :config do
     RUBY
   end
 
-  it "flags in the root context" do
+  it 'flags in the root context' do
     expect_offense(<<~RUBY)
       RSpec.describe do
         it { expect(person).to be_positive }
@@ -449,7 +449,7 @@ RSpec.describe RuboCop::Cop::RSpec::AggregateExamples, :config do
     RUBY
   end
 
-  it "flags several examples separated by newlines" do
+  it 'flags several examples separated by newlines' do
     expect_offense(<<~RUBY)
       describe do
         it { expect(person).to be_positive }
@@ -469,7 +469,7 @@ RSpec.describe RuboCop::Cop::RSpec::AggregateExamples, :config do
     RUBY
   end
 
-  it "flags scattered examples separated by newlines" do
+  it 'flags scattered examples separated by newlines' do
     expect_offense(<<~RUBY)
       describe do
         it { expect(person).to be_positive }
@@ -492,12 +492,12 @@ RSpec.describe RuboCop::Cop::RSpec::AggregateExamples, :config do
     RUBY
   end
 
-  context "when AddAggregateFailuresMetadata is true" do
+  context 'when AddAggregateFailuresMetadata is true' do
     let(:cop_config) do
-      {"AddAggregateFailuresMetadata" => true}
+      { 'AddAggregateFailuresMetadata' => true }
     end
 
-    it "flags examples" do
+    it 'flags examples' do
       expect_offense(<<~RUBY)
         describe do
           it { expect(life).to be_first }

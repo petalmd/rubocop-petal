@@ -15,13 +15,11 @@ module RuboCop
 
           def metadata_for_aggregated_example(metadata)
             metadata_to_add = metadata.compact.map(&:source)
-            if add_aggregate_failures_metadata?
-              metadata_to_add.unshift(":aggregate_failures")
-            end
+            metadata_to_add.unshift(':aggregate_failures') if add_aggregate_failures_metadata?
             if metadata_to_add.any?
-              "(#{metadata_to_add.join(", ")})"
+              "(#{metadata_to_add.join(', ')})"
             else
-              ""
+              ''
             end
           end
 
@@ -58,7 +56,7 @@ module RuboCop
           end
 
           def add_aggregate_failures_metadata?
-            cop_config.fetch("AddAggregateFailuresMetadata", false)
+            cop_config.fetch('AddAggregateFailuresMetadata', false)
           end
         end
       end

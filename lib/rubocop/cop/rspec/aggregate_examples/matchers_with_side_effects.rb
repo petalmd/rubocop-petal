@@ -36,8 +36,8 @@ module RuboCop
           include Language
 
           MSG_FOR_EXPECTATIONS_WITH_SIDE_EFFECTS =
-            "Aggregate with the example at line %d. IMPORTANT! Pay attention " \
-            "to the expectation order, some of the matchers have side effects."
+            'Aggregate with the example at line %d. IMPORTANT! Pay attention ' \
+            'to the expectation order, some of the matchers have side effects.'
 
           private
 
@@ -48,7 +48,7 @@ module RuboCop
           end
 
           def matcher_with_side_effects_names
-            cop_config.fetch("MatchersWithSideEffects", [])
+            cop_config.fetch('MatchersWithSideEffects', [])
               .map(&:to_sym)
           end
 

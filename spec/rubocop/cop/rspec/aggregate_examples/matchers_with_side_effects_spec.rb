@@ -4,19 +4,20 @@
 # require "test_prof/cops/rspec/aggregate_examples"
 
 RSpec.describe RuboCop::Cop::RSpec::AggregateExamples,
-  ".matchers_with_side_effects", :config do
-  let(:all_cops_config) do
-    {"DisplayCopNames" => false}
-  end
-
+               '.matchers_with_side_effects',
+               :config do
   subject(:cop) { described_class.new(config) }
 
-  context "without side effect matchers defined in configuration" do
+  let(:all_cops_config) do
+    { 'DisplayCopNames' => false }
+  end
+
+  context 'without side effect matchers defined in configuration' do
     let(:cop_config) do
-      {"MatchersWithSideEffects" => []}
+      { 'MatchersWithSideEffects' => [] }
     end
 
-    it "flags all examples" do
+    it 'flags all examples' do
       expect_offense(<<~RUBY)
         describe do
           it { expect(entry).to validate_absence_of(:comment) }
@@ -36,10 +37,10 @@ RSpec.describe RuboCop::Cop::RSpec::AggregateExamples,
     end
   end
 
-  context "with default configuration" do
+  context 'with default configuration' do
     let(:cop_config) { {} }
 
-    it "flags without qualifiers, but does not autocorrect" do
+    it 'flags without qualifiers, but does not autocorrect' do
       expect_offense(<<~RUBY)
         describe 'with and without side effects' do
           it { expect(fruit).to be_good }
@@ -51,7 +52,7 @@ RSpec.describe RuboCop::Cop::RSpec::AggregateExamples,
       expect_no_corrections
     end
 
-    it "flags with qualifiers, but does not autocorrect" do
+    it 'flags with qualifiers, but does not autocorrect' do
       expect_offense(<<~RUBY)
         describe 'with and without side effects' do
           it { expect(fruit).to be_good }

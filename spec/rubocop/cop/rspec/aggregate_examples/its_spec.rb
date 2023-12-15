@@ -2,20 +2,20 @@
 
 # require "cop_helper"
 
-RSpec.describe RuboCop::Cop::RSpec::AggregateExamples, ".its", :config do
+RSpec.describe RuboCop::Cop::RSpec::AggregateExamples, '.its', :config do
+  subject(:cop) { described_class.new(config) }
+
   let(:all_cops_config) do
-    {"DisplayCopNames" => false}
+    { 'DisplayCopNames' => false }
   end
 
   let(:cop_config) do
-    {"AddAggregateFailuresMetadata" => false}
+    { 'AddAggregateFailuresMetadata' => false }
   end
-
-  subject(:cop) { described_class.new(config) }
 
   # Regular `its` call with an attribute/method name, or a chain of methods
   # expressed as a string with dots.
-  it "flags `its`" do
+  it 'flags `its`' do
     expect_offense(<<~RUBY)
       describe do
         its(:one) { is_expected.to be(true) }
@@ -42,7 +42,7 @@ RSpec.describe RuboCop::Cop::RSpec::AggregateExamples, ".its", :config do
 
   # For single-element array argument, it's possible to make a proper
   # correction for `its`.
-  it "flags `its` with single element array syntax" do
+  it 'flags `its` with single element array syntax' do
     expect_offense(<<~RUBY)
       describe do
         its([:one]) { is_expected.to be(true) }
@@ -66,7 +66,7 @@ RSpec.describe RuboCop::Cop::RSpec::AggregateExamples, ".its", :config do
   # - a Hash: `hash[element1][element2]...`
   # - and arbitrary type: `hash[element1, element2, ...]`
   # It is impossible to infer the type to propose a proper correction.
-  it "flags `its` with multiple element array syntax, but does not autocorrect" do
+  it 'flags `its` with multiple element array syntax, but does not autocorrect' do
     expect_offense(<<~RUBY)
       describe do
         its([:one, :two]) { is_expected.to be(true) }
@@ -79,7 +79,7 @@ RSpec.describe RuboCop::Cop::RSpec::AggregateExamples, ".its", :config do
   end
 
   # Supports single-element `its` array argument with metadata.
-  it "flags `its` with metadata" do
+  it 'flags `its` with metadata' do
     expect_offense(<<~RUBY)
       describe do
         its([:one], night_mode: true) { is_expected.to be(true) }
@@ -112,7 +112,7 @@ RSpec.describe RuboCop::Cop::RSpec::AggregateExamples, ".its", :config do
   #
   # NOTE: The same applies to method calls, instance, class, global vars and
   #       constants.
-  it "flags `its` with a send node, but does not autocorrect" do
+  it 'flags `its` with a send node, but does not autocorrect' do
     expect_offense(<<~RUBY)
       describe do
         its(one) { is_expected.to be(false) }
