@@ -30,7 +30,7 @@ RSpec.describe RuboCop::Cop::RSpec::AggregateExamples, '.its', :config do
 
     expect_correction(<<~RUBY)
       describe do
-        specify do
+        it do
           expect(subject.one).to be(true)
           is_expected.to be_cool
           expect(subject.phone_numbers.size).to be(2)
@@ -53,7 +53,7 @@ RSpec.describe RuboCop::Cop::RSpec::AggregateExamples, '.its', :config do
 
     expect_correction(<<~RUBY)
       describe do
-        specify do
+        it do
           expect(subject[:one]).to be(true)
           expect(subject['two']).to be(false)
         end
@@ -91,7 +91,7 @@ RSpec.describe RuboCop::Cop::RSpec::AggregateExamples, '.its', :config do
 
     expect_correction(<<~RUBY)
       describe do
-        specify(night_mode: true) do
+        it(night_mode: true) do
           expect(subject[:one]).to be(true)
           expect(subject.three).to be(true)
         end
@@ -104,7 +104,7 @@ RSpec.describe RuboCop::Cop::RSpec::AggregateExamples, '.its', :config do
   # if the following is a correct replacement:
   #
   #   describe do
-  #     specify do
+  #     it do
   #       expect(subject.public_send(one)).to ... }
   #       expect(subject.public_send(two)).to ... }
   #     end

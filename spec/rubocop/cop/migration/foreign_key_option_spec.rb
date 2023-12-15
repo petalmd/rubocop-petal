@@ -1,7 +1,7 @@
 # frozen_string_literal: true
 
 RSpec.describe RuboCop::Cop::Migration::ForeignKeyOption, :config do
-  it 'registers an offense when not specifying the foreign key option' do
+  it 'registers an offense when not iting the foreign key option' do
     expect_offense(<<~RUBY)
       add_reference :products, :user
       ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^ Add `foreign_key: true` or `foreign_key: { to_table: :some_table }`

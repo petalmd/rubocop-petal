@@ -23,7 +23,7 @@ module RuboCop
       #
       #   # bad
       #   describe do
-      #     specify do
+      #     it do
       #       expect(number).to be_positive
       #       expect(number).to be_odd
       #     end
@@ -33,7 +33,7 @@ module RuboCop
       #
       #   # good
       #   describe do
-      #     specify do
+      #     it.+do
       #       expect(number).to be_positive
       #       expect(number).to be_odd
       #       is_expected.to be_prime
@@ -42,11 +42,11 @@ module RuboCop
       #
       #   # fair - subject has side effects
       #   describe do
-      #     specify do
+      #     it do
       #       expect(multiply_by(2)).to be_multiple_of(2)
       #     end
       #
-      #     specify do
+      #     it do
       #       expect(multiply_by(3)).to be_multiple_of(3)
       #     end
       #   end
@@ -98,14 +98,14 @@ module RuboCop
       # @example AddAggregateFailuresMetadata: true (default)
       #
       #   # Metadata set using a symbol
-      #   specify(:aggregate_failures) do
+      #   it(:aggregate_failures) do
       #     expect(number).to be_positive
       #     expect(number).to be_odd
       #   end
       #
       # @example AddAggregateFailuresMetadata: false
       #
-      #   specify do
+      #   it do
       #     expect(number).to be_positive
       #     expect(number).to be_odd
       #   end
@@ -181,7 +181,7 @@ module RuboCop
           base_indent = ' ' * examples.first.source_range.column
           metadata = metadata_for_aggregated_example(metadata)
           [
-            "#{base_indent}specify#{metadata} do",
+            "#{base_indent}it#{metadata} do",
             *examples.map { |example| transform_body(example, base_indent) },
             "#{base_indent}end\n"
           ].join("\n")

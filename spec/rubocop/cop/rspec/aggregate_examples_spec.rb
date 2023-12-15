@@ -28,7 +28,7 @@ RSpec.describe RuboCop::Cop::RSpec::AggregateExamples, :config do
 
       expect_correction(<<~RUBY)
         #{group} 'some docstring' do
-          specify do
+          it do
             is_expected.to be_awesome
             expect(subject).to be_amazing
             expect(article).to be_brilliant
@@ -51,7 +51,7 @@ RSpec.describe RuboCop::Cop::RSpec::AggregateExamples, :config do
   it 'ignores examples with non-expectation statements' do
     expect_no_offenses(<<~RUBY)
       describe do
-        specify do
+        it do
           something
           expect(book).to be_cool
         end
@@ -66,8 +66,8 @@ RSpec.describe RuboCop::Cop::RSpec::AggregateExamples, :config do
     expect_offense(<<~RUBY)
       describe do
         it { expect(candidate).to be_positive }
-        specify do
-        ^^^^^^^^^^ Aggregate with the example at line 2.
+        it do
+        ^^^^^ Aggregate with the example at line 2.
           expect(subject).to be_enthusiastic
           is_expected.to be_skilled
         end
@@ -76,7 +76,7 @@ RSpec.describe RuboCop::Cop::RSpec::AggregateExamples, :config do
 
     expect_correction(<<~RUBY)
       describe do
-        specify do
+        it do
           expect(candidate).to be_positive
           expect(subject).to be_enthusiastic
           is_expected.to be_skilled
@@ -88,7 +88,7 @@ RSpec.describe RuboCop::Cop::RSpec::AggregateExamples, :config do
   it 'flags a following single expectation example' do
     expect_offense(<<~RUBY)
       describe do
-        specify do
+        it do
           expect(subject).to be_enthusiastic
           is_expected.to be_skilled
         end
@@ -99,7 +99,7 @@ RSpec.describe RuboCop::Cop::RSpec::AggregateExamples, :config do
 
     expect_correction(<<~RUBY)
       describe do
-        specify do
+        it do
           expect(subject).to be_enthusiastic
           is_expected.to be_skilled
           expect(candidate).to be_positive
@@ -111,7 +111,7 @@ RSpec.describe RuboCop::Cop::RSpec::AggregateExamples, :config do
   it 'flags an expectation with compound matchers' do
     expect_offense(<<~RUBY)
       describe do
-        specify do
+        it do
           expect(candidate)
             .to be_enthusiastic
             .and be_hard_working
@@ -123,7 +123,7 @@ RSpec.describe RuboCop::Cop::RSpec::AggregateExamples, :config do
 
     expect_correction(<<~RUBY)
       describe do
-        specify do
+        it do
           expect(candidate)
             .to be_enthusiastic
             .and be_hard_working
@@ -138,13 +138,13 @@ RSpec.describe RuboCop::Cop::RSpec::AggregateExamples, :config do
     expect_offense(<<~RUBY)
       describe do
         it { expect(life).to be_first }
-        specify do
+        it do
           foo
           expect(bar).to be_foo
         end
         it { expect(work).to be_second }
         ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^ Aggregate with the example at line 2.
-        specify do
+        it do
           bar
           expect(foo).to be_bar
         end
@@ -155,16 +155,16 @@ RSpec.describe RuboCop::Cop::RSpec::AggregateExamples, :config do
 
     expect_correction(<<~RUBY)
       describe do
-        specify do
+        it do
           expect(life).to be_first
           expect(work).to be_second
           expect(other).to be_third
         end
-        specify do
+        it do
           foo
           expect(bar).to be_foo
         end
-        specify do
+        it do
           bar
           expect(foo).to be_bar
         end
@@ -219,11 +219,11 @@ RSpec.describe RuboCop::Cop::RSpec::AggregateExamples, :config do
 
     expect_correction(<<~RUBY)
       describe do
-        specify do
+        it do
           expect(ambient_temperature).to be_mild
           expect(ambient_temperature).to be_warm
         end
-        specify(freeze: -30) do
+        it(freeze: -30) do
           expect(ambient_temperature).to be_cold
           expect(ambient_temperature).to be_chilly
           expect(ambient_temperature).to be_cool
@@ -250,7 +250,7 @@ RSpec.describe RuboCop::Cop::RSpec::AggregateExamples, :config do
     expect_correction(<<~RUBY)
       describe do
         it { expect(fruit).to be_so_so }
-        specify(:peach) do
+        it(:peach) do
           expect(fruit).to be_awesome
           expect(fruit).to be_cool
           expect(fruit).to be_amazing
@@ -287,7 +287,7 @@ RSpec.describe RuboCop::Cop::RSpec::AggregateExamples, :config do
     expect_correction(<<~RUBY)
       describe do
         it { expect(data).to be_ok }
-        specify(:model, isolation: :full) do
+        it(:model, isolation: :full) do
           expect(data).to be_isolated
           expect(data).to be_saved
         end
@@ -308,7 +308,7 @@ RSpec.describe RuboCop::Cop::RSpec::AggregateExamples, :config do
   it 'flags examples with HEREDOC, but does not autocorrect' do
     expect_offense(<<~RUBY)
       describe do
-        specify do
+        it do
           expect(text).to span_couple_lines <<~TEXT
             Multiline text.
             Second line.
@@ -340,11 +340,11 @@ RSpec.describe RuboCop::Cop::RSpec::AggregateExamples, :config do
   it 'ignores block expectation syntax' do
     expect_no_offenses(<<~RUBY)
       describe do
-        specify do
+        it do
           expect { something }.to do_something
         end
 
-        specify do
+        it do
           expect { something }.to do_something_else
         end
       end
@@ -362,7 +362,7 @@ RSpec.describe RuboCop::Cop::RSpec::AggregateExamples, :config do
 
     expect_correction(<<~RUBY)
       describe do
-        specify do
+        it do
           expect(division.result).to eq(5)
           expect(division.modulo).to eq(3)
         end
@@ -375,11 +375,11 @@ RSpec.describe RuboCop::Cop::RSpec::AggregateExamples, :config do
   it 'ignores helper method as subject' do
     expect_no_offenses(<<~RUBY)
       describe do
-        specify do
+        it do
           expect(multiply_by(2)).to be_multiple_of(2)
         end
 
-        specify do
+        it do
           expect(multiply_by(3)).to be_multiple_of(3)
         end
       end
@@ -418,7 +418,7 @@ RSpec.describe RuboCop::Cop::RSpec::AggregateExamples, :config do
 
     expect_correction(<<~RUBY)
       describe do
-        specify do
+        it do
           expect(pressure).to be_ok
           expect(pressure).to be_alright
         end
@@ -441,7 +441,7 @@ RSpec.describe RuboCop::Cop::RSpec::AggregateExamples, :config do
 
     expect_correction(<<~RUBY)
       RSpec.describe do
-        specify do
+        it do
           expect(person).to be_positive
           expect(person).to be_enthusiastic
         end
@@ -461,7 +461,7 @@ RSpec.describe RuboCop::Cop::RSpec::AggregateExamples, :config do
 
     expect_correction(<<~RUBY)
       describe do
-        specify do
+        it do
           expect(person).to be_positive
           expect(person).to be_enthusiastic
         end
@@ -482,7 +482,7 @@ RSpec.describe RuboCop::Cop::RSpec::AggregateExamples, :config do
 
     expect_correction(<<~RUBY)
       describe do
-        specify do
+        it do
           expect(person).to be_positive
           expect(person).to be_enthusiastic
         end
@@ -511,11 +511,11 @@ RSpec.describe RuboCop::Cop::RSpec::AggregateExamples, :config do
 
       expect_correction(<<~RUBY)
         describe do
-          specify(:aggregate_failures) do
+          it(:aggregate_failures) do
             expect(life).to be_first
             expect(work).to be_second
           end
-          specify(:aggregate_failures, :follow, allow: true) do
+          it(:aggregate_failures, :follow, allow: true) do
             expect(life).to be_first
             expect(work).to be_second
           end

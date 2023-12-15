@@ -28,7 +28,7 @@ RSpec.describe RuboCop::Cop::RSpec::AggregateExamples,
 
       expect_correction(<<~RUBY)
         describe do
-          specify(:aggregate_failures) do
+          it(:aggregate_failures) do
             expect(entry).to validate_absence_of(:comment)
             expect(entry).to validate_presence_of(:description)
           end

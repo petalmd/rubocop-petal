@@ -1,7 +1,7 @@
 # frozen_string_literal: true
 
 RSpec.describe RuboCop::Cop::Chewy::FieldType, :config do
-  it 'registers an offense when no specifying a field' do
+  it 'registers an offense when no iting a field' do
     expect_offense(<<~RUBY)
       field :name
       ^^^^^^^^^^^ Specify a `type` for Chewy field.
