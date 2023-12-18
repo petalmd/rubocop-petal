@@ -65,8 +65,6 @@ RSpec/LetSetup:
   Enabled: false
 RSpec/MessageSpies:
   EnforcedStyle: receive
-RSpec/MultipleExpectations:
-  Enabled: false
 RSpec/MultipleMemoizedHelpers:
   Enabled: false
 RSpec/NamedSubject:
