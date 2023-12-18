@@ -2,6 +2,8 @@
 
 # main
 
+* Enabled `RSpec/MultipleExpectations`. ([#73](https://github.com/petalmd/rubocop-petal/pull/73))
+
 # v1.2.0 (2023-09-28)
 
 * Added cop `Rails/DestroyAllBang`(Fix [#42](https://github.com/petalmd/rubocop-petal/issues/42)). ([#65](https://github.com/petalmd/rubocop-petal/pull/65))
