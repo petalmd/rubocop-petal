@@ -106,11 +106,3 @@ Style/NumericLiterals:
   MinDigits: 8
 Style/ReturnNil:
   Enabled: true
-RSpec/MultipleExpectations:
-  Enabled: false
-RSpec/AggregateExamples:
-  Enabled: false
-Lint/SymbolConversion:
-  Enabled: false
-Performance/StringIdentifierArgument:
-  Enabled: false
