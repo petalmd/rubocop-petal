@@ -16,8 +16,8 @@ RSpec.configure do |config|
   Kernel.srand config.seed
 
   config.define_derived_metadata(file_path: %r{/spec/rubocop/cop/rspec/}) do |metadata|
-    metadata[:type] = :rspec_cop
+    metadata[:type] = :rspec_cops
   end
 
-  config.include_context 'with default RSpec/Language config', type: :rspec_cop
+  config.include_context 'with default RSpec/Language config', type: :rspec_cops
 end
