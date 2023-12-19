@@ -2,6 +2,7 @@
 
 require 'rubocop-petal'
 require 'rubocop/rspec/support'
+require 'rubocop/rspec/shared_contexts/default_rspec_language_config_context'
 
 RSpec.configure do |config|
   config.include RuboCop::RSpec::ExpectOffense
@@ -13,4 +14,10 @@ RSpec.configure do |config|
 
   config.order = :random
   Kernel.srand config.seed
+
+  config.define_derived_metadata(file_path: %r{/spec/rubocop/cop/rspec/}) do |metadata|
+    metadata[:type] = :rspec_cops
+  end
+
+  config.include_context 'with default RSpec/Language config', type: :rspec_cops
 end
