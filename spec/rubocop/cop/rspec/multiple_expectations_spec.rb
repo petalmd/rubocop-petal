@@ -1,5 +1,6 @@
 # frozen_string_literal: true
 
+# Test the cop directly
 RSpec.describe RuboCop::Cop::RSpec::MultipleExpectations, :config do
   it 'autocorrects multiple expectations with aggregate_failures' do
     expect_offense(<<~RUBY)
