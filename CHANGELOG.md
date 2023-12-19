@@ -4,6 +4,7 @@
 
 * Added autocorrection for `RSpec/MultipleExpectations`. 
  (Fix [#59](https://github.com/petalmd/rubocop-petal/issues/59)). ([#74](https://github.com/petalmd/rubocop-petal/pull/74))
+* Update rubocop dependencies and minimum Ruby version. (Fix [#68](https://github.com/petalmd/rubocop-petal/issues/68)). ([#75](https://github.com/petalmd/rubocop-petal/pull/75))
 * Enabled `RSpec/MultipleExpectations`. ([#73](https://github.com/petalmd/rubocop-petal/pull/73))
 * Added new cops from test-prod RSpec/AggregateExamples. ([#72](https://github.com/petalmd/rubocop-petal/pull/72))
 
