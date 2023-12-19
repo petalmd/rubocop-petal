@@ -1,10 +1,6 @@
 # frozen_string_literal: true
 
-require 'rubocop/rspec/shared_contexts/default_rspec_language_config_context'
-
 RSpec.describe RuboCop::Cop::RSpec::MultipleExpectations, :config do
-  include_context 'with default RSpec/Language config'
-
   it 'autocorrects multiple expectations with aggregate_failures' do
     expect_offense(<<~RUBY)
       describe Foo do
