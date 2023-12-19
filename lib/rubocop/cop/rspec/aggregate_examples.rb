@@ -122,7 +122,7 @@ module RuboCop
 
         def on_block(node)
           example_group_with_several_examples(node) do |all_examples|
-            example_clusters(all_examples).each do |_, examples|
+            example_clusters(all_examples).each_value do |examples|
               examples[1..].each do |example|
                 add_offense(example,
                             location: :expression,
