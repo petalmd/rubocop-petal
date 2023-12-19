@@ -1,30 +1,104 @@
 # frozen_string_literal: true
 
-require 'rubocop-rspec'
+require 'rubocop/rspec/shared_contexts/default_rspec_language_config_context'
 
 RSpec.describe RuboCop::Cop::RSpec::MultipleExpectations, :config do
-  let(:cop_config) do
-    # rubocop_rspec_default_config = RuboCop::ConfigLoader.default_configuration['RSpec']['MultipleExpectations']
-    gem_dir = Gem::Specification.find_by_name("rubocop-rspec").gem_dir
-    RuboCop::ConfigLoader.configuration_file_for(gem_dir)
-  end
+  include_context 'with default RSpec/Language config'
 
   it 'autocorrects multiple expectations with aggregate_failures' do
-    expect_offense(<<-RUBY)
-        describe Foo do
-          it 'uses expect twice' do
-          ^^^^^^^^^^^^^^^^^^^^^^ Example has too many expectations [2/1].
-            expect(foo).to eq(bar)
-            expect(baz).to eq(bar)
-          end
+    expect_offense(<<~RUBY)
+      describe Foo do
+        it 'uses expect twice' do
+        ^^^^^^^^^^^^^^^^^^^^^^ Example has too many expectations [2/1].
+          expect(foo).to eq(bar)
+          expect(baz).to eq(bar)
         end
-      RUBY
+      end
+    RUBY
 
-    # expect_correction(<<~RUBY)
-    #   it do
-    #     expect(foo).to eq(1)
-    #     expect(foo).to eq(2)
-    #   end
-    # RUBY
+    expect_correction(<<~RUBY)
+      describe Foo do
+        it 'uses expect twice', :aggregate_failures do
+          expect(foo).to eq(bar)
+          expect(baz).to eq(bar)
+        end
+      end
+    RUBY
+
+    expect_offense(<<~RUBY)
+      describe Foo do
+        it do
+        ^^ Example has too many expectations [2/1].
+          expect(foo).to eq(bar)
+          expect(baz).to eq(bar)
+        end
+      end
+    RUBY
+
+    expect_correction(<<~RUBY)
+      describe Foo do
+        it :aggregate_failures do
+          expect(foo).to eq(bar)
+          expect(baz).to eq(bar)
+        end
+      end
+    RUBY
+
+    expect_offense(<<~RUBY)
+      describe Foo do
+        it('uses expect twice') do
+        ^^^^^^^^^^^^^^^^^^^^^^^ Example has too many expectations [2/1].
+          expect(foo).to eq(bar)
+          expect(baz).to eq(bar)
+        end
+      end
+    RUBY
+
+    expect_correction(<<~RUBY)
+      describe Foo do
+        it('uses expect twice', :aggregate_failures) do
+          expect(foo).to eq(bar)
+          expect(baz).to eq(bar)
+        end
+      end
+    RUBY
+
+    expect_offense(<<~RUBY)
+      describe Foo do
+        it 'uses expect twice', timecop: true do
+        ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^ Example has too many expectations [2/1].
+          expect(foo).to eq(bar)
+          expect(baz).to eq(bar)
+        end
+      end
+    RUBY
+
+    expect_correction(<<~RUBY)
+      describe Foo do
+        it 'uses expect twice', :aggregate_failures, timecop: true do
+          expect(foo).to eq(bar)
+          expect(baz).to eq(bar)
+        end
+      end
+    RUBY
+
+    expect_offense(<<~RUBY)
+      describe Foo do
+        it('uses expect twice', timecop: true) do
+        ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^ Example has too many expectations [2/1].
+          expect(foo).to eq(bar)
+          expect(baz).to eq(bar)
+        end
+      end
+    RUBY
+
+    expect_correction(<<~RUBY)
+      describe Foo do
+        it('uses expect twice', :aggregate_failures, timecop: true) do
+          expect(foo).to eq(bar)
+          expect(baz).to eq(bar)
+        end
+      end
+    RUBY
   end
 end
