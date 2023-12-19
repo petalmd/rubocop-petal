@@ -5,17 +5,14 @@ require 'rubocop-rspec'
 module RuboCop
   module Cop
     module RSpec
-      # reopens the MultipleExpectations class to add autocorrect
-      class MultipleExpectations < Base
-        extend AutoCorrector
-
+      module MultipleExpectationsAutoCorrect
         private
 
         def flag_example(node, expectation_count:)
           add_offense(
             node.send_node,
             message: format(
-              MSG,
+              RuboCop::Cop::RSpec::MultipleExpectations::MSG,
               total: expectation_count,
               max: max_expectations
             )
@@ -35,3 +32,8 @@ module RuboCop
     end
   end
 end
+
+RuboCop::Cop::RSpec::MultipleExpectations
+  .extend(RuboCop::Cop::AutoCorrector)
+RuboCop::Cop::RSpec::MultipleExpectations
+  .prepend(RuboCop::Cop::RSpec::MultipleExpectationsAutoCorrect)

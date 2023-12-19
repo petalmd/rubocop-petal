@@ -2,8 +2,10 @@
 
 # main
 
+* Added autocorrection for `RSpec/MultipleExpectations`. 
+ (Fix [#59](https://github.com/petalmd/rubocop-petal/issues/59)). ([#74](https://github.com/petalmd/rubocop-petal/pull/74))
 * Enabled `RSpec/MultipleExpectations`. ([#73](https://github.com/petalmd/rubocop-petal/pull/73))
-* Added new cops from test-prod RSpec/AggregateExamples (Fix [#59](https://github.com/petalmd/rubocop-petal/issues/59)). ([#72](https://github.com/petalmd/rubocop-petal/pull/72))
+* Added new cops from test-prod RSpec/AggregateExamples. ([#72](https://github.com/petalmd/rubocop-petal/pull/72))
 
 # v1.2.0 (2023-09-28)
 
