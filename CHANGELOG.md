@@ -2,6 +2,8 @@
 
 # main
 
+# v1.3.0 (2024-01-09)
+
 * Added autocorrection for `RSpec/MultipleExpectations`. 
  (Fix [#59](https://github.com/petalmd/rubocop-petal/issues/59)). ([#74](https://github.com/petalmd/rubocop-petal/pull/74))
 * Update rubocop dependencies and minimum Ruby version. (Fix [#68](https://github.com/petalmd/rubocop-petal/issues/68)). ([#75](https://github.com/petalmd/rubocop-petal/pull/75))
