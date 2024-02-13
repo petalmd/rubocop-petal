@@ -24,8 +24,8 @@ module RuboCop
               self.class.new(selectors + other.selectors)
             end
 
-            def include?(other)
-              selectors.include?(other)
+            def include?(selector)
+              selectors.include?(selector)
             end
 
             def block_pattern
