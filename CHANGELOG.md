@@ -2,6 +2,8 @@
 
 # main
 
+* Remove usage of `delegate` from activesupport. ([#78](https://github.com/petalmd/rubocop-petal/pull/78)) 
+
 # v1.3.0 (2024-01-09)
 
 * Added autocorrection for `RSpec/MultipleExpectations`. 
