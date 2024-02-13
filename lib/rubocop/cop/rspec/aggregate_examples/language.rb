@@ -24,7 +24,9 @@ module RuboCop
               self.class.new(selectors + other.selectors)
             end
 
-            delegate :include?, to: :selectors
+            def include?(selector)
+              selectors.include?(selector)
+            end
 
             def block_pattern
               "(block #{send_pattern} ...)"
