@@ -2,6 +2,8 @@
 
 # main
 
+* Remove cop `RSpec/AuthenticatedAs`. ([#79](https://github.com/petalmd/rubocop-petal/pull/79))
+
 # v1.3.1 (2024-02-13)
 
 * Remove usage of `delegate` from activesupport. ([#78](https://github.com/petalmd/rubocop-petal/pull/78)) 
