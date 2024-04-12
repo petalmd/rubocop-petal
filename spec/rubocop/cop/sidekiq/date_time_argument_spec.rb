@@ -3,57 +3,151 @@
 RSpec.describe RuboCop::Cop::Sidekiq::DateTimeArgument, :config do
   let(:config) { RuboCop::Config.new }
 
-  describe 'when perform_async is called with an ActiveSupport::TimeWithZone' do
-    it 'registers an offense when using' do
-      expect_offense(<<~RUBY)
-        MyWorker.perform_async(Time.zone.now)
-                               ^^^^^^^^^^^^^ Sidekiq/DateTimeArgument: Date/Time objects are not Sidekiq-serializable; convert to integers or strings instead.
-      RUBY
+  describe '#perform_async' do
+    context 'when called with an ActiveSupport::TimeWithZone' do
+      it 'registers an offense' do
+        expect_offense(<<~RUBY)
+          MyWorker.perform_async(Time.zone.now)
+                                 ^^^^^^^^^^^^^ Sidekiq/DateTimeArgument: Date/Time objects are not Sidekiq-serializable; convert to integers or strings instead.
+        RUBY
+      end
+    end
+
+    context 'when called with a Date' do
+      it 'registers an offense' do
+        expect_offense(<<~RUBY)
+          MyWorker.perform_async(Date.current)
+                                 ^^^^^^^^^^^^ Sidekiq/DateTimeArgument: Date/Time objects are not Sidekiq-serializable; convert to integers or strings instead.
+        RUBY
+      end
+    end
+
+    describe 'when called with a Time' do
+      it 'registers an offense' do
+        expect_offense(<<~RUBY)
+          MyWorker.perform_async(Time.now)
+                                 ^^^^^^^^ Sidekiq/DateTimeArgument: Date/Time objects are not Sidekiq-serializable; convert to integers or strings instead.
+        RUBY
+      end
+    end
+
+    describe 'when called with a DateTime' do
+      it 'registers an offense' do
+        expect_offense(<<~RUBY)
+          MyWorker.perform_async(DateTime.new(2001,2,3,4,5,6))
+                                 ^^^^^^^^^^^^^^^^^^^^^^^^^^^^ Sidekiq/DateTimeArgument: Date/Time objects are not Sidekiq-serializable; convert to integers or strings instead.
+        RUBY
+      end
+    end
+
+    describe 'when called with a ActiveSupport::Duration' do
+      it 'registers an offense' do
+        expect_offense(<<~RUBY)
+          MyWorker.perform_async(1.hour)
+                                 ^^^^^^ Sidekiq/DateTimeArgument: Durations are not Sidekiq-serializable; use the integer instead.
+          RUBY
+      end
     end
   end
 
-  describe 'when perform_async is called with a Date' do
-    it 'registers an offense when using' do
-      expect_offense(<<~RUBY)
-        MyWorker.perform_async(Date.current)
-                               ^^^^^^^^^^^^ Sidekiq/DateTimeArgument: Date/Time objects are not Sidekiq-serializable; convert to integers or strings instead.
-      RUBY
+  describe '#perform_at' do
+    context 'when called with an ActiveSupport::TimeWithZone' do
+      it 'registers an offense' do
+        expect_offense(<<~RUBY)
+          MyWorker.perform_at(Time.zone.now, Time.zone.now)
+                                             ^^^^^^^^^^^^^ Sidekiq/DateTimeArgument: Date/Time objects are not Sidekiq-serializable; convert to integers or strings instead.
+        RUBY
+      end
+    end
+
+    context 'when called with a Date' do
+      it 'registers an offense' do
+        expect_offense(<<~RUBY)
+          MyWorker.perform_at(Time.zone.now, Date.current)
+                                             ^^^^^^^^^^^^ Sidekiq/DateTimeArgument: Date/Time objects are not Sidekiq-serializable; convert to integers or strings instead.
+        RUBY
+      end
+    end
+
+    describe 'when called with a Time' do
+      it 'registers an offense' do
+        expect_offense(<<~RUBY)
+          MyWorker.perform_at(Time.zone.now, Time.now)
+                                             ^^^^^^^^ Sidekiq/DateTimeArgument: Date/Time objects are not Sidekiq-serializable; convert to integers or strings instead.
+        RUBY
+      end
+    end
+
+    describe 'when called with a DateTime' do
+      it 'registers an offense' do
+        expect_offense(<<~RUBY)
+          MyWorker.perform_at(Time.zone.now, DateTime.new(2001,2,3,4,5,6))
+                                             ^^^^^^^^^^^^^^^^^^^^^^^^^^^^ Sidekiq/DateTimeArgument: Date/Time objects are not Sidekiq-serializable; convert to integers or strings instead.
+        RUBY
+      end
+    end
+
+    describe 'when called with a ActiveSupport::Duration' do
+      it 'registers an offense' do
+        expect_offense(<<~RUBY)
+          MyWorker.perform_at(Time.zone.now, 1.hour)
+                                             ^^^^^^ Sidekiq/DateTimeArgument: Durations are not Sidekiq-serializable; use the integer instead.
+          RUBY
+      end
     end
   end
 
-  describe 'when perform_async is called with a Time' do
-    it 'registers an offense when using' do
-      expect_offense(<<~RUBY)
-        MyWorker.perform_async(Time.now)
-                               ^^^^^^^^ Sidekiq/DateTimeArgument: Date/Time objects are not Sidekiq-serializable; convert to integers or strings instead.
-      RUBY
-    end
-  end
+  describe '#perform_in' do
+    context 'when called with an ActiveSupport::TimeWithZone' do
+      it 'registers an offense' do
+        expect_offense(<<~RUBY)
+          MyWorker.perform_in(5.minutes, Time.zone.now)
+                                         ^^^^^^^^^^^^^ Sidekiq/DateTimeArgument: Date/Time objects are not Sidekiq-serializable; convert to integers or strings instead.
+        RUBY
+      end
 
-  describe 'when perform_async is called with a DateTime' do
-    it 'registers an offense when using' do
-      expect_offense(<<~RUBY)
-        MyWorker.perform_async(DateTime.new(2001,2,3,4,5,6))
-                               ^^^^^^^^^^^^^^^^^^^^^^^^^^^^ Sidekiq/DateTimeArgument: Date/Time objects are not Sidekiq-serializable; convert to integers or strings instead.
-      RUBY
+      it 'registers an offense' do
+        expect_offense(<<~RUBY)
+          MyWorker.perform_in(5.minutes, Time.zone.now)
+                                         ^^^^^^^^^^^^^ Sidekiq/DateTimeArgument: Date/Time objects are not Sidekiq-serializable; convert to integers or strings instead.
+        RUBY
+      end
     end
-  end
 
-  describe 'when perform_async is called with a ActiveSupport::Duration' do
-    it 'registers an offense when using' do
-      expect_offense(<<~RUBY)
-        MyWorker.perform_async(1.hour)
-                               ^^^^^^ Sidekiq/DateTimeArgument: Durations are not Sidekiq-serializable; use the integer instead.
-      RUBY
+    context 'when called with a Date' do
+      it 'registers an offense' do
+        expect_offense(<<~RUBY)
+          MyWorker.perform_in(5.minutes, Date.current)
+                                         ^^^^^^^^^^^^ Sidekiq/DateTimeArgument: Date/Time objects are not Sidekiq-serializable; convert to integers or strings instead.
+        RUBY
+      end
     end
-  end
 
-  describe 'when perform_async is not date or time arguments' do
-    it 'does not register an offense when using `#good_method`' do
-      expect_no_offenses(<<~RUBY)
-        MyWorker.perform_async(1, {'abc' => 3})
-        do_something
-      RUBY
+    describe 'when called with a Time' do
+      it 'registers an offense' do
+        expect_offense(<<~RUBY)
+          MyWorker.perform_in(5.minutes, Time.now)
+                                         ^^^^^^^^ Sidekiq/DateTimeArgument: Date/Time objects are not Sidekiq-serializable; convert to integers or strings instead.
+        RUBY
+      end
+    end
+
+    describe 'when called with a DateTime' do
+      it 'registers an offense' do
+        expect_offense(<<~RUBY)
+          MyWorker.perform_in(5.minutes, DateTime.new(2001,2,3,4,5,6))
+                                         ^^^^^^^^^^^^^^^^^^^^^^^^^^^^ Sidekiq/DateTimeArgument: Date/Time objects are not Sidekiq-serializable; convert to integers or strings instead.
+        RUBY
+      end
+    end
+
+    describe 'when called with a ActiveSupport::Duration' do
+      it 'registers an offense' do
+        expect_offense(<<~RUBY)
+          MyWorker.perform_at(5.minutes, 1.hour)
+                                         ^^^^^^ Sidekiq/DateTimeArgument: Durations are not Sidekiq-serializable; use the integer instead.
+        RUBY
+      end
     end
   end
 end

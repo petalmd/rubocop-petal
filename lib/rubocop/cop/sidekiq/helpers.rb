@@ -25,8 +25,16 @@ module RuboCop
             (block (send (const nil? :Class) :new ...) _ #includes_sidekiq?)
           PATTERN
 
+          def_node_matcher :worker_class_application_worker?, <<~PATTERN
+            (class _ (const {nil? cbase} :ApplicationWorker) ...)
+          PATTERN
+
+          def_node_matcher :worker_anon_class_application_worker_def?, <<~PATTERN
+            (block (send (const nil? :Class) :new (const {nil? cbase} :ApplicationWorker)) ...)
+          PATTERN
+
           def_node_matcher :sidekiq_worker?, <<~PATTERN
-            {#worker_class_def? #worker_anon_class_def?}
+            {#worker_class_def? #worker_anon_class_def? #worker_class_application_worker? #worker_anon_class_application_worker_def?}
           PATTERN
 
           def_node_matcher :sidekiq_perform?, <<~PATTERN
