@@ -9,6 +9,7 @@
 * Update rubocop dependencies and minimum Ruby version. (Fix [#68](https://github.com/petalmd/rubocop-petal/issues/68)). ([#75](https://github.com/petalmd/rubocop-petal/pull/75))
 * Enabled `RSpec/MultipleExpectations`. ([#73](https://github.com/petalmd/rubocop-petal/pull/73))
 * Added new cops from test-prod RSpec/AggregateExamples. ([#72](https://github.com/petalmd/rubocop-petal/pull/72))
+* Add new cops for Sidekiq. ([#77](https://github.com/petalmd/rubocop-petal/pull/77))
 
 # v1.2.0 (2023-09-28)
 
