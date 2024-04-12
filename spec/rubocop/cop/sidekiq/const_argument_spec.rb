@@ -16,7 +16,7 @@ RSpec.describe RuboCop::Cop::Sidekiq::ConstArgument, :config do
     context 'when Const argument is not present' do
       it 'does not register an offense' do
         expect_no_offenses(<<~RUBY)
-          MyWorker.perform_async(1, {'abc' => 3})                                   
+          MyWorker.perform_async(1, {'abc' => 3})#{'                                   '}
         RUBY
       end
     end
@@ -37,7 +37,7 @@ RSpec.describe RuboCop::Cop::Sidekiq::ConstArgument, :config do
       it 'does not register an offense' do
         expect_no_offenses(<<~RUBY)
           at = Time.zone.now.to_s
-          MyWorker.perform_at(at, 1, {'abc' => 3})                                   
+          MyWorker.perform_at(at, 1, {'abc' => 3})#{'                                   '}
         RUBY
       end
     end
@@ -56,7 +56,7 @@ RSpec.describe RuboCop::Cop::Sidekiq::ConstArgument, :config do
     context 'when Const argument is not present' do
       it 'does not register an offense' do
         expect_no_offenses(<<~RUBY)
-          MyWorker.perform_in(5.seconds, 1, {'abc' => 3})                                   
+          MyWorker.perform_in(5.seconds, 1, {'abc' => 3})#{'                                   '}
         RUBY
       end
     end

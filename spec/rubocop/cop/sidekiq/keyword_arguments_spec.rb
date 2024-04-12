@@ -52,13 +52,13 @@ RSpec.describe RuboCop::Cop::Sidekiq::KeywordArguments, :config do
   describe 'Anonymous class with ApplicationWorker' do
     it 'registers an offense' do
       expect_offense(<<~RUBY)
-          Class.new(ApplicationWorker) do
-            #{'  '}
-            def perform(b:)
-                        ^^ Sidekiq/KeywordArguments: Keyword arguments are not allowed in a sidekiq worker's perform method.
-              do_something
-            end
-          end#{'                          '}
+        Class.new(ApplicationWorker) do
+          #{'  '}
+          def perform(b:)
+                      ^^ Sidekiq/KeywordArguments: Keyword arguments are not allowed in a sidekiq worker's perform method.
+            do_something
+          end
+        end#{'                          '}
       RUBY
     end
   end

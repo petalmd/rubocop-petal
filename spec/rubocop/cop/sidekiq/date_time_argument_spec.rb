@@ -45,7 +45,7 @@ RSpec.describe RuboCop::Cop::Sidekiq::DateTimeArgument, :config do
         expect_offense(<<~RUBY)
           MyWorker.perform_async(1.hour)
                                  ^^^^^^ Sidekiq/DateTimeArgument: Durations are not Sidekiq-serializable; use the integer instead.
-          RUBY
+        RUBY
       end
     end
   end
@@ -92,20 +92,13 @@ RSpec.describe RuboCop::Cop::Sidekiq::DateTimeArgument, :config do
         expect_offense(<<~RUBY)
           MyWorker.perform_at(Time.zone.now, 1.hour)
                                              ^^^^^^ Sidekiq/DateTimeArgument: Durations are not Sidekiq-serializable; use the integer instead.
-          RUBY
+        RUBY
       end
     end
   end
 
   describe '#perform_in' do
     context 'when called with an ActiveSupport::TimeWithZone' do
-      it 'registers an offense' do
-        expect_offense(<<~RUBY)
-          MyWorker.perform_in(5.minutes, Time.zone.now)
-                                         ^^^^^^^^^^^^^ Sidekiq/DateTimeArgument: Date/Time objects are not Sidekiq-serializable; convert to integers or strings instead.
-        RUBY
-      end
-
       it 'registers an offense' do
         expect_offense(<<~RUBY)
           MyWorker.perform_in(5.minutes, Time.zone.now)

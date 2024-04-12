@@ -31,7 +31,7 @@ RSpec.describe RuboCop::Cop::Sidekiq::SymbolArgument, :config do
         expect_offense(<<~RUBY)
           MyWorker.perform_in(5.minutes, 'a', 1, :foo)
                                                  ^^^^ Sidekiq/SymbolArgument: Symbols are not Sidekiq-serializable; use strings instead.
-          RUBY
+        RUBY
       end
     end
   end
