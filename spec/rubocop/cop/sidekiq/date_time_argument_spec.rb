@@ -11,6 +11,13 @@ RSpec.describe RuboCop::Cop::Sidekiq::DateTimeArgument, :config do
                                  ^^^^^^^^^^^^^ Sidekiq/DateTimeArgument: Date/Time objects are not Sidekiq-serializable; convert to integers or strings instead.
         RUBY
       end
+
+      it 'registers an offense' do
+        expect_offense(<<~RUBY)
+          MyWorker.perform_async(Time.current)
+                                 ^^^^^^^^^^^^ Sidekiq/DateTimeArgument: Date/Time objects are not Sidekiq-serializable; convert to integers or strings instead.
+        RUBY
+      end
     end
 
     context 'when called with a Date' do
