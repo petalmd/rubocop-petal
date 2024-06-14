@@ -126,6 +126,26 @@ Performance/Snif:
   Description: 'Prevent snif in favor of detect'
   Enabled: true
 
+Sidekiq/ConstArgument:
+  Description: "Prevent passing constant like Class as arguments in worker's perform method"
+  Enabled: true
+
+Sidekiq/DateTimeArgument:
+  Description: "Prevent passing Date/Time arguments in worker's perform method"
+  Enabled: true
+
+Sidekiq/KeywordArguments:
+  Description: "Prevent define keywords arguments in worker's perform method"
+  Enabled: true
+  Include:
+    - app/workers/**/*
+
 Sidekiq/NoNilReturn:
   Description: 'Prevent early nil return in workers'
   Enabled: false
+  Include:
+    - app/workers/**/*
+
+Sidekiq/SymbolArgument:
+  Description: "Prevent passing keywords arguments in worker's perform method"
+  Enabled: true

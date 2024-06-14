@@ -4,6 +4,7 @@
 
 * Set `Rails/Date`, `AllowToTime` config to false. ([#80](https://github.com/petalmd/rubocop-petal/pull/80))
 * Remove cop `RSpec/AuthenticatedAs`. ([#79](https://github.com/petalmd/rubocop-petal/pull/79))
+* Add new cops for Sidekiq. ([#77](https://github.com/petalmd/rubocop-petal/pull/77))
 
 # v1.3.1 (2024-02-13)
 
