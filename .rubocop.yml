@@ -4,7 +4,5 @@ inherit_gem:
 Naming/FileName:
   Exclude:
     - lib/rubocop-petal.rb
-Rails/Output:
-  Enabled: false
-Rails/RakeEnvironment:
+Rails:
   Enabled: false

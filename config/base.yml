@@ -78,6 +78,8 @@ RSpec/StubbedMock:
 RSpec/DescribeClass:
   Exclude:
     - spec/integration/**/*.rb
+Rails/Date:
+  AllowToTime: false
 Rails/SaveBang:
   Enabled: true
 Rails/NotNullColumn:

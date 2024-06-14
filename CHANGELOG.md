@@ -2,6 +2,13 @@
 
 # main
 
+* Set `Rails/Date`, `AllowToTime` config to false. ([#80](https://github.com/petalmd/rubocop-petal/pull/80))
+* Remove cop `RSpec/AuthenticatedAs`. ([#79](https://github.com/petalmd/rubocop-petal/pull/79))
+
+# v1.3.1 (2024-02-13)
+
+* Remove usage of `delegate` from activesupport. ([#78](https://github.com/petalmd/rubocop-petal/pull/78)) 
+
 # v1.3.0 (2024-01-09)
 
 * Added autocorrection for `RSpec/MultipleExpectations`. 
