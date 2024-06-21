@@ -13,26 +13,25 @@ module RuboCop
       #
       class PerformInline < Base
         extend AutoCorrector
-        MSG = 'Use `perform_inline` instead of `new.perform`.'
+        MSG = 'Use `perform_inline` instead of `new.perform`'
 
         RESTRICT_ON_SEND = %i[perform].freeze
 
         # @!method new_perform?(node)
         def_node_matcher :new_perform?, <<~PATTERN
-          (send (send (const nil? _) :new) :perform)
+          (send (send _ :new) :perform ...)
         PATTERN
 
         def on_send(node)
           return unless new_perform?(node)
 
-          add_offense(node)
-        end
+          new_perform_node = node.source_range.with(
+            begin_pos: node.receiver.receiver.source_range.end_pos + 1,
+            end_pos: node.loc.selector.end_pos
+          )
 
-        def autocorrect(node)
-          lambda do |corrector|
-            receiver, _method_name = *node
-            corrector.replace(receiver.source_range,
-                              receiver.source_range.source.gsub('new.perform', 'perform_inline'))
+          add_offense(new_perform_node) do |corrector|
+            corrector.replace(new_perform_node, 'perform_inline')
           end
         end
       end
