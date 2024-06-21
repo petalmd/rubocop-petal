@@ -146,6 +146,10 @@ Sidekiq/NoNilReturn:
   Include:
     - app/workers/**/*
 
+Sidekiq/PerformInline:
+  Description: 'Suggest to use `perform_inline` instead of `new.perform` for Sidekiq workers.'
+  Enabled: true
+
 Sidekiq/SymbolArgument:
   Description: "Prevent passing keywords arguments in worker's perform method"
   Enabled: true
