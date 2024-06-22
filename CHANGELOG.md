@@ -2,6 +2,8 @@
 
 # main
 
+* Add Add Sidekiq/PerformInline ([#82](https://github.com/petalmd/rubocop-petal/pull/82))
+
 # v1.4.0 (2024-06-14)
 
 * Set `Rails/Date`, `AllowToTime` config to false. ([#80](https://github.com/petalmd/rubocop-petal/pull/80))
