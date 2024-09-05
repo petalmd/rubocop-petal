@@ -4,6 +4,10 @@ Chewy/FieldType:
   Include:
     - app/chewy/**/*
 
+Chewy/UpdateIndexArgument:
+  Description: 'Prevent single expression in update_index block.'
+  Enabled: true
+
 Grape/PreferNamespace:
   Description: 'Prevent usage of namespace aliases.'
   Enabled: true
