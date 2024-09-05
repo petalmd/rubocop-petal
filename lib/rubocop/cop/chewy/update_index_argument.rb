@@ -19,6 +19,7 @@ module RuboCop
 
         RESTRICT_ON_SEND = %i[update_index].freeze
 
+        # @!method block_with_single_expression?(node)
         def_node_matcher :block_with_single_expression?, <<~PATTERN
           (block
             (send nil? :update_index (str _) $...)
@@ -40,14 +41,12 @@ module RuboCop
         private
 
         def corrected_code(node, existing_args, method_name)
-          method_call = node.children[0] # The update_index method call
+          method_call = node.children[0]
           index_name = method_call.children[2].source
 
           if existing_args.any?
-            # If there are additional arguments (like if: :update?), insert method_name before them
             "update_index(#{index_name}, :#{method_name}, #{existing_args.map(&:source).join(', ')})"
           else
-            # If no additional arguments, simply add method_name as the second argument
             "update_index(#{index_name}, :#{method_name})"
           end
         end
