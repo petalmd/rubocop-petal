@@ -3,8 +3,8 @@
 RSpec.describe RuboCop::Cop::Chewy::UpdateIndexArgument, :config do
   it 'registers an offense when using block with single expression' do
     expect_offense(<<~RUBY)
-       update_index('index_name') { self }
-       ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^ Use method symbol as second argument instead of block.
+      update_index('index_name') { self }
+      ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^ Use method symbol as second argument instead of block.
     RUBY
 
     expect_correction(<<~RUBY)
@@ -12,8 +12,8 @@ RSpec.describe RuboCop::Cop::Chewy::UpdateIndexArgument, :config do
     RUBY
 
     expect_offense(<<~RUBY)
-       update_index('index_name', if: :update?) { self }
-       ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^ Use method symbol as second argument instead of block.
+      update_index('index_name', if: :update?) { self }
+      ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^ Use method symbol as second argument instead of block.
     RUBY
 
     expect_correction(<<~RUBY)
@@ -21,8 +21,8 @@ RSpec.describe RuboCop::Cop::Chewy::UpdateIndexArgument, :config do
     RUBY
 
     expect_offense(<<~RUBY)
-       update_index('index_name') { some_ids }
-       ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^ Use method symbol as second argument instead of block.
+      update_index('index_name') { some_ids }
+      ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^ Use method symbol as second argument instead of block.
     RUBY
 
     expect_correction(<<~RUBY)
@@ -30,8 +30,8 @@ RSpec.describe RuboCop::Cop::Chewy::UpdateIndexArgument, :config do
     RUBY
 
     expect_offense(<<~RUBY)
-       update_index('index_name', if: :update?) { some_ids }
-       ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^ Use method symbol as second argument instead of block.
+      update_index('index_name', if: :update?) { some_ids }
+      ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^ Use method symbol as second argument instead of block.
     RUBY
 
     expect_correction(<<~RUBY)
