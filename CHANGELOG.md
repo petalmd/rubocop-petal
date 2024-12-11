@@ -2,6 +2,8 @@
 
 # main
 
+# v1.5.0 (2024-12-11)
+
 * Add Add Sidekiq/PerformInline ([#82](https://github.com/petalmd/rubocop-petal/pull/82))
 * Add Add Chewy/UpdateIndexArgument ([#83](https://github.com/petalmd/rubocop-petal/pull/83))
 
