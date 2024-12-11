@@ -2,10 +2,12 @@
 
 # main
 
+* Update rubocop dependencies and fix warnings ([#85](https://github.com/petalmd/rubocop-petal/pull/85))
+
 # v1.5.0 (2024-12-11)
 
-* Add Add Sidekiq/PerformInline ([#82](https://github.com/petalmd/rubocop-petal/pull/82))
-* Add Add Chewy/UpdateIndexArgument ([#83](https://github.com/petalmd/rubocop-petal/pull/83))
+* Add Sidekiq/PerformInline ([#82](https://github.com/petalmd/rubocop-petal/pull/82))
+* Add Chewy/UpdateIndexArgument ([#83](https://github.com/petalmd/rubocop-petal/pull/83))
 
 # v1.4.0 (2024-06-14)
 
