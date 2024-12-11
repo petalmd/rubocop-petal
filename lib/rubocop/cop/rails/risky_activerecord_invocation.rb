@@ -5,7 +5,7 @@ module RuboCop
     module Rails
       # Disallow ActiveRecord calls that pass interpolated or added strings as an argument.
       # https://github.com/airbnb/ruby/blob/12435e8136d2adf710de999bc0f6bef01215df2c/rubocop-airbnb/lib/rubocop/cop/airbnb/risky_activerecord_invocation.rb
-      class RiskyActiverecordInvocation < Cop
+      class RiskyActiverecordInvocation < Base
         VULNERABLE_AR_METHODS = %i[
           delete_all
           destroy_all
