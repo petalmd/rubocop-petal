@@ -12,6 +12,33 @@ RSpec.describe RuboCop::Cop::Sidekiq::SymbolArgument, :config do
         RUBY
       end
     end
+
+    describe 'when called with a hash that contains a key symbol' do
+      it 'registers an offense' do
+        expect_offense(<<~RUBY)
+          MyWorker.perform_async('a', 1, foo: 1)
+                                         ^^^ Sidekiq/SymbolArgument: Symbols are not Sidekiq-serializable; use strings instead.
+        RUBY
+      end
+    end
+
+    describe 'when called with a hash that contains a value symbol' do
+      it 'registers an offense' do
+        expect_offense(<<~RUBY)
+          MyWorker.perform_async('a', 1, 'bar' => :baz)
+                                                  ^^^^ Sidekiq/SymbolArgument: Symbols are not Sidekiq-serializable; use strings instead.
+        RUBY
+      end
+    end
+
+    describe 'when called with a hash that contains a  symbol' do
+      it 'registers an offense' do
+        expect_offense(<<~RUBY)
+          MyWorker.perform_async('a', 1, { 'bar' => :baz }, b)
+                                                    ^^^^ Sidekiq/SymbolArgument: Symbols are not Sidekiq-serializable; use strings instead.
+        RUBY
+      end
+    end
   end
 
   describe '#perform_at' do

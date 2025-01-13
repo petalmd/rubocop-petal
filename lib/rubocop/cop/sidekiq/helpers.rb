@@ -59,8 +59,10 @@ module RuboCop
 
         def expand_arguments(arguments)
           arguments.flat_map do |argument|
-            if argument.array_type? || argument.hash_type?
+            if argument.array_type?
               expand_arguments(argument.values)
+            elsif argument.hash_type?
+              expand_arguments(argument.keys.concat(argument.values))
             else
               argument
             end

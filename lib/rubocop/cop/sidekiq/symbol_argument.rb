@@ -15,6 +15,12 @@ module RuboCop
       #
       #   # good
       #   MyWorker.perform_async('foo')
+      #
+      #   # bad
+      #   MyWorker.perform_async(foo: 1)
+      #
+      #   # good
+      #   MyWorker.perform_async({'foo' => 1})
       class SymbolArgument < Base
         include Helpers
 
