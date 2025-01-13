@@ -62,7 +62,7 @@ module RuboCop
             if argument.array_type?
               expand_arguments(argument.values)
             elsif argument.hash_type?
-              expand_arguments(argument.keys.concat(argument.values))
+              expand_arguments(argument.pairs)
             else
               argument
             end
