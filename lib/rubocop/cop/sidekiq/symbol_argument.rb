@@ -30,25 +30,49 @@ module RuboCop
 
         def on_send(node)
           sidekiq_arguments(node).each do |argument|
-            if argument.sym_type?
-              add_offense(argument) do |corrector|
-                corrector.replace(argument, "'#{argument.value}'")
-              end
-            elsif argument.pair_type?
-              if argument.key.sym_type? && argument.value.sym_type?
-                add_offense(argument) do |corrector|
-                  corrector.replace(argument, "'#{argument.key.value}' => '#{argument.value.value}'")
-                end
-              elsif argument.key.sym_type?
-                add_offense(argument.key) do |corrector|
-                  corrector.replace(argument, "'#{argument.key.value}' => #{argument.value.value}")
-                end
-              elsif argument.value.sym_type?
-                add_offense(argument.value) do |corrector|
-                  corrector.replace(argument.value, "'#{argument.value.value}'")
-                end
-              end
-            end
+            manage_sym_type(argument) || manage_pair_type(argument)
+          end
+        end
+
+        private
+
+        def manage_sym_type(argument)
+          return unless argument.sym_type?
+
+          add_offense(argument) do |corrector|
+            corrector.replace(argument, "'#{argument.value}'")
+          end
+        end
+
+        def manage_pair_type(argument)
+          return unless argument.pair_type?
+
+          manage_pair_key_value_symbol(argument) ||
+            manage_pair_key_symbol(argument) ||
+            manage_pair_value_symbol(argument)
+        end
+
+        def manage_pair_key_value_symbol(argument)
+          return unless argument.key.sym_type? && argument.value.sym_type?
+
+          add_offense(argument) do |corrector|
+            corrector.replace(argument, "'#{argument.key.value}' => '#{argument.value.value}'")
+          end
+        end
+
+        def manage_pair_key_symbol(argument)
+          return unless argument.key.sym_type?
+
+          add_offense(argument.key) do |corrector|
+            corrector.replace(argument, "'#{argument.key.value}' => #{argument.value.value}")
+          end
+        end
+
+        def manage_pair_value_symbol(argument)
+          return unless argument.value.sym_type?
+
+          add_offense(argument.value) do |corrector|
+            corrector.replace(argument.value, "'#{argument.value.value}'")
           end
         end
       end
