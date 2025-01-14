@@ -50,22 +50,49 @@ module RuboCop
           node.each_ancestor(:class, :block).detect { |anc| sidekiq_worker?(anc) }
         end
 
-        def sidekiq_arguments(node)
+        def sidekiq_arguments(node, &block)
           return [] unless node.send_type? && (method_name = sidekiq_perform?(node))
+          return enum_for(:sidekiq_arguments, node) unless block
 
           # Drop the first argument for perform_at and perform_in
-          expand_arguments(method_name == :perform_async ? node.arguments : node.arguments[1..])
+          expand_nodes(method_name == :perform_async ? node.arguments : node.arguments[1..], &block)
         end
 
-        def expand_arguments(arguments)
-          arguments.flat_map do |argument|
-            if argument.array_type?
-              expand_arguments(argument.values)
-            elsif argument.hash_type?
-              expand_arguments(argument.pairs)
-            else
-              argument
-            end
+        def expand_nodes(nodes, &block)
+          return enum_for(:expand_nodes, nodes) unless block
+
+          nodes.each { |node| expand_node(node, &block) }
+        end
+
+        def expand_node(node, &block)
+          return enum_for(:expand_node, node) unless block
+
+          expand_hash_array_node(node, &block) || yield(node)
+        end
+
+        def expand_hash_array_node(node, &block)
+          expand_hash_node(node, &block) || expand_array_node(node, &block)
+        end
+
+        def expand_hash_node(node, &block)
+          return unless node.hash_type?
+          return enum_for(:expand_hash_node, node) unless block
+
+          node.pairs.each do |pair_node|
+            expand_hash_array_node(pair_node.key, &block) ||
+              expand_hash_array_node(pair_node.value, &block) ||
+              yield(pair_node)
+          end
+        end
+
+        def expand_array_node(node, &block)
+          return unless node.array_type?
+          return enum_for(:expand_array_node, node) unless block
+
+          if node.square_brackets?
+            expand_nodes(node.values, &block)
+          else
+            yield node
           end
         end
 

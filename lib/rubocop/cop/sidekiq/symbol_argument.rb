@@ -17,10 +17,10 @@ module RuboCop
       #   MyWorker.perform_async('foo')
       #
       #   # bad
-      #   MyWorker.perform_async(foo: 1)
+      #   MyWorker.perform_async(%i(foo))
       #
       #   # good
-      #   MyWorker.perform_async({'foo' => 1})
+      #   MyWorker.perform_async(%w(foo))
       class SymbolArgument < Base
         extend AutoCorrector
 
@@ -29,51 +29,64 @@ module RuboCop
         MSG = 'Symbols are not Sidekiq-serializable; use strings instead.'
 
         def on_send(node)
-          sidekiq_arguments(node).each do |argument|
-            manage_sym_type(argument) || manage_pair_type(argument)
+          sidekiq_arguments(node)
+            .lazy
+            .select { |n| node_contains_symbol?(n) }
+            .each do |selected_node|
+            offense_data(selected_node) do |offense_node, replace_node, replace_value|
+              add_offense(offense_node) do |corrector|
+                corrector.replace(replace_node, replace_value)
+              end
+            end
           end
         end
 
         private
 
-        def manage_sym_type(argument)
-          return unless argument.sym_type?
-
-          add_offense(argument) do |corrector|
-            corrector.replace(argument, "'#{argument.value}'")
-          end
+        def node_contains_symbol?(node)
+          node.sym_type? ||
+            (node.array_type? && node.percent_literal?(:symbol)) ||
+            (node.pair_type? && (node.key.sym_type? || node.value.sym_type?))
         end
 
-        def manage_pair_type(argument)
-          return unless argument.pair_type?
-
-          manage_pair_key_value_symbol(argument) ||
-            manage_pair_key_symbol(argument) ||
-            manage_pair_value_symbol(argument)
+        def offense_data(node)
+          yield sym_replace_value(node) || array_replace_value(node) || pair_replace_value(node)
         end
 
-        def manage_pair_key_value_symbol(argument)
-          return unless argument.key.sym_type? && argument.value.sym_type?
+        def sym_replace_value(node)
+          return unless node.sym_type?
 
-          add_offense(argument) do |corrector|
-            corrector.replace(argument, "'#{argument.key.value}' => '#{argument.value.value}'")
-          end
+          [node, node, %("#{node.value}")]
         end
 
-        def manage_pair_key_symbol(argument)
-          return unless argument.key.sym_type?
+        def array_replace_value(node)
+          return unless node.array_type?
 
-          add_offense(argument.key) do |corrector|
-            corrector.replace(argument, "'#{argument.key.value}' => #{argument.value.source}")
-          end
+          [node, node, "%w(#{node.values.map(&:value).join(' ')})"]
         end
 
-        def manage_pair_value_symbol(argument)
-          return unless argument.value.sym_type?
+        def pair_replace_value(node)
+          return unless node.pair_type?
 
-          add_offense(argument.value) do |corrector|
-            corrector.replace(argument.value, "'#{argument.value.value}'")
-          end
+          pair_both_symbol(node) || pair_only_key_symbol(node) || pair_only_value_symbol(node)
+        end
+
+        def pair_both_symbol(node)
+          return unless node.key.sym_type? && node.value.sym_type?
+
+          [node, node, %("#{node.key.value}" => "#{node.value.value}")]
+        end
+
+        def pair_only_key_symbol(node)
+          return unless node.key.sym_type?
+
+          [node.key, node, %("#{node.key.value}" => #{node.value.source})]
+        end
+
+        def pair_only_value_symbol(node)
+          return unless node.value.sym_type?
+
+          [node.value, node.value, %("#{node.value.value}")]
         end
       end
     end
