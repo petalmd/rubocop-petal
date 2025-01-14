@@ -51,7 +51,7 @@ RSpec.describe RuboCop::Cop::Sidekiq::DateTimeArgument, :config do
       it 'registers an offense' do
         expect_offense(<<~RUBY)
           MyWorker.perform_async(1.hour)
-                                 ^^^^^^ Sidekiq/DateTimeArgument: Durations are not Sidekiq-serializable; use the integer instead.
+                                 ^^^^^^ Sidekiq/DateTimeArgument: Date/Time objects are not Sidekiq-serializable; convert to integers or strings instead.
         RUBY
       end
     end
@@ -98,7 +98,7 @@ RSpec.describe RuboCop::Cop::Sidekiq::DateTimeArgument, :config do
       it 'registers an offense' do
         expect_offense(<<~RUBY)
           MyWorker.perform_at(Time.zone.now, 1.hour)
-                                             ^^^^^^ Sidekiq/DateTimeArgument: Durations are not Sidekiq-serializable; use the integer instead.
+                                             ^^^^^^ Sidekiq/DateTimeArgument: Date/Time objects are not Sidekiq-serializable; convert to integers or strings instead.
         RUBY
       end
     end
@@ -145,7 +145,7 @@ RSpec.describe RuboCop::Cop::Sidekiq::DateTimeArgument, :config do
       it 'registers an offense' do
         expect_offense(<<~RUBY)
           MyWorker.perform_at(5.minutes, 1.hour)
-                                         ^^^^^^ Sidekiq/DateTimeArgument: Durations are not Sidekiq-serializable; use the integer instead.
+                                         ^^^^^^ Sidekiq/DateTimeArgument: Date/Time objects are not Sidekiq-serializable; convert to integers or strings instead.
         RUBY
       end
     end

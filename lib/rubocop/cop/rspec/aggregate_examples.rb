@@ -109,7 +109,8 @@ module RuboCop
       #     expect(number).to be_odd
       #   end
       #
-      class AggregateExamples < ::RuboCop::Cop::Cop
+      class AggregateExamples < Base
+        extend AutoCorrector
         include LineRangeHelpers
         include MetadataHelpers
         include NodeMatchers
@@ -124,24 +125,15 @@ module RuboCop
           example_group_with_several_examples(node) do |all_examples|
             example_clusters(all_examples).each_value do |examples|
               examples[1..].each do |example|
-                add_offense(example,
-                            location: :expression,
-                            message: message_for(example, examples[0]))
+                add_offense(example, message: message_for(example, examples[0])) do |corrector|
+                  example_clusters_for_autocorrect(example).each do |metadata, cluster_examples|
+                    range = range_for_replace(cluster_examples)
+                    replacement = aggregated_example(cluster_examples, metadata)
+                    corrector.replace(range, replacement)
+                    cluster_examples[1..].map { |cluster_example| drop_example(corrector, cluster_example) }
+                  end
+                end
               end
-            end
-          end
-        end
-
-        def autocorrect(example_node)
-          clusters = example_clusters_for_autocorrect(example_node)
-          return if clusters.empty?
-
-          lambda do |corrector|
-            clusters.each do |metadata, examples|
-              range = range_for_replace(examples)
-              replacement = aggregated_example(examples, metadata)
-              corrector.replace(range, replacement)
-              examples[1..].map { |example| drop_example(corrector, example) }
             end
           end
         end
