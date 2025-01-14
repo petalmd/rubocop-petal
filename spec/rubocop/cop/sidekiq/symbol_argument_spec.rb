@@ -30,7 +30,7 @@ RSpec.describe RuboCop::Cop::Sidekiq::SymbolArgument, :config do
           RUBY
         end
 
-        context 'when value is a var' do
+        context 'when value is a var type' do
           it 'registers an offense' do
             expect_offense(<<~RUBY)
               a = 1
@@ -44,7 +44,7 @@ RSpec.describe RuboCop::Cop::Sidekiq::SymbolArgument, :config do
           end
         end
 
-        context 'when value is a function' do
+        context 'when value is a function type' do
           it 'registers an offense' do
             expect_offense(<<~RUBY)
               MyWorker.perform_async('a', 1, bar: 1.hour)
@@ -56,7 +56,7 @@ RSpec.describe RuboCop::Cop::Sidekiq::SymbolArgument, :config do
           end
         end
 
-        context 'when value is a block' do
+        context 'when value is a block type' do
           it 'registers an offense' do
             expect_offense(<<~RUBY)
               my_service = MyService.new('a')
@@ -66,6 +66,18 @@ RSpec.describe RuboCop::Cop::Sidekiq::SymbolArgument, :config do
             expect_correction(<<~RUBY)
               my_service = MyService.new('a')
               MyWorker.perform_async('a', 1, 'bar' => my_service.call('b'))
+            RUBY
+          end
+        end
+
+        context 'when value is a boolean type' do
+          it 'registers an offense' do
+            expect_offense(<<~RUBY)
+              MyWorker.perform_async('a', 1, bar: true)
+                                             ^^^ Sidekiq/SymbolArgument: Symbols are not Sidekiq-serializable; use strings instead.
+            RUBY
+            expect_correction(<<~RUBY)
+              MyWorker.perform_async('a', 1, 'bar' => true)
             RUBY
           end
         end
