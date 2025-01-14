@@ -61,8 +61,8 @@ module RuboCop
 
         include Helpers
 
-        DURATION_MSG = 'Durations are not Sidekiq-serializable; use the integer instead.'
-        MSG = 'Date/Time objects are not Sidekiq-serializable; convert to integers or strings instead.'
+        DURATION_MSG = 'Durations are not native JSON types; use the integer instead.'
+        MSG = 'Date/Time objects are not native JSON types; convert to integers or strings instead.'
         ALLOWED_METHODS = %i[to_i to_s].freeze
 
         def_node_matcher :rational_literal?, <<~PATTERN

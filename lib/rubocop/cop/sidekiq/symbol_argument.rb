@@ -26,7 +26,7 @@ module RuboCop
 
         include Helpers
 
-        MSG = 'Symbols are not Sidekiq-serializable; use strings instead.'
+        MSG = 'Symbols are not native JSON types; use strings instead.'
 
         def on_send(node)
           sidekiq_arguments(node)

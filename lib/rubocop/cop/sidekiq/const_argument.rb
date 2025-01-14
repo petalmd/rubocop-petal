@@ -25,8 +25,8 @@ module RuboCop
 
         include Helpers
 
-        MSG = 'Objects are not Sidekiq-serializable.'
-        MSG_SELF = '`self` is not Sidekiq-serializable.'
+        MSG = 'Objects are not native JSON types.'
+        MSG_SELF = '`self` is not a native JSON type.'
 
         def_node_matcher :initializer?, <<~PATTERN
           (send const :new)

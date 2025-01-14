@@ -8,7 +8,7 @@ RSpec.describe RuboCop::Cop::Sidekiq::SymbolArgument, :config do
       it 'registers an offense' do
         expect_offense(<<~RUBY)
           MyWorker.perform_async('a', 1, :foo)
-                                         ^^^^ Sidekiq/SymbolArgument: Symbols are not Sidekiq-serializable; use strings instead.
+                                         ^^^^ Sidekiq/SymbolArgument: Symbols are not native JSON types; use strings instead.
         RUBY
 
         expect_correction(<<~RUBY)
@@ -30,7 +30,7 @@ RSpec.describe RuboCop::Cop::Sidekiq::SymbolArgument, :config do
         it 'registers an offense' do
           expect_offense(<<~RUBY)
             MyWorker.perform_async('a', 1, ['foo', :bar])
-                                                   ^^^^ Sidekiq/SymbolArgument: Symbols are not Sidekiq-serializable; use strings instead.
+                                                   ^^^^ Sidekiq/SymbolArgument: Symbols are not native JSON types; use strings instead.
           RUBY
           expect_correction(<<~RUBY)
             MyWorker.perform_async('a', 1, ['foo', "bar"])
@@ -43,7 +43,7 @@ RSpec.describe RuboCop::Cop::Sidekiq::SymbolArgument, :config do
           it 'registers an offense' do
             expect_offense(<<~RUBY)
               MyWorker.perform_async('a', 1, ['foo', %i(bar baz)])
-                                                     ^^^^^^^^^^^ Sidekiq/SymbolArgument: Symbols are not Sidekiq-serializable; use strings instead.
+                                                     ^^^^^^^^^^^ Sidekiq/SymbolArgument: Symbols are not native JSON types; use strings instead.
             RUBY
             expect_correction(<<~RUBY)
               MyWorker.perform_async('a', 1, ['foo', %w(bar baz)])
@@ -64,7 +64,7 @@ RSpec.describe RuboCop::Cop::Sidekiq::SymbolArgument, :config do
         it 'registers an offense' do
           expect_offense(<<~RUBY)
             MyWorker.perform_async('a', 1, ['foo', [:bar]])
-                                                    ^^^^ Sidekiq/SymbolArgument: Symbols are not Sidekiq-serializable; use strings instead.
+                                                    ^^^^ Sidekiq/SymbolArgument: Symbols are not native JSON types; use strings instead.
           RUBY
           expect_correction(<<~RUBY)
             MyWorker.perform_async('a', 1, ['foo', ["bar"]])
@@ -76,7 +76,7 @@ RSpec.describe RuboCop::Cop::Sidekiq::SymbolArgument, :config do
         it 'registers an offense' do
           expect_offense(<<~RUBY)
             MyWorker.perform_async('a', 1, ['foo', { bar: 'baz' }])
-                                                     ^^^ Sidekiq/SymbolArgument: Symbols are not Sidekiq-serializable; use strings instead.
+                                                     ^^^ Sidekiq/SymbolArgument: Symbols are not native JSON types; use strings instead.
           RUBY
           expect_correction(<<~RUBY)
             MyWorker.perform_async('a', 1, ['foo', { "bar" => 'baz' }])
@@ -89,7 +89,7 @@ RSpec.describe RuboCop::Cop::Sidekiq::SymbolArgument, :config do
       it 'registers an offense' do
         expect_offense(<<~RUBY)
           MyWorker.perform_async('a', 1, %i(foo bar))
-                                         ^^^^^^^^^^^ Sidekiq/SymbolArgument: Symbols are not Sidekiq-serializable; use strings instead.
+                                         ^^^^^^^^^^^ Sidekiq/SymbolArgument: Symbols are not native JSON types; use strings instead.
         RUBY
 
         expect_correction(<<~RUBY)
@@ -103,7 +103,7 @@ RSpec.describe RuboCop::Cop::Sidekiq::SymbolArgument, :config do
         it 'registers an offense' do
           expect_offense(<<~RUBY)
             MyWorker.perform_async('a', 1, foo: 1)
-                                           ^^^ Sidekiq/SymbolArgument: Symbols are not Sidekiq-serializable; use strings instead.
+                                           ^^^ Sidekiq/SymbolArgument: Symbols are not native JSON types; use strings instead.
           RUBY
 
           expect_correction(<<~RUBY)
@@ -117,7 +117,7 @@ RSpec.describe RuboCop::Cop::Sidekiq::SymbolArgument, :config do
           expect_offense(<<~RUBY)
             a = 1
             MyWorker.perform_async('a', 1, bar: a)
-                                           ^^^ Sidekiq/SymbolArgument: Symbols are not Sidekiq-serializable; use strings instead.
+                                           ^^^ Sidekiq/SymbolArgument: Symbols are not native JSON types; use strings instead.
           RUBY
           expect_correction(<<~RUBY)
             a = 1
@@ -130,7 +130,7 @@ RSpec.describe RuboCop::Cop::Sidekiq::SymbolArgument, :config do
         it 'registers an offense' do
           expect_offense(<<~RUBY)
             MyWorker.perform_async('a', 1, bar: 1.hour)
-                                           ^^^ Sidekiq/SymbolArgument: Symbols are not Sidekiq-serializable; use strings instead.
+                                           ^^^ Sidekiq/SymbolArgument: Symbols are not native JSON types; use strings instead.
           RUBY
           expect_correction(<<~RUBY)
             MyWorker.perform_async('a', 1, "bar" => 1.hour)
@@ -143,7 +143,7 @@ RSpec.describe RuboCop::Cop::Sidekiq::SymbolArgument, :config do
           expect_offense(<<~RUBY)
             my_service = MyService.new('a')
             MyWorker.perform_async('a', 1, bar: my_service.call('b'))
-                                           ^^^ Sidekiq/SymbolArgument: Symbols are not Sidekiq-serializable; use strings instead.
+                                           ^^^ Sidekiq/SymbolArgument: Symbols are not native JSON types; use strings instead.
           RUBY
           expect_correction(<<~RUBY)
             my_service = MyService.new('a')
@@ -156,7 +156,7 @@ RSpec.describe RuboCop::Cop::Sidekiq::SymbolArgument, :config do
         it 'registers an offense' do
           expect_offense(<<~RUBY)
             MyWorker.perform_async('a', 1, bar: true)
-                                           ^^^ Sidekiq/SymbolArgument: Symbols are not Sidekiq-serializable; use strings instead.
+                                           ^^^ Sidekiq/SymbolArgument: Symbols are not native JSON types; use strings instead.
           RUBY
           expect_correction(<<~RUBY)
             MyWorker.perform_async('a', 1, "bar" => true)
@@ -168,7 +168,7 @@ RSpec.describe RuboCop::Cop::Sidekiq::SymbolArgument, :config do
         it 'registers an offense' do
           expect_offense(<<~RUBY)
             MyWorker.perform_async('a', 1, 'bar' => :baz)
-                                                    ^^^^ Sidekiq/SymbolArgument: Symbols are not Sidekiq-serializable; use strings instead.
+                                                    ^^^^ Sidekiq/SymbolArgument: Symbols are not native JSON types; use strings instead.
           RUBY
           expect_correction(<<~RUBY)
             MyWorker.perform_async('a', 1, 'bar' => "baz")
@@ -180,7 +180,7 @@ RSpec.describe RuboCop::Cop::Sidekiq::SymbolArgument, :config do
         it 'registers an offense' do
           expect_offense(<<~RUBY)
             MyWorker.perform_async('a', 1, 'bar' => %i(baz))
-                                                    ^^^^^^^ Sidekiq/SymbolArgument: Symbols are not Sidekiq-serializable; use strings instead.
+                                                    ^^^^^^^ Sidekiq/SymbolArgument: Symbols are not native JSON types; use strings instead.
           RUBY
           expect_correction(<<~RUBY)
             MyWorker.perform_async('a', 1, 'bar' => %w(baz))
@@ -192,7 +192,7 @@ RSpec.describe RuboCop::Cop::Sidekiq::SymbolArgument, :config do
         it 'registers an offense' do
           expect_offense(<<~RUBY)
             MyWorker.perform_async('a', 1, 'bar' => [:baz])
-                                                     ^^^^ Sidekiq/SymbolArgument: Symbols are not Sidekiq-serializable; use strings instead.
+                                                     ^^^^ Sidekiq/SymbolArgument: Symbols are not native JSON types; use strings instead.
           RUBY
           expect_correction(<<~RUBY)
             MyWorker.perform_async('a', 1, 'bar' => ["baz"])
@@ -204,7 +204,7 @@ RSpec.describe RuboCop::Cop::Sidekiq::SymbolArgument, :config do
         it 'registers an offense' do
           expect_offense(<<~RUBY)
             MyWorker.perform_async('a', 1, 'foo' => { 'bar' => %i(baz) })
-                                                               ^^^^^^^ Sidekiq/SymbolArgument: Symbols are not Sidekiq-serializable; use strings instead.
+                                                               ^^^^^^^ Sidekiq/SymbolArgument: Symbols are not native JSON types; use strings instead.
           RUBY
           expect_correction(<<~RUBY)
             MyWorker.perform_async('a', 1, 'foo' => { 'bar' => %w(baz) })
@@ -216,7 +216,7 @@ RSpec.describe RuboCop::Cop::Sidekiq::SymbolArgument, :config do
         it 'registers an offense' do
           expect_offense(<<~RUBY)
             MyWorker.perform_async('a', 1, bar: :baz)
-                                           ^^^^^^^^^ Sidekiq/SymbolArgument: Symbols are not Sidekiq-serializable; use strings instead.
+                                           ^^^^^^^^^ Sidekiq/SymbolArgument: Symbols are not native JSON types; use strings instead.
           RUBY
           expect_correction(<<~RUBY)
             MyWorker.perform_async('a', 1, "bar" => "baz")
@@ -231,7 +231,7 @@ RSpec.describe RuboCop::Cop::Sidekiq::SymbolArgument, :config do
       it 'registers an offense' do
         expect_offense(<<~RUBY)
           MyWorker.perform_at(Time.zone.now, 'a', 1, :foo)
-                                                     ^^^^ Sidekiq/SymbolArgument: Symbols are not Sidekiq-serializable; use strings instead.
+                                                     ^^^^ Sidekiq/SymbolArgument: Symbols are not native JSON types; use strings instead.
         RUBY
         expect_correction(<<~RUBY)
           MyWorker.perform_at(Time.zone.now, 'a', 1, "foo")
@@ -245,7 +245,7 @@ RSpec.describe RuboCop::Cop::Sidekiq::SymbolArgument, :config do
       it 'registers an offense' do
         expect_offense(<<~RUBY)
           MyWorker.perform_in(5.minutes, 'a', 1, :foo)
-                                                 ^^^^ Sidekiq/SymbolArgument: Symbols are not Sidekiq-serializable; use strings instead.
+                                                 ^^^^ Sidekiq/SymbolArgument: Symbols are not native JSON types; use strings instead.
         RUBY
         expect_correction(<<~RUBY)
           MyWorker.perform_in(5.minutes, 'a', 1, "foo")
