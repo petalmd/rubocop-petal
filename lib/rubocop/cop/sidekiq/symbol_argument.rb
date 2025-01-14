@@ -65,7 +65,7 @@ module RuboCop
 
           add_offense(argument.key) do |corrector|
             value = argument.value
-            corrected_value = value.lvar_type? ? value.source : value.value
+            corrected_value = value.lvar_type? || value.send_type? ? value.source : value.value
             corrector.replace(argument, "'#{argument.key.value}' => #{corrected_value}")
           end
         end

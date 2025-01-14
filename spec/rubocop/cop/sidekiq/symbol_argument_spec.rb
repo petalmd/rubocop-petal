@@ -43,6 +43,18 @@ RSpec.describe RuboCop::Cop::Sidekiq::SymbolArgument, :config do
             RUBY
           end
         end
+
+        context 'when value is a function' do
+          it 'registers an offense' do
+            expect_offense(<<~RUBY)
+              MyWorker.perform_async('a', 1, bar: 1.hour)
+                                             ^^^ Sidekiq/SymbolArgument: Symbols are not Sidekiq-serializable; use strings instead.
+            RUBY
+            expect_correction(<<~RUBY)
+              MyWorker.perform_async('a', 1, 'bar' => 1.hour)
+            RUBY
+          end
+        end
       end
 
       context 'when value is a symbol' do
