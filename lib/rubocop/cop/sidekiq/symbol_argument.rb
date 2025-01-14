@@ -14,7 +14,7 @@ module RuboCop
       #   MyWorker.perform_async(:foo)
       #
       #   # good
-      #   MyWorker.perform_async('foo')
+      #   MyWorker.perform_async("foo")
       #
       #   # bad
       #   MyWorker.perform_async(%i(foo))
@@ -26,7 +26,7 @@ module RuboCop
       #   MyWorker.perform_async([:foo])
       #
       #   # good
-      #   MyWorker.perform_async(['foo']))
+      #   MyWorker.perform_async(["foo"]))
       #
       #   # bad
       #   MyWorker.perform_async(foo: 1)
@@ -38,13 +38,13 @@ module RuboCop
       #   MyWorker.perform_async('foo' => :baz)
       #
       #   # good
-      #   MyWorker.perform_async('foo' => 'baz')
+      #   MyWorker.perform_async('foo' => "baz")
       #
       #   # bad
       #   MyWorker.perform_async('foo' => [:bar]
       #
       #   # good
-      #   MyWorker.perform_async('foo' => ['baz'])
+      #   MyWorker.perform_async('foo' => ["baz"])
       #
       #   # bad
       #   MyWorker.perform_async('foo' => %i(baz)
@@ -62,7 +62,7 @@ module RuboCop
       #   MyWorker.perform_async('foo' => { bar: [:baz]) })
       #
       #   # good
-      #   MyWorker.perform_async('foo' => { bar: ['baz'] })
+      #   MyWorker.perform_async('foo' => { bar: ["baz"] })
       #
       class SymbolArgument < Base
         extend AutoCorrector
