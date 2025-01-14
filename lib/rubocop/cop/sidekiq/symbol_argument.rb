@@ -21,6 +21,49 @@ module RuboCop
       #
       #   # good
       #   MyWorker.perform_async(%w(foo))
+      #
+      #   # bad
+      #   MyWorker.perform_async([:foo])
+      #
+      #   # good
+      #   MyWorker.perform_async(['foo']))
+      #
+      #   # bad
+      #   MyWorker.perform_async(foo: 1)
+      #
+      #   # good
+      #   MyWorker.perform_async('foo' => 1)
+      #
+      #   # bad
+      #   MyWorker.perform_async('foo' => :baz)
+      #
+      #   # good
+      #   MyWorker.perform_async('foo' => 'baz')
+      #
+      #   # bad
+      #   MyWorker.perform_async('foo' => [:bar]
+      #
+      #   # good
+      #   MyWorker.perform_async('foo' => ['baz'])
+      #
+      #   # bad
+      #   MyWorker.perform_async('foo' => %i(baz)
+      #
+      #   # good
+      #   MyWorker.perform_async('foo' => %w(baz))
+      #
+      #   # bad
+      #   MyWorker.perform_async('foo' => { bar: %i(baz) })
+      #
+      #   # good
+      #   MyWorker.perform_async('foo' => { bar: %w(baz) })
+      #
+      #   # bad
+      #   MyWorker.perform_async('foo' => { bar: [:baz]) })
+      #
+      #   # good
+      #   MyWorker.perform_async('foo' => { bar: ['baz'] })
+      #
       class SymbolArgument < Base
         extend AutoCorrector
 
@@ -44,9 +87,15 @@ module RuboCop
         private
 
         def node_contains_symbol?(node)
-          node.sym_type? ||
-            (node.array_type? && node.percent_literal?(:symbol)) ||
-            (node.pair_type? && (node.key.sym_type? || node.value.sym_type?))
+          node.sym_type? || symbol_percent_literal?(node) || pair_with_symbol?(node)
+        end
+
+        def symbol_percent_literal?(node)
+          node.array_type? && node.percent_literal?(:symbol)
+        end
+
+        def pair_with_symbol?(node)
+          node.pair_type? && (node.key.sym_type? || node.value.sym_type?)
         end
 
         def offense_data(node)
