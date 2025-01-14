@@ -64,8 +64,7 @@ module RuboCop
           return unless argument.key.sym_type?
 
           add_offense(argument.key) do |corrector|
-            value = argument.value
-            corrector.replace(argument, "'#{argument.key.value}' => #{value.source}")
+            corrector.replace(argument, "'#{argument.key.value}' => #{argument.value.source}")
           end
         end
 
