@@ -17,37 +17,53 @@ RSpec.describe RuboCop::Cop::Sidekiq::SymbolArgument, :config do
       end
     end
 
-    describe 'when called with a hash that contains a key symbol' do
-      it 'registers an offense' do
-        expect_offense(<<~RUBY)
-          MyWorker.perform_async('a', 1, foo: 1)
-                                         ^^^ Sidekiq/SymbolArgument: Symbols are not Sidekiq-serializable; use strings instead.
-        RUBY
+    context 'when argument is a Hash' do
+      context 'when key is a symbol' do
+        it 'registers an offense' do
+          expect_offense(<<~RUBY)
+            MyWorker.perform_async('a', 1, foo: 1)
+                                           ^^^ Sidekiq/SymbolArgument: Symbols are not Sidekiq-serializable; use strings instead.
+          RUBY
 
-        expect_correction(<<~RUBY)
-          MyWorker.perform_async('a', 1, 'foo' => 1)
-        RUBY
+          expect_correction(<<~RUBY)
+            MyWorker.perform_async('a', 1, 'foo' => 1)
+          RUBY
+        end
+
+        context 'when value is a var' do
+          it 'registers an offense' do
+            expect_offense(<<~RUBY)
+              a = 1
+              MyWorker.perform_async('a', 1, bar: a)
+                                             ^^^ Sidekiq/SymbolArgument: Symbols are not Sidekiq-serializable; use strings instead.
+            RUBY
+            expect_correction(<<~RUBY)
+              a = 1
+              MyWorker.perform_async('a', 1, 'bar' => a)
+            RUBY
+          end
+        end
       end
-    end
 
-    describe 'when called with a hash that contains a value symbol' do
-      it 'registers an offense' do
-        expect_offense(<<~RUBY)
-          MyWorker.perform_async('a', 1, 'bar' => :baz)
-                                                  ^^^^ Sidekiq/SymbolArgument: Symbols are not Sidekiq-serializable; use strings instead.
-        RUBY
+      context 'when value is a symbol' do
+        it 'registers an offense' do
+          expect_offense(<<~RUBY)
+            MyWorker.perform_async('a', 1, 'bar' => :baz)
+                                                    ^^^^ Sidekiq/SymbolArgument: Symbols are not Sidekiq-serializable; use strings instead.
+          RUBY
+        end
       end
-    end
 
-    describe 'when called with a hash that contains a key and a value symbol' do
-      it 'registers an offense' do
-        expect_offense(<<~RUBY)
-          MyWorker.perform_async('a', 1, bar: :baz)
-                                         ^^^^^^^^^ Sidekiq/SymbolArgument: Symbols are not Sidekiq-serializable; use strings instead.
-        RUBY
-        expect_correction(<<~RUBY)
-          MyWorker.perform_async('a', 1, 'bar' => 'baz')
-        RUBY
+      context 'when key/value are symbols' do
+        it 'registers an offense' do
+          expect_offense(<<~RUBY)
+            MyWorker.perform_async('a', 1, bar: :baz)
+                                           ^^^^^^^^^ Sidekiq/SymbolArgument: Symbols are not Sidekiq-serializable; use strings instead.
+          RUBY
+          expect_correction(<<~RUBY)
+            MyWorker.perform_async('a', 1, 'bar' => 'baz')
+          RUBY
+        end
       end
     end
   end
