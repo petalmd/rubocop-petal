@@ -89,6 +89,9 @@ RSpec.describe RuboCop::Cop::Sidekiq::SymbolArgument, :config do
             MyWorker.perform_async('a', 1, 'bar' => :baz)
                                                     ^^^^ Sidekiq/SymbolArgument: Symbols are not Sidekiq-serializable; use strings instead.
           RUBY
+          expect_correction(<<~RUBY)
+            MyWorker.perform_async('a', 1, 'bar' => 'baz')
+          RUBY
         end
       end
 
