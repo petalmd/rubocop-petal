@@ -34,7 +34,7 @@ module RuboCop
       #   # good
       #   MyWorker.perform_async(Time.now.mday)
       #
-      class DateTimeArgument < ::RuboCop::Cop::Cop
+      class DateTimeArgument < Base
         DURATION_METHODS = %i[
           second
           seconds

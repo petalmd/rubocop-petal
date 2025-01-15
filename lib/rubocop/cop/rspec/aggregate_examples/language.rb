@@ -6,7 +6,7 @@ module RuboCop
   module Cop
     module RSpec
       # RSpec public API methods that are commonly used in cops
-      class AggregateExamples < ::RuboCop::Cop::Cop
+      class AggregateExamples < Base
         module Language
           RSPEC = '{(const {nil? cbase} :RSpec) nil?}'
 
