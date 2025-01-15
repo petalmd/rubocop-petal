@@ -157,3 +157,4 @@ Sidekiq/PerformInline:
 Sidekiq/SymbolArgument:
   Description: "Prevent passing keywords arguments in worker's perform method"
   Enabled: true
+  SafeAutoCorrect: false
