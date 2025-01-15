@@ -8,7 +8,7 @@ RSpec.describe RuboCop::Cop::Sidekiq::ConstArgument, :config do
       it 'registers an offense' do
         expect_offense(<<~RUBY)
           MyWorker.perform_async(1, {'abc' => 3}, MyClass, 1, {'abc' => 3})
-                                                  ^^^^^^^ Sidekiq/ConstArgument: Objects are not Sidekiq-serializable.
+                                                  ^^^^^^^ Sidekiq/ConstArgument: Objects are not native JSON types.
         RUBY
       end
     end
@@ -28,7 +28,7 @@ RSpec.describe RuboCop::Cop::Sidekiq::ConstArgument, :config do
         expect_offense(<<~RUBY)
           at = Time.zone.now.iso8601
           MyWorker.perform_at(at, 1, {'abc' => 3}, MyClass, 1, {'abc' => 3})
-                                                   ^^^^^^^ Sidekiq/ConstArgument: Objects are not Sidekiq-serializable.
+                                                   ^^^^^^^ Sidekiq/ConstArgument: Objects are not native JSON types.
         RUBY
       end
     end
@@ -48,7 +48,7 @@ RSpec.describe RuboCop::Cop::Sidekiq::ConstArgument, :config do
       it 'registers an offense' do
         expect_offense(<<~RUBY)
           MyWorker.perform_in(5.seconds, 1, {'abc' => 3}, MyClass, 1, {'abc' => 3})
-                                                          ^^^^^^^ Sidekiq/ConstArgument: Objects are not Sidekiq-serializable.
+                                                          ^^^^^^^ Sidekiq/ConstArgument: Objects are not native JSON types.
         RUBY
       end
     end
