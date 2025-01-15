@@ -25,9 +25,9 @@ Gem::Specification.new do |spec|
     'rubygems_mfa_required' => 'true'
   }
 
-  spec.add_dependency 'rubocop', '~> 1.69'
+  spec.add_dependency 'rubocop', '~> 1.70'
   spec.add_dependency 'rubocop-factory_bot', '~> 2.26'
   spec.add_dependency 'rubocop-performance', '~> 1.23'
-  spec.add_dependency 'rubocop-rails', '~> 2.27'
-  spec.add_dependency 'rubocop-rspec', '~> 3.2'
+  spec.add_dependency 'rubocop-rails', '~> 2.28'
+  spec.add_dependency 'rubocop-rspec', '~> 3.3'
 end
