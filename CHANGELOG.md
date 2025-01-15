@@ -1,6 +1,7 @@
 # Changelog
 
 # main
+* Sidekiq/SymbolArgument now handles Arrays/Hashes with symbols and has an autocorrection ([#86](https://github.com/petalmd/rubocop-petal/pull/86))
 
 # v1.5.0 (2024-12-11)
 
