@@ -1,0 +1,21 @@
+# .github/workflows/publish-release.yml
+name: Release
+on:
+  push:
+    tags:
+      - "v*"
+jobs:
+  github_release:
+    name: GitHub release
+    runs-on: ubuntu-latest
+    permissions:
+      contents: write
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v4
+      - name: Publish release
+        uses: ghalactic/github-release-from-tag@v5
+        with:
+          generateReleaseNotes: "true"
+          summaryEnabled: "false"
+          prerelease: "false"
