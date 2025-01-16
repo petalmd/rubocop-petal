@@ -1,5 +1,7 @@
 # See [releases notes](https://github.com/petalmd/rubocop-petal/releases)
 
+* Add missing 'rubocop-rspec_rails' ([#88](https://github.com/petalmd/rubocop-petal/pull/88))
+
 # v1.6.0 (2025-01-16)
 
 * Sidekiq/SymbolArgument now handles Arrays/Hashes with symbols and has an autocorrection ([#86](https://github.com/petalmd/rubocop-petal/pull/86))
