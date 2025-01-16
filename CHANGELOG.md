@@ -1,7 +1,6 @@
 # Changelog
 
 # main
-* Add back rubocop-rspec_rails dependency ([#87](https://github.com/petalmd/rubocop-petal/pull/87))
 
 * v1.6.0 (2025-01-16)
 
