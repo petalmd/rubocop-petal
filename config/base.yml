@@ -1,8 +1,9 @@
 require:
-  - rubocop-rails
   - rubocop-performance
-  - rubocop-rspec
   - rubocop-petal
+  - rubocop-rails
+  - rubocop-rspec
+  - rubocop-rspec_rails
 
 AllCops:
   SuggestExtensions: false
