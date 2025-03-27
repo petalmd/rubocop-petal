@@ -74,9 +74,10 @@ RSpec/SidekiqInline:
     - spec/**/*
 
 RSpec/SidekiqPerformMatcher:
-  Description: 'TODO: Write a description of the cop.'
-  Enabled: pending
-  VersionAdded: '<<next>>'
+  Description: 'Prevent using `receive(:perform_async)` in favor of rspec-sidekiq matcher'
+  Enabled: true
+  Include:
+    - spec/**/*
 
 RSpec/StubProducts:
   Description: 'Suggest to use stub_products instead of veil/unveil_product.'

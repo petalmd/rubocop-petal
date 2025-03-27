@@ -2,20 +2,57 @@
 
 RSpec.describe RuboCop::Cop::RSpec::SidekiqPerformMatcher, :config do
   let(:config) { RuboCop::Config.new }
-
-  # TODO: Write test code
-  #
-  # For example
-  it 'registers an offense when using `#bad_method`' do
+  it 'registers an offense when using perform_async' do
     expect_offense(<<~RUBY)
-      bad_method
-      ^^^^^^^^^^ Use `#good_method` instead of `#bad_method`.
+      expect(MyWorker).to receive(:perform_async)
+                          ^^^^^^^^^^^^^^^^^^^^^^^ RSpec/SidekiqPerformMatcher: Use `have_enqueued_sidekiq_job` instead of `receive(:perform_async)`.
     RUBY
   end
-
-  it 'does not register an offense when using `#good_method`' do
+  
+  it 'registers an offense when using perform_async with parameters' do
+    expect_offense(<<~RUBY)
+      expect(MyWorker).to receive(:perform_async).with('arg1', 'arg2')
+                          ^^^^^^^^^^^^^^^^^^^^^^^ RSpec/SidekiqPerformMatcher: Use `have_enqueued_sidekiq_job` instead of `receive(:perform_async)`.
+    RUBY
+  end
+  
+  it 'registers an offense when using perform_in' do
+    expect_offense(<<~RUBY)
+      expect(MyWorker).to receive(:perform_in)
+                          ^^^^^^^^^^^^^^^^^^^^ RSpec/SidekiqPerformMatcher: Use `have_enqueued_sidekiq_job` instead of `receive(:perform_in)`.
+    RUBY
+  end
+  
+  it 'registers an offense when using perform_in with time and arguments' do
+    expect_offense(<<~RUBY)
+      expect(MyWorker).to receive(:perform_in).with(5.minutes, user.id)
+                          ^^^^^^^^^^^^^^^^^^^^ RSpec/SidekiqPerformMatcher: Use `have_enqueued_sidekiq_job` instead of `receive(:perform_in)`.
+    RUBY
+  end
+  
+  it 'registers an offense when using perform_at' do
+    expect_offense(<<~RUBY)
+      expect(MyWorker).to receive(:perform_at)
+                          ^^^^^^^^^^^^^^^^^^^^ RSpec/SidekiqPerformMatcher: Use `have_enqueued_sidekiq_job` instead of `receive(:perform_at)`.
+    RUBY
+  end
+  
+  it 'registers an offense with chained expectations' do
+    expect_offense(<<~RUBY)
+      expect(MyWorker).to receive(:perform_async).once
+                          ^^^^^^^^^^^^^^^^^^^^^^^ RSpec/SidekiqPerformMatcher: Use `have_enqueued_sidekiq_job` instead of `receive(:perform_async)`.
+    RUBY
+  end
+  
+  it 'does not register an offense when using have_enqueued_sidekiq_job' do
     expect_no_offenses(<<~RUBY)
-      good_method
+      expect(MyWorker).to have_enqueued_sidekiq_job('arg1', 'arg2')
+    RUBY
+  end
+  
+  it 'does not register an offense for unrelated matchers' do
+    expect_no_offenses(<<~RUBY)
+      expect(MyWorker).to receive(:some_other_method)
     RUBY
   end
 end

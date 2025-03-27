@@ -3,72 +3,35 @@
 module RuboCop
   module Cop
     module RSpec
-      # TODO: Write cop description and example of bad / good code. For every
-      # `SupportedStyle` and unique configuration, there needs to be examples.
-      # Examples must have valid Ruby syntax. Do not use upticks.
+      # Prevent the use of `receive(:perform_async)` matcher to 
+      # use instead rspec-sidekiq matcher like `enqueue_sidekiq_job`.
       #
-      # @safety
-      #   Delete this section if the cop is not unsafe (`Safe: false` or
-      #   `SafeAutoCorrect: false`), or use it to explain how the cop is
-      #   unsafe.
-      #
-      # @example EnforcedStyle: bar (default)
-      #   # Description of the `bar` style.
-      #
+      # @example
       #   # bad
-      #   bad_bar_method
-      #
-      #   # bad
-      #   bad_bar_method(args)
+      #   expect(MyWorker).to receive(:perform_async).with(args)
+      #   expect(MyWorker).to receive(:perform_in).with(5.seconds, args)
+      #   expect(MyWorker).to receive(:perform_at).with(specific_time, args)
       #
       #   # good
-      #   good_bar_method
-      #
-      #   # good
-      #   good_bar_method(args)
-      #
-      # @example EnforcedStyle: foo
-      #   # Description of the `foo` style.
-      #
-      #   # bad
-      #   bad_foo_method
-      #
-      #   # bad
-      #   bad_foo_method(args)
-      #
-      #   # good
-      #   good_foo_method
-      #
-      #   # good
-      #   good_foo_method(args)
+      #   expect(MyWorker).to have_enqueued_sidekiq_job.with(args)
+      #   expect(MyWorker).to have_enqueued_sidekiq_job.in(1.seconds).with(args)
+      #   expect(MyWorker).to have_enqueued_sidekiq_job.at(specific_time).with(args)
       #
       class SidekiqPerformMatcher < Base
-        # TODO: Implement the cop in here.
-        #
-        # In many cases, you can use a node matcher for matching node pattern.
-        # See https://github.com/rubocop/rubocop-ast/blob/master/lib/rubocop/ast/node_pattern.rb
-        #
-        # For example
-        MSG = 'Use `#good_method` instead of `#bad_method`.'
+        MSG = 'Use `have_enqueued_sidekiq_job` instead of `receive(:perform_%s)`.'
+        RESTRICT_ON_SEND = %i[receive].freeze
 
-        # TODO: Don't call `on_send` unless the method name is in this list
-        # If you don't need `on_send` in the cop you created, remove it.
-        RESTRICT_ON_SEND = %i[bad_method].freeze
-
-        # @!method bad_method?(node)
-        def_node_matcher :bad_method?, <<~PATTERN
-          (send nil? :bad_method ...)
+        # @!method perform_matcher?(node)
+        def_node_matcher :perform_matcher?, <<~PATTERN
+          (send nil? :receive (sym {:perform_async :perform_in :perform_at}))
         PATTERN
 
-        # Called on every `send` node (method call) while walking the AST.
-        # TODO: remove this method if inspecting `send` nodes is unneeded for your cop.
-        # By default, this is aliased to `on_csend` as well to handle method calls
-        # with safe navigation, remove the alias if this is unnecessary.
-        # If kept, ensure your tests cover safe navigation as well!
         def on_send(node)
-          return unless bad_method?(node)
+          return unless perform_matcher?(node)
 
-          add_offense(node)
+          perform_method = node.first_argument.value.to_s.sub('perform_', '')
+          
+          add_offense(node, message: format(MSG, perform_method))
         end
         alias on_csend on_send
       end
