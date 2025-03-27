@@ -11,11 +11,13 @@ module RuboCop
       #   expect(MyWorker).to receive(:perform_async).with(args)
       #   expect(MyWorker).to receive(:perform_in).with(5.seconds, args)
       #   expect(MyWorker).to receive(:perform_at).with(specific_time, args)
+      #   expect(MyWorker).to receive(:perform_bulk)
       #
       #   # good
       #   expect(MyWorker).to have_enqueued_sidekiq_job.with(args)
       #   expect(MyWorker).to have_enqueued_sidekiq_job.in(1.seconds).with(args)
       #   expect(MyWorker).to have_enqueued_sidekiq_job.at(specific_time).with(args)
+      #   expect(MyWorker).to have_enqueued_sidekiq_job
       #
       class SidekiqPerformMatcher < Base
         MSG = 'Use `have_enqueued_sidekiq_job` instead of `receive(:perform_%s)`.'
@@ -23,7 +25,7 @@ module RuboCop
 
         # @!method perform_matcher?(node)
         def_node_matcher :perform_matcher?, <<~PATTERN
-          (send nil? :receive (sym {:perform_async :perform_in :perform_at}))
+          (send nil? :receive (sym {:perform_async :perform_in :perform_at :perform_bulk}))
         PATTERN
 
         def on_send(node)

@@ -45,6 +45,13 @@ RSpec.describe RuboCop::Cop::RSpec::SidekiqPerformMatcher, :config do
     RUBY
   end
 
+  it 'registers an offense when using perform_bulk' do
+    expect_offense(<<~RUBY)
+      expect(MyWorker).to receive(:perform_bulk)
+                          ^^^^^^^^^^^^^^^^^^^^^^ RSpec/SidekiqPerformMatcher: Use `have_enqueued_sidekiq_job` instead of `receive(:perform_bulk)`.
+    RUBY
+  end
+
   it 'does not register an offense when using have_enqueued_sidekiq_job' do
     expect_no_offenses(<<~RUBY)
       expect(MyWorker).to have_enqueued_sidekiq_job('arg1', 'arg2')
