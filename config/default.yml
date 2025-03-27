@@ -60,9 +60,10 @@ RSpec/AggregateExamples:
     - validates_exclusion_of
 
 RSpec/ChewyStrategy:
-  Description: 'TODO: Write a description of the cop.'
-  Enabled: pending
-  VersionAdded: '<<next>>'
+  Description: 'Prevent using Chewy strategy in tests.'
+  Enabled: true
+  Include:
+    - spec/**/*
 
 RSpec/CreateListMax:
   Description: 'Prevent creating to most records with `FactoryBot.create_list`.'
