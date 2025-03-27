@@ -59,6 +59,11 @@ RSpec/AggregateExamples:
     - validate_inclusion_of
     - validates_exclusion_of
 
+RSpec/ChewyStrategy:
+  Description: 'TODO: Write a description of the cop.'
+  Enabled: pending
+  VersionAdded: '<<next>>'
+
 RSpec/CreateListMax:
   Description: 'Prevent creating to most records with `FactoryBot.create_list`.'
   Enabled: true
