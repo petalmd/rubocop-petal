@@ -20,7 +20,7 @@ RSpec.describe RuboCop::Cop::RSpec::ChewyStrategy, :config do
       end
     RUBY
   end
-  
+
   it 'registers an offense when assigning Chewy.strategy to a variable' do
     expect_offense(<<~RUBY)
       before do

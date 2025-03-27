@@ -7,7 +7,7 @@ module RuboCop
       # Setting the strategy to atomic may try to import unnecessary data
       # for the test which result to a slower test suite.
       #
-      # @example 
+      # @example
       #   # bad
       #   let(:user) { Chewy.strategy(:atomic) { create(:user) } }
       #
