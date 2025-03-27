@@ -3,7 +3,7 @@
 module RuboCop
   module Cop
     module RSpec
-      # Prevent the use of `receive(:perform_async)` matcher to 
+      # Prevent the use of `receive(:perform_async)` matcher to
       # use instead rspec-sidekiq matcher like `enqueue_sidekiq_job`.
       #
       # @example
@@ -30,7 +30,7 @@ module RuboCop
           return unless perform_matcher?(node)
 
           perform_method = node.first_argument.value.to_s.sub('perform_', '')
-          
+
           add_offense(node, message: format(MSG, perform_method))
         end
         alias on_csend on_send
