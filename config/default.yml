@@ -75,6 +75,7 @@ RSpec/SidekiqInline:
 
 RSpec/SidekiqPerformMatcher:
   Description: 'Prevent using `receive(:perform_async)` in favor of rspec-sidekiq matcher'
+  StyleGuide: https://github.com/wspurgin/rspec-sidekiq
   Enabled: true
   Include:
     - spec/**/*
