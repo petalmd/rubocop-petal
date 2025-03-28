@@ -59,6 +59,12 @@ RSpec/AggregateExamples:
     - validate_inclusion_of
     - validates_exclusion_of
 
+RSpec/ChewyStrategy:
+  Description: 'Prevent using Chewy strategy in tests.'
+  Enabled: true
+  Include:
+    - spec/**/*
+
 RSpec/CreateListMax:
   Description: 'Prevent creating to most records with `FactoryBot.create_list`.'
   Enabled: true
