@@ -79,6 +79,13 @@ RSpec/SidekiqInline:
   Include:
     - spec/**/*
 
+RSpec/SidekiqPerformMatcher:
+  Description: 'Prevent using `receive(:perform_async)` in favor of rspec-sidekiq matcher'
+  StyleGuide: https://github.com/wspurgin/rspec-sidekiq
+  Enabled: true
+  Include:
+    - spec/**/*
+
 RSpec/StubProducts:
   Description: 'Suggest to use stub_products instead of veil/unveil_product.'
   Enabled: true
