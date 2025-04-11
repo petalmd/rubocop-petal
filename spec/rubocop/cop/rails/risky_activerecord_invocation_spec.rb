@@ -19,7 +19,7 @@ RSpec.describe RuboCop::Cop::Rails::RiskyActiverecordInvocation do
   end
 
   it 'allows interpolation in subsequent arguments to where' do
-    expect_no_offenses('Users.where("name like ?", "%#{name}%")') # rubocop:disable Style/FormatStringToken
+    expect_no_offenses('Users.where("name like ?", "%#{name}%")')
   end
 
   it 'disallows interpolation in where statements' do
