@@ -2,6 +2,7 @@ PATH
   remote: .
   specs:
     rubocop-petal (1.7.1)
+      lint_roller
       rubocop (~> 1.75)
       rubocop-factory_bot (~> 2.27)
       rubocop-performance (~> 1.25)

@@ -22,9 +22,11 @@ Gem::Specification.new do |spec|
     'changelog_uri' => 'https://github.com/petalmd/rubocop-petal/blob/main/CHANGELOG.md',
     'source_code_uri' => 'https://github.com/petalmd/rubocop-petal',
     'bug_tracker_uri' => 'https://github.com/petalmd/rubocop-petal/issues',
-    'rubygems_mfa_required' => 'true'
+    'rubygems_mfa_required' => 'true',
+    'default_lint_roller_plugin' => 'RuboCop::Petal::Plugin'
   }
 
+  spec.add_dependency 'lint_roller'
   spec.add_dependency 'rubocop', '~> 1.75'
   spec.add_dependency 'rubocop-factory_bot', '~> 2.27'
   spec.add_dependency 'rubocop-performance', '~> 1.25'
