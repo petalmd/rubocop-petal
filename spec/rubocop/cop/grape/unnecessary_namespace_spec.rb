@@ -228,4 +228,82 @@ RSpec.describe RuboCop::Cop::Grape::UnnecessaryNamespace, :config do
       end
     RUBY
   end
+
+  it 'does not register an offense when namespace contains Grape callbacks' do
+    expect_no_offenses(<<~RUBY)
+      namespace :my_namespace do
+        after_validation do
+          do_something
+        end
+
+        get do
+          something
+        end
+      end
+    RUBY
+
+    expect_no_offenses(<<~RUBY)
+      namespace :my_namespace do
+        before do
+          authenticate!
+        end
+
+        get do
+          something
+        end
+      end
+    RUBY
+
+    expect_no_offenses(<<~RUBY)
+      namespace :my_namespace do
+        after do
+          log_request
+        end
+
+        get do
+          something
+        end
+      end
+    RUBY
+
+    expect_no_offenses(<<~RUBY)
+      namespace :my_namespace do
+        finally do
+          cleanup
+        end
+
+        get do
+          something
+        end
+      end
+    RUBY
+
+    expect_no_offenses(<<~RUBY)
+      namespace :my_namespace do
+        before_validation do
+          normalize_params
+        end
+
+        get do
+          something
+        end
+      end
+    RUBY
+
+    expect_no_offenses(<<~RUBY)
+      namespace :my_namespace do
+        before do
+          authenticate!
+        end
+
+        after_validation do
+          do_something
+        end
+
+        get do
+          something
+        end
+      end
+    RUBY
+  end
 end

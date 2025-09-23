@@ -18,7 +18,7 @@ module RuboCop
               'Specify endpoint name with an argument: `get :some_path`.'
         HTTP_ACTIONS = Set.new(%i[get head put post patch delete])
         GRAPE_NAMESPACE_ALIAS = Set.new(%i[namespace resource resources])
-        METHOD_JUSTIFY_NAMESPACE = Set.new(%i[route_param namespaces resource resources version])
+        METHOD_JUSTIFY_NAMESPACE = Set.new(%i[route_param namespaces resource resources version before after finally after_validation before_validation])
 
         def_node_matcher :namespace?, <<~PATTERN
           (send nil? GRAPE_NAMESPACE_ALIAS ({sym | str} _))
