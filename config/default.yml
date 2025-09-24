@@ -59,6 +59,12 @@ RSpec/AggregateExamples:
     - validate_inclusion_of
     - validates_exclusion_of
 
+RSpec/AggregateFailuresTag:
+  Description: 'Checks that the `:aggregate_failures` tag is only used on examples, not on example groups.'
+  Enabled: true
+  Include:
+    - spec/**/*
+
 RSpec/ChewyStrategy:
   Description: 'Prevent using Chewy strategy in tests.'
   Enabled: true
