@@ -156,12 +156,14 @@ Sidekiq/KeywordArguments:
   Enabled: true
   Include:
     - app/workers/**/*
+    - app/jobs/**/*
 
 Sidekiq/NoNilReturn:
   Description: 'Prevent early nil return in workers'
   Enabled: false
   Include:
     - app/workers/**/*
+    - app/jobs/**/*
 
 Sidekiq/PerformInline:
   Description: 'Suggest to use `perform_inline` instead of `new.perform` for Sidekiq workers.'
@@ -171,3 +173,26 @@ Sidekiq/SymbolArgument:
   Description: "Prevent passing keywords arguments in worker's perform method"
   Enabled: true
   SafeAutoCorrect: false
+
+Sidekiq/PreferJob:
+  Description: 'Prefer `Sidekiq::Job` over `Sidekiq::Worker`.'
+  Enabled: true
+  StyleGuide: https://github.com/sidekiq/sidekiq/wiki/Best-Practices#4-use-precise-terminology
+  Include:
+    - app/workers/**/*
+    - app/jobs/**/*
+
+Sidekiq/JobNaming:
+  Description: 'Job class name should end with `Job` instead of `Worker`.'
+  Enabled: true
+  StyleGuide: https://github.com/sidekiq/sidekiq/wiki/Best-Practices#4-use-precise-terminology
+  Include:
+    - app/workers/**/*
+    - app/jobs/**/*
+
+Sidekiq/JobLocation:
+  Description: 'Job class with `Job` suffix should be placed in `app/jobs` directory instead of `app/workers`.'
+  Enabled: true
+  StyleGuide: https://github.com/sidekiq/sidekiq/wiki/Best-Practices#4-use-precise-terminology
+  Include:
+    - app/workers/**/*
