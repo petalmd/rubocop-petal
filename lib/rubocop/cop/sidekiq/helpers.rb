@@ -7,7 +7,7 @@ module RuboCop
       module Helpers
         NODE_MATCHERS = lambda do
           def_node_matcher :sidekiq_include?, <<~PATTERN
-            (send nil? :include (const (const nil? :Sidekiq) :Worker))
+            (send nil? :include (const (const {nil? cbase} :Sidekiq) {:Worker :Job}))
           PATTERN
 
           def_node_matcher :includes_sidekiq?, <<~PATTERN
